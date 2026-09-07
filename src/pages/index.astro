@@ -1,0 +1,181 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import ObjectiveCard from "~/components/ObjectiveCard.astro";
+import NewsCard from "~/components/NewsCard.astro";
+import EventCard from "~/components/EventCard.astro";
+import Pattern from "~/components/Pattern.astro";
+import { site } from "~/data/site";
+import { objectives } from "~/data/objectives";
+
+const news = (await getCollection("news", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const events = (await getCollection("events", ({ data }) => !data.draft))
+  .filter((e) => e.data.startDate.getTime() >= Date.now() - 1000 * 60 * 60 * 24 * 14)
+  .sort((a, b) => a.data.startDate.getTime() - b.data.startDate.getTime())
+  .slice(0, 3);
+
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="relative isolate overflow-hidden text-white">
+    <img
+      src="/images/hero/youth-collaboration.jpg"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 -z-10 w-full h-full object-cover object-center"
+    />
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-brand)]/95 via-[var(--color-brand)]/82 to-[var(--color-brand)]/45"
+      aria-hidden="true"
+    ></div>
+    <div class="container-wide pt-24 md:pt-36 pb-24 md:pb-32">
+      <div class="max-w-2xl">
+        <p
+          class="text-xs font-semibold tracking-[0.16em] uppercase text-[var(--color-accent-soft)] mb-6"
+        >
+          An EU-funded CERV project
+        </p>
+        <h1 class="font-display text-[2.5rem] md:text-[4.5rem] leading-[1.05] tracking-tight mb-8 text-white">
+          Youth voices shaping an AI-ready Europe
+        </h1>
+        <p class="text-lg md:text-xl text-white/85 leading-relaxed mb-10 max-w-xl">
+          {site.description}
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/about"
+            class="btn bg-white text-[var(--color-brand)] hover:bg-[var(--color-surface-soft)]"
+          >
+            About the project
+          </a>
+          <a
+            href="/news-events"
+            class="btn border border-white/40 text-white hover:bg-white/10"
+          >
+            News &amp; events
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="absolute bottom-2 right-3 text-[10px] text-white/55 z-10">
+      Photo via Unsplash
+    </p>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="border-y border-[var(--color-border)] bg-[var(--color-surface-soft)]">
+    <div class="container-wide py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {
+        [
+          { figure: site.duration.months.toString(), label: "Months" },
+          { figure: "6", label: "Partner organisations" },
+          { figure: "5", label: "Countries" },
+          { figure: "25", label: "Public deliverables" },
+        ].map((stat) => (
+          <div>
+            <p class="font-display text-4xl md:text-5xl text-[var(--color-brand)] mb-1">{stat.figure}</p>
+            <p class="text-xs md:text-sm uppercase tracking-wider text-[var(--color-ink-soft)]">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section class="relative isolate container-wide py-20 md:py-28">
+    <Pattern side="right" />
+    <div class="max-w-2xl mb-12">
+      <h2 class="text-3xl md:text-4xl mb-4">Project objectives</h2>
+      <p class="text-[var(--color-ink-soft)] text-lg leading-relaxed">
+        Bring young people, employers, and policymakers into honest dialogue — and turn that dialogue into skills,
+        pathways, and policy.
+      </p>
+    </div>
+    <div class="grid gap-5 md:grid-cols-2">
+      {objectives.map((o) => <ObjectiveCard number={o.number} title={o.title} body={o.body} />)}
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENTS -->
+  {
+    events.length > 0 && (
+      <section class="relative isolate overflow-hidden bg-[var(--color-surface-soft)] border-y border-[var(--color-border)]">
+        <Pattern variant="waves" side="left" />
+        <div class="container-wide py-20 md:py-28">
+          <div class="flex items-end justify-between mb-10 gap-6 flex-wrap">
+            <h2 class="text-3xl md:text-4xl">Upcoming events</h2>
+            <a href="/news-events" class="text-sm font-medium text-[var(--color-brand)] hover:underline underline-offset-4">
+              See all events →
+            </a>
+          </div>
+          <div class="grid gap-5 md:grid-cols-3">
+            {events.map((e) => (
+              <EventCard
+                href={`/news-events/events/${e.id}`}
+                title={e.data.title}
+                startDate={e.data.startDate}
+                endDate={e.data.endDate}
+                location={e.data.location}
+                country={e.data.country}
+                format={e.data.format}
+                summary={e.data.summary}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- LATEST NEWS -->
+  {
+    news.length > 0 && (
+      <section class="container-wide py-20 md:py-28">
+        <div class="flex items-end justify-between mb-10 gap-6 flex-wrap">
+          <h2 class="text-3xl md:text-4xl">Latest news</h2>
+          <a href="/news-events" class="text-sm font-medium text-[var(--color-brand)] hover:underline underline-offset-4">
+            All news →
+          </a>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          {news.map((n) => (
+            <NewsCard
+              href={`/news-events/news/${n.id}`}
+              title={n.data.title}
+              date={n.data.date}
+              summary={n.data.summary}
+              image={n.data.image}
+              tags={n.data.tags}
+            />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- IMPLEMENTATION COUNTRIES -->
+  <section class="bg-[var(--color-brand)] text-white">
+    <div class="container-wide py-16 md:py-24 text-center">
+      <h2 class="text-3xl md:text-4xl font-display mb-3 text-white">Implementation countries</h2>
+      <p class="text-white/75 mb-12 max-w-2xl mx-auto">
+        PATHFINDER activities take place across five countries. Each hosts participatory research
+        with young people, a national public debate on AI and the future of work, a career day
+        connecting youth to employers, and a youth skills lab.
+      </p>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-8 gap-x-4 max-w-4xl mx-auto">
+        {
+          site.countries.map((c) => (
+            <li class="flex flex-col items-center gap-3 text-center">
+              <span class="text-6xl md:text-7xl leading-none" aria-hidden="true">{c.flag}</span>
+              <span class="text-sm md:text-base font-semibold text-white/95">{c.name}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

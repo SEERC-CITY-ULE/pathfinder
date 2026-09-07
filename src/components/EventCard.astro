@@ -1,0 +1,43 @@
+---
+import { site } from "~/data/site";
+
+type Props = {
+  href: string;
+  title: string;
+  startDate: Date;
+  endDate?: Date;
+  location: string;
+  country: string;
+  format: "In-person" | "Online" | "Hybrid";
+  summary: string;
+};
+
+const { href, title, startDate, endDate, location, country, format, summary } = Astro.props;
+const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const dateLabel = endDate ? `${fmt(startDate)} – ${fmt(endDate)}` : fmt(startDate);
+---
+
+<a href={href} class="surface-card p-6 md:p-7 group flex flex-col h-full">
+  <div class="flex items-center gap-2 mb-4 text-xs">
+    <span
+      class="inline-flex items-center px-2.5 py-1 rounded-full bg-[var(--color-teal)] text-white font-semibold"
+    >
+      {format}
+    </span>
+  </div>
+
+  <p class="text-sm font-semibold text-[var(--color-accent)] mb-2">{dateLabel}</p>
+  <h3 class="font-display text-xl leading-tight mb-2 group-hover:text-[var(--color-brand)] transition-colors">
+    {title}
+  </h3>
+  <p class="text-sm text-[var(--color-ink-soft)] mb-3">
+    <span aria-hidden="true">{flag}</span> {location}
+  </p>
+  <p class="text-sm text-[var(--color-ink-soft)] mb-4 flex-1">{summary}</p>
+  <span class="text-sm font-medium text-[var(--color-brand)]">
+    Event details <span aria-hidden="true">→</span>
+  </span>
+</a>

@@ -1,0 +1,23 @@
+---
+type Props = {
+  number: number;
+  title: string;
+  body: string;
+};
+
+const { number, title, body } = Astro.props;
+const numberLabel = number.toString().padStart(2, "0");
+---
+
+<article class="surface-card p-6 md:p-8 flex gap-5">
+  <div
+    class="shrink-0 font-display text-[2.5rem] leading-none text-[var(--color-accent)]"
+    aria-hidden="true"
+  >
+    {numberLabel}
+  </div>
+  <div>
+    <h3 class="text-xl mb-2">{title}</h3>
+    <p class="text-[var(--color-ink-soft)] text-[0.95rem] leading-relaxed">{body}</p>
+  </div>
+</article>

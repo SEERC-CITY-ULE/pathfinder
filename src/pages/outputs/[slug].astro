@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const items = await getCollection("outputs");
+  return items.map((item) => ({
+    params: { slug: item.data.id.toLowerCase().replace(".", "-") },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<ArticleLayout
+  title={item.data.title}
+  eyebrow="Output"
+  description={item.data.summary}
+>
+  <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed mb-8">{item.data.summary}</p>
+  <Content />
+
+  {
+    item.data.fileUrl && (
+      <p class="mt-10">
+        <a href={item.data.fileUrl} class="btn btn-primary" rel="noopener">
+          Download deliverable ↗
+        </a>
+      </p>
+    )
+  }
+
+  <p class="mt-12 pt-8 border-t border-[var(--color-border)]">
+    <a href="/outputs" class="text-[var(--color-brand)] hover:underline underline-offset-4">
+      ← Back to outputs
+    </a>
+  </p>
+</ArticleLayout>

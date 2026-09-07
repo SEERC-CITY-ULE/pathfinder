@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const items = await getCollection("news", ({ data }) => !data.draft);
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const dateLabel = item.data.date.toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+const meta = [
+  { label: "Published", value: dateLabel },
+  ...(item.data.author ? [{ label: "By", value: item.data.author }] : []),
+  ...(item.data.tags.length > 0
+    ? [{ label: "Tags", value: item.data.tags.join(", ") }]
+    : []),
+];
+---
+
+<ArticleLayout
+  title={item.data.title}
+  eyebrow="News"
+  description={item.data.summary}
+  meta={meta}
+  image={item.data.image}
+>
+  <Content />
+
+  <p class="mt-12 pt-8 border-t border-[var(--color-border)]">
+    <a href="/news-events" class="text-[var(--color-brand)] hover:underline underline-offset-4">
+      ← Back to news &amp; events
+    </a>
+  </p>
+</ArticleLayout>

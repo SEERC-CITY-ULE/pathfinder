@@ -1,0 +1,133 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import ObjectiveCard from "~/components/ObjectiveCard.astro";
+import Pattern from "~/components/Pattern.astro";
+import { objectives } from "~/data/objectives";
+
+const phases = [
+  {
+    title: "Participatory research",
+    body: "Country-level dialogues between youth and employers, co-creating the research agenda. Inclusive methods reach those most often left out of the conversation.",
+  },
+  {
+    title: "Public dialogue",
+    body: "National public debates in each country — youth, employers, and policymakers reflecting together on what AI means for the future of work.",
+  },
+  {
+    title: "Networks & pathways",
+    body: "National Career Days build direct links between marginalised youth and the labour market — role-playing AI ethics dilemmas, networking, mentorship.",
+  },
+  {
+    title: "Transnational reflection",
+    body: "The Sarajevo Dialogue and Sofia Forum bring everyone to the same table, comparing national experience and proposing shared strategies.",
+  },
+  {
+    title: "Capacity building",
+    body: "Youth Skills Labs in five countries deliver hands-on AI literacy, 4th-generation skills, and career adaptability training.",
+  },
+  {
+    title: "Advocacy & policy",
+    body: "Youth-driven recommendations are presented to EU policymakers at the closing Policy Roundtable.",
+  },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="PATHFINDER tackles youth unemployment in the age of AI through participatory research, public dialogue, hands-on skills training, and EU-level policy advocacy."
+>
+  <!-- HEADER -->
+  <section class="relative isolate container-wide pt-16 md:pt-24 pb-12 md:pb-16">
+    <Pattern side="right" />
+    <div class="container-prose px-0">
+      <h1 class="text-4xl md:text-6xl mb-6">About the project</h1>
+      <p class="text-lg md:text-xl text-[var(--color-ink-soft)] leading-relaxed">
+        PATHFINDER addresses youth unemployment in the EU by fostering a critical dialogue on the dual nature of
+        artificial intelligence as both a challenge and an opportunity. Through debates, workshops, and youth
+        knowledge exchanges, the project asks whether AI is a curse or a blessing for young people — and advocates for
+        policies that bridge education gaps and prepare youth for the future of work.
+      </p>
+    </div>
+  </section>
+
+  <!-- THE CHALLENGE -->
+  <section class="bg-[var(--color-surface-soft)] border-y border-[var(--color-border)]">
+    <div class="container-wide py-20 md:py-24">
+      <div class="container-prose px-0">
+        <h2 class="text-3xl md:text-4xl mb-6">The challenge</h2>
+        <div class="space-y-5 text-[var(--color-ink-soft)] text-[1.05rem] leading-relaxed">
+          <p>
+            In late 2024, EU youth unemployment averaged <strong class="text-[var(--color-ink)]">15%</strong>, with
+            Spain and Greece exceeding 26%. Marginalised youth — from low-income, racialised, or rural backgrounds —
+            face even higher rates, compounded by AI-driven labour market shifts.
+          </p>
+          <p>
+            In 2023, <strong class="text-[var(--color-ink)]">11.2%</strong> of young Europeans aged 15–29 were
+            <abbr title="not in employment, education, or training" class="cursor-help underline decoration-dotted underline-offset-4">NEET</abbr>,
+            many from marginalised groups facing systemic barriers. Without their inclusion in policymaking, AI may
+            deepen inequalities — making their voices essential.
+          </p>
+          <p>
+            And yet, according to the European Youth Forum's 2023 report, only <strong class="text-[var(--color-ink)]">10% of AI policy
+            consultations</strong> include meaningful youth participation. PATHFINDER exists to close that gap.
+          </p>
+        </div>
+      </div>
+
+      <div class="container-prose px-0 mt-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {
+            [
+              { fig: "15%", lbl: "EU youth unemployment (late 2024)" },
+              { fig: "26%+", lbl: "in Greece and Spain" },
+              { fig: "11.2%", lbl: "of 15–29s were NEET (2023)" },
+              { fig: "10%", lbl: "of AI consultations include youth" },
+            ].map((s) => (
+              <div class="border-l-2 border-[var(--color-accent)] pl-4">
+                <p class="font-display text-2xl md:text-3xl text-[var(--color-brand)]">{s.fig}</p>
+                <p class="text-xs md:text-sm text-[var(--color-ink-soft)] mt-1">{s.lbl}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="relative isolate container-wide py-20 md:py-28">
+    <Pattern variant="dots" side="left" />
+    <div class="container-prose px-0 mb-12">
+      <h2 class="text-3xl md:text-4xl mb-4">Methodology</h2>
+      <p class="text-[var(--color-ink-soft)] leading-relaxed">
+        Six phases that feed one another. The methodology draws on participatory action research, critical pedagogy,
+        and Kolb's experiential learning cycle — each phase informs the next, with young people leading the work.
+      </p>
+    </div>
+    <ol class="grid gap-5 md:grid-cols-2 lg:grid-cols-3 [counter-reset:phase]">
+      {
+        phases.map((p) => (
+          <li
+            class="surface-card p-6 md:p-7 relative [counter-increment:phase] before:content-[counter(phase,decimal-leading-zero)] before:absolute before:top-5 before:right-5 before:font-display before:text-[1.6rem] before:text-[var(--color-border-strong)]"
+          >
+            <h3 class="text-lg mb-2">{p.title}</h3>
+            <p class="text-sm text-[var(--color-ink-soft)] leading-relaxed">{p.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section class="bg-[var(--color-surface-soft)] border-y border-[var(--color-border)]">
+    <div class="container-wide py-20 md:py-24">
+      <div class="container-prose px-0 mb-12">
+        <h2 class="text-3xl md:text-4xl mb-3">Objectives</h2>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        {objectives.map((o) => <ObjectiveCard number={o.number} title={o.title} body={o.body} />)}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

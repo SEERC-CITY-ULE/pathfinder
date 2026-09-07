@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleLayout from "~/layouts/ArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const items = await getCollection("events", ({ data }) => !data.draft);
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+const dateLabel = item.data.endDate
+  ? `${fmt(item.data.startDate)} – ${fmt(item.data.endDate)}`
+  : fmt(item.data.startDate);
+
+const meta = [
+  { label: "When", value: dateLabel },
+  { label: "Where", value: item.data.location },
+  { label: "Format", value: item.data.format },
+  ...(item.data.workPackage ? [{ label: "Work package", value: item.data.workPackage }] : []),
+];
+---
+
+<ArticleLayout
+  title={item.data.title}
+  eyebrow="Event"
+  description={item.data.summary}
+  meta={meta}
+  image={item.data.image}
+>
+  <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed mb-8">{item.data.summary}</p>
+  <Content />
+
+  {
+    item.data.registrationUrl && (
+      <p class="mt-10">
+        <a href={item.data.registrationUrl} class="btn btn-primary" rel="noopener">
+          Register →
+        </a>
+      </p>
+    )
+  }
+
+  <p class="mt-12 pt-8 border-t border-[var(--color-border)]">
+    <a href="/news-events" class="text-[var(--color-brand)] hover:underline underline-offset-4">
+      ← Back to news &amp; events
+    </a>
+  </p>
+</ArticleLayout>

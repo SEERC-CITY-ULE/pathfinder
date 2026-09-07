@@ -1,0 +1,27 @@
+{
+  "name": "pathfinder-website",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public website for the PATHFINDER EU-funded project on AI, youth and the future of work.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.4.0",
+    "@fontsource-variable/league-spartan": "^5.2.8",
+    "@fontsource-variable/montserrat": "^5.2.8",
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.10.0",
+    "marked": "^18.0.7",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.7.0"
+  }
+}

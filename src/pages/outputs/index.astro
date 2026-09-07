@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import OutputCard from "~/components/OutputCard.astro";
+import Pattern from "~/components/Pattern.astro";
+
+const featured = (await getCollection("outputs", ({ data }) => data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="Outputs"
+  description="PATHFINDER deliverables — including the Transnational Research Synthesis, the Sofia Forum Report and Youth Skills Lab Curriculum, and the closing Policy Recommendation Report."
+>
+  <section class="relative isolate container-wide pt-16 md:pt-24 pb-12 md:pb-16">
+    <Pattern side="right" />
+    <div class="container-prose px-0">
+      <h1 class="text-4xl md:text-6xl mb-6">Project outputs</h1>
+      <p class="text-lg md:text-xl text-[var(--color-ink-soft)] leading-relaxed">
+        The three flagship outputs that thread the whole project together. Each one will be published openly as
+        it's finalised.
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURED OUTPUTS -->
+  <section class="container-wide pb-20 md:pb-28">
+    <div class="grid gap-5 md:grid-cols-3">
+      {
+        featured.map((o) => (
+          <OutputCard
+            href={`/outputs/${o.id.toLowerCase().replace(".", "-")}`}
+            title={o.data.title}
+            summary={o.data.summary}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+import { site } from "~/data/site";
+
+type Props = {
+  name: string;
+  country: string;
+  affiliation: string;
+  expertise: string;
+  bio: string;
+  photo?: string;
+};
+
+const { name, country, affiliation, expertise, bio, photo } = Astro.props;
+const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
+
+const nameWords = name
+  .replace(/^(Professor|Prof\.?|Dr\.?|Mr\.?|Ms\.?|Mrs\.?)\s+/i, "")
+  .split(/\s+/)
+  .filter(Boolean);
+const initials =
+  nameWords.length === 1
+    ? nameWords[0][0].toUpperCase()
+    : (nameWords[0][0] + nameWords[nameWords.length - 1][0]).toUpperCase();
+---
+
+<article class="surface-card p-6 md:p-8 h-full flex gap-5">
+  <div class="shrink-0">
+    {
+      photo ? (
+        <img
+          src={photo}
+          alt={`Portrait of ${name}`}
+          width="96"
+          height="96"
+          class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border border-[var(--color-border)]"
+        />
+      ) : (
+        <div
+          class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[var(--color-teal)] text-white flex items-center justify-center font-display text-2xl font-semibold"
+          aria-hidden="true"
+        >
+          {initials}
+        </div>
+      )
+    }
+  </div>
+  <div class="flex flex-col">
+    <p class="eyebrow mb-2">{expertise}</p>
+    <h3 class="font-display text-xl leading-tight mb-1">{name}</h3>
+    <p class="text-sm text-[var(--color-ink-soft)] mb-1">
+      <span aria-hidden="true">{flag}</span> {country}
+    </p>
+    <p class="text-sm font-semibold text-[var(--color-ink)] mb-4">{affiliation}</p>
+    <p class="text-sm text-[var(--color-ink-soft)] leading-relaxed">{bio}</p>
+  </div>
+</article>

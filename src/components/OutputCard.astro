@@ -1,0 +1,30 @@
+---
+type Props = {
+  href?: string;
+  title: string;
+  summary: string;
+};
+
+const { href, title, summary } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  href={href}
+  class:list={[
+    "surface-card p-6 md:p-8 flex flex-col h-full",
+    href && "group",
+  ]}
+>
+  <h3 class:list={["font-display text-xl leading-tight mb-3", href && "group-hover:text-[var(--color-brand)] transition-colors"]}>
+    {title}
+  </h3>
+  <p class="text-sm text-[var(--color-ink-soft)] flex-1">{summary}</p>
+  {
+    href && (
+      <p class="mt-5 text-sm font-semibold text-[var(--color-brand)] group-hover:underline underline-offset-4">
+        Read more →
+      </p>
+    )
+  }
+</Tag>

@@ -1,0 +1,105 @@
+---
+import { nav, site } from "~/data/site";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+---
+
+<header class="sticky top-0 z-40 bg-[var(--color-surface)]/90 backdrop-blur border-b border-[var(--color-border)]">
+  <div class="container-wide flex items-center justify-between h-24 md:h-28">
+    <a href="/" class="flex items-center group" aria-label={`${site.name} home`}>
+      <img
+        src="/images/logo.png"
+        alt=""
+        aria-hidden="true"
+        width="80"
+        height="80"
+        class="h-20 md:h-24 w-auto"
+      />
+      <span class="sr-only">{site.name}</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-1">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+              isActive(item.href)
+                ? "text-[var(--color-brand)] bg-[var(--color-surface-soft)]"
+                : "text-[var(--color-ink-soft)] hover:text-[var(--color-brand)] hover:bg-[var(--color-surface-soft)]",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="md:hidden p-2 -mr-2 rounded-md text-[var(--color-ink)] hover:bg-[var(--color-surface-soft)]"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Open menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path id="nav-icon-open" d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+        <path id="nav-icon-close" d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" class="hidden" />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobile-nav"
+    class="md:hidden hidden border-t border-[var(--color-border)] bg-[var(--color-surface)]"
+  >
+    <nav aria-label="Primary mobile" class="container-wide py-3 flex flex-col">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "px-3 py-3 text-base font-medium rounded-md",
+              isActive(item.href)
+                ? "text-[var(--color-brand)] bg-[var(--color-surface-soft)]"
+                : "text-[var(--color-ink)] hover:bg-[var(--color-surface-soft)]",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("nav-toggle");
+  const nav = document.getElementById("mobile-nav");
+  const open = document.getElementById("nav-icon-open");
+  const close = document.getElementById("nav-icon-close");
+  if (btn && nav && open && close) {
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      btn.setAttribute("aria-label", expanded ? "Open menu" : "Close menu");
+      nav.classList.toggle("hidden");
+      open.classList.toggle("hidden");
+      close.classList.toggle("hidden");
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+        btn.click();
+        btn.focus();
+      }
+    });
+  }
+</script>

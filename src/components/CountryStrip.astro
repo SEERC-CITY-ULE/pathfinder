@@ -1,0 +1,14 @@
+---
+import { site } from "~/data/site";
+---
+
+<ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-base">
+  {
+    site.countries.map((c) => (
+      <li class="flex items-center gap-3 text-[var(--color-ink-soft)]">
+        <span class="text-3xl md:text-4xl leading-none" aria-hidden="true">{c.flag}</span>
+        <span>{c.name}</span>
+      </li>
+    ))
+  }
+</ul>

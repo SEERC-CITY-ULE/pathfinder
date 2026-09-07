@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+/* Bundled via @fontsource so there's no third-party font CDN dependency. */
+@import "@fontsource-variable/league-spartan";
+@import "@fontsource-variable/montserrat";
+
+@theme {
+  /* ─── PATHFINDER brand tokens ─────────────────────────────────────────
+     Source: PATHFINDER visual identity guide.
+     Keep this list in sync with the README "Design tokens" table.
+  ──────────────────────────────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --color-surface: #f5f2ec;        /* Warm Light Background — official */
+  --color-surface-soft: #ede9df;   /* slightly darker for cards */
+  --color-surface-sunken: #e6e1d3;
+
+  /* Text */
+  --color-ink: #2b2b2b;            /* Dark Graphite — official */
+  --color-ink-soft: #5a5a5a;
+  --color-ink-faint: #8e8e8e;
+
+  /* Primary — Deep Navy: institutional, trustworthy */
+  --color-brand: #143b63;          /* Deep Navy — official */
+  --color-brand-soft: #1e5285;
+
+  /* Secondary — Teal: innovation, technology, new opportunities */
+  --color-teal: #159e9c;           /* Teal — official */
+  --color-teal-soft: #2ab3b1;
+  --color-teal-deep: #0f7775;
+
+  /* Accent — Bright Orange: energy, action, youth participation */
+  --color-accent: #ff8a30;         /* Bright Orange — official */
+  --color-accent-soft: #ffa961;
+
+  /* Borders + focus */
+  --color-border: #e5e1d7;
+  --color-border-strong: #c7c3b7;
+  --color-focus: #143b63;
+
+  /* Typography — official brand fonts */
+  --font-display: "League Spartan Variable", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Montserrat Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+
+  --container-prose: 42rem;
+  --container-wide: 72rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  /* Brand recommendation: avoid italics — they reduce readability for
+     people with visual impairments or reading difficulties. */
+  em,
+  i,
+  cite,
+  dfn {
+    font-style: normal;
+    font-weight: 600;
+  }
+  blockquote {
+    font-style: normal;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+@layer components {
+  .container-prose {
+    max-width: var(--container-prose);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  .container-wide {
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-wide,
+    .container-prose {
+      padding-inline: 2rem;
+    }
+  }
+
+  .surface-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .surface-card:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .surface-card:hover {
+      transform: none;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary {
+    background: var(--color-brand);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-soft);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-brand);
+    border: 1px solid var(--color-border-strong);
+  }
+  .btn-secondary:hover {
+    background: var(--color-surface-soft);
+    border-color: var(--color-brand);
+  }
+  .btn-teal {
+    background: var(--color-teal);
+    color: white;
+  }
+  .btn-teal:hover {
+    background: var(--color-teal-deep);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .prose-content {
+    max-width: var(--container-prose);
+  }
+  .prose-content p {
+    margin-block: 1.1em;
+  }
+  .prose-content h2 {
+    font-size: 1.85rem;
+    margin-top: 2.5em;
+    margin-bottom: 0.6em;
+  }
+  .prose-content h3 {
+    font-size: 1.35rem;
+    margin-top: 2em;
+    margin-bottom: 0.4em;
+  }
+  .prose-content ul,
+  .prose-content ol {
+    padding-left: 1.5em;
+    margin-block: 1em;
+  }
+  .prose-content ul {
+    list-style: disc;
+  }
+  .prose-content ol {
+    list-style: decimal;
+  }
+  .prose-content li {
+    margin-block: 0.4em;
+  }
+  .prose-content a {
+    color: var(--color-teal-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-content a:hover {
+    text-decoration-thickness: 2px;
+    color: var(--color-brand);
+  }
+  .prose-content blockquote {
+    border-left: 3px solid var(--color-teal);
+    padding-left: 1.25em;
+    margin-block: 1.5em;
+    color: var(--color-ink-soft);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    background: var(--color-brand);
+    color: white;
+    padding: 0.6rem 0.9rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}

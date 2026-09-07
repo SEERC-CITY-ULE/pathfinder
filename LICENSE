@@ -1,0 +1,54 @@
+PATHFINDER project website — license summary
+==============================================
+
+This repository combines source code and editorial content. They carry
+different licenses.
+
+1. Editorial content
+--------------------
+All Markdown files (everything under `src/content/`), the project copy
+(strings inside `src/pages/`, `src/data/`, and `src/components/`), and any
+original images created for this project are licensed under
+
+    Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+To view a copy of this license, visit
+https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt this material in any medium or format, for any
+purpose, including commercially, provided you give appropriate credit to
+the PATHFINDER project and indicate if changes were made.
+
+2. Source code
+--------------
+All source files (`.astro`, `.ts`, `.mjs`, `.css`, configuration files,
+the GitHub Actions workflow) are licensed under
+
+    MIT License
+
+Copyright (c) 2026–2028 PATHFINDER Consortium
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+3. Third-party content
+----------------------
+Images in `public/images/` may carry their own licenses (recorded in the
+`imageCredit:` field of the content file that references them). Fonts are
+distributed via the @fontsource-variable npm packages under the Open Font
+License.

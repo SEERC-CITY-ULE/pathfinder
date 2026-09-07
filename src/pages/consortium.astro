@@ -1,0 +1,78 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PartnerSection from "~/components/PartnerSection.astro";
+import AdvisoryBoardCard from "~/components/AdvisoryBoardCard.astro";
+import CountryStrip from "~/components/CountryStrip.astro";
+import Pattern from "~/components/Pattern.astro";
+
+const partners = (await getCollection("partners")).sort((a, b) => a.data.order - b.data.order);
+const advisory = (await getCollection("advisoryBoard")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Consortium"
+  description="Six organisations from Slovakia, Greece, Bosnia & Herzegovina, Bulgaria, and Serbia — and a four-person Advisory Board spanning AI, regulation, employability, and work-based learning."
+>
+  <!-- HEADER -->
+  <section class="relative isolate container-wide pt-16 md:pt-24 pb-12 md:pb-16">
+    <Pattern variant="waves" side="right" />
+    <div class="container-prose px-0">
+      <h1 class="text-4xl md:text-6xl mb-6">Consortium</h1>
+      <p class="text-lg md:text-xl text-[var(--color-ink-soft)] leading-relaxed">
+        Six partners across five countries — a multidisciplinary partnership of research institutes, universities,
+        civic and youth organisations from the EU and the Western Balkans, combining academic rigour with grassroots
+        community engagement.
+      </p>
+    </div>
+    <div class="mt-10">
+      <CountryStrip />
+    </div>
+  </section>
+
+  <!-- PARTNERS — each gets a full section with team -->
+  {
+    partners.map((p) => (
+      <PartnerSection
+        name={p.data.name}
+        shortName={p.data.shortName}
+        country={p.data.country}
+        role={p.data.role}
+        summary={p.data.summary}
+        contribution={p.data.contribution}
+        website={p.data.website}
+        logo={p.data.logo}
+        team={p.data.team}
+      />
+    ))
+  }
+
+  <!-- ADVISORY BOARD -->
+  <section class="border-t border-[var(--color-border)] bg-[var(--color-surface-soft)]">
+    <div class="container-wide py-20 md:py-24">
+      <div class="container-prose px-0 mb-10">
+        <h2 class="text-3xl md:text-4xl mb-4">Advisory Board</h2>
+        <p class="text-[var(--color-ink-soft)] leading-relaxed">
+          Four experts drawn from four countries and four complementary fields of expertise: cutting-edge AI
+          development, AI regulation and ethics, youth employability counselling, and work-based learning systems
+          linked to HR. The Board is gender-balanced and spans Italy, the United Kingdom, Greece, and Bosnia &
+          Herzegovina.
+        </p>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        {
+          advisory.map((a) => (
+            <AdvisoryBoardCard
+              name={a.data.name}
+              country={a.data.country}
+              affiliation={a.data.affiliation}
+              expertise={a.data.expertise}
+              bio={a.data.bio}
+              photo={a.data.photo}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

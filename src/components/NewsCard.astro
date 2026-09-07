@@ -1,0 +1,46 @@
+---
+type Props = {
+  href: string;
+  title: string;
+  date: Date;
+  summary: string;
+  image?: { src: string; alt: string };
+  tags?: string[];
+};
+
+const { href, title, date, summary, image, tags = [] } = Astro.props;
+const dateLabel = date.toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+const isoDate = date.toISOString().slice(0, 10);
+---
+
+<a href={href} class="surface-card overflow-hidden group flex flex-col h-full">
+  <img
+    src={image?.src ?? "/images/logo.png"}
+    alt={image?.alt ?? ""}
+    aria-hidden={!image ? "true" : undefined}
+    class="w-full h-44 object-contain bg-[var(--color-surface-soft)] p-5"
+    loading="lazy"
+  />
+  <div class="p-6 flex flex-col flex-1">
+    <div class="flex items-center gap-3 mb-3 text-xs text-[var(--color-ink-faint)]">
+      <time datetime={isoDate}>{dateLabel}</time>
+      {tags.length > 0 && (
+        <>
+          <span aria-hidden="true">·</span>
+          <span class="uppercase tracking-wider">{tags[0]}</span>
+        </>
+      )}
+    </div>
+    <h3 class="font-display text-xl leading-tight mb-3 group-hover:text-[var(--color-brand)] transition-colors">
+      {title}
+    </h3>
+    <p class="text-sm text-[var(--color-ink-soft)] mb-4 flex-1">{summary}</p>
+    <span class="text-sm font-medium text-[var(--color-brand)]">
+      Read more <span aria-hidden="true">→</span>
+    </span>
+  </div>
+</a>

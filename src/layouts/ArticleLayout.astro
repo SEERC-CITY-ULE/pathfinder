@@ -1,0 +1,60 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+type Props = {
+  title: string;
+  eyebrow?: string;
+  description?: string;
+  meta?: { label: string; value: string }[];
+  image?: { src: string; alt: string; credit?: string };
+};
+
+const { title, eyebrow, description, meta = [], image } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header class="container-wide py-12 md:py-20 border-b border-[var(--color-border)]">
+      <div class="container-prose px-0">
+        {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+        <h1 class="text-3xl md:text-5xl mb-6">{title}</h1>
+        {
+          meta.length > 0 && (
+            <dl class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-[var(--color-ink-soft)]">
+              {meta.map((m) => (
+                <div>
+                  <dt class="sr-only">{m.label}</dt>
+                  <dd>
+                    <span class="font-medium text-[var(--color-ink)]">{m.label}:</span> {m.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )
+        }
+      </div>
+    </header>
+
+    <figure class="container-wide py-8">
+      <img
+        src={image?.src ?? "/images/logo.png"}
+        alt={image?.alt ?? ""}
+        aria-hidden={!image ? "true" : undefined}
+        class="w-full h-72 object-contain rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-soft)] p-8"
+      />
+      {
+        image?.credit && (
+          <figcaption class="text-xs text-[var(--color-ink-faint)] mt-2 text-right">
+            {image.credit}
+          </figcaption>
+        )
+      }
+    </figure>
+
+    <div class="container-wide py-12 md:py-16">
+      <div class="prose-content mx-auto">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

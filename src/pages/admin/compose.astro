@@ -1,0 +1,636 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { site } from "~/data/site";
+
+const countries = [
+  "Slovakia",
+  "Greece",
+  "Bosnia & Herzegovina",
+  "Bulgaria",
+  "Serbia",
+  "Italy",
+  "United Kingdom",
+  "European Union",
+  "Online",
+];
+---
+
+<BaseLayout
+  title="Compose"
+  description="Internal helper for creating news and event posts. Nothing is published from this page."
+  noindex
+>
+  <div class="container-wide py-10 md:py-14">
+    <header class="mb-8 max-w-3xl">
+      <p class="eyebrow mb-3">Internal tool</p>
+      <h1 class="text-3xl md:text-5xl mb-4">Compose a post</h1>
+      <p class="text-[var(--color-ink-soft)] leading-relaxed">
+        Fill in the form and the correctly-formatted Markdown appears on the right. Copy it, then
+        send it to the publisher. <strong class="text-[var(--color-ink)]">This page publishes
+        nothing on its own</strong> — it's just a formatter to save you from writing YAML by hand.
+      </p>
+    </header>
+
+    <!-- TYPE TOGGLE -->
+    <div class="mb-8 inline-flex rounded-full border border-[var(--color-border-strong)] p-1 bg-[var(--color-surface-soft)]">
+      <button
+        type="button"
+        data-type="news"
+        class="type-toggle px-5 py-2 rounded-full text-sm font-semibold transition-colors"
+        aria-pressed="true"
+      >
+        News item
+      </button>
+      <button
+        type="button"
+        data-type="event"
+        class="type-toggle px-5 py-2 rounded-full text-sm font-semibold transition-colors"
+        aria-pressed="false"
+      >
+        Event
+      </button>
+    </div>
+
+    <div class="grid gap-10 lg:grid-cols-2">
+      <!-- ─── FORM ────────────────────────────────────────────────── -->
+      <form id="composer-form" class="space-y-5" novalidate>
+        <div class="form-field">
+          <label for="f-title">Title <span class="req">·</span></label>
+          <input id="f-title" name="title" type="text" required maxlength="120" placeholder="A short, punchy headline" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-field" data-only="news">
+            <label for="f-date">Date <span class="req">·</span></label>
+            <input id="f-date" name="date" type="date" required />
+          </div>
+          <div class="form-field hidden" data-only="event">
+            <label for="f-startDate">Start date <span class="req">·</span></label>
+            <input id="f-startDate" name="startDate" type="date" required />
+          </div>
+          <div class="form-field hidden" data-only="event">
+            <label for="f-endDate">End date <span class="opt">optional</span></label>
+            <input id="f-endDate" name="endDate" type="date" />
+          </div>
+        </div>
+
+        <!-- EVENT-ONLY FIELDS -->
+        <div class="form-field hidden" data-only="event">
+          <label for="f-location">Location <span class="req">·</span></label>
+          <input id="f-location" name="location" type="text" placeholder="City, Country (or 'Online')" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-field hidden" data-only="event">
+            <label for="f-country">Country <span class="req">·</span></label>
+            <select id="f-country" name="country">
+              {countries.map((c) => <option value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div class="form-field hidden" data-only="event">
+            <label for="f-format">Format <span class="req">·</span></label>
+            <select id="f-format" name="format">
+              <option value="In-person">In-person</option>
+              <option value="Online">Online</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field hidden" data-only="event">
+          <label for="f-registrationUrl">Registration URL <span class="opt">optional</span></label>
+          <input id="f-registrationUrl" name="registrationUrl" type="url" placeholder="https://..." />
+        </div>
+
+        <!-- SHARED FIELDS -->
+        <div class="form-field">
+          <label for="f-summary">Summary <span class="req">·</span></label>
+          <textarea
+            id="f-summary"
+            name="summary"
+            rows="2"
+            required
+            minlength="20"
+            placeholder="One or two sentences shown on the card preview. At least 20 characters."
+          ></textarea>
+          <p class="help">Shown on the card and social-media share previews.</p>
+        </div>
+
+        <div class="form-field">
+          <label for="f-body">Body</label>
+          <textarea
+            id="f-body"
+            name="body"
+            rows="10"
+            placeholder="The full article text in Markdown.
+
+## Use headings like this
+**Bold** and *italic*. [Links](https://example.org) work too.
+
+- Bullet lists
+- Are supported"
+          ></textarea>
+          <p class="help">
+            Uses <a href="https://commonmark.org/help/" rel="noopener" target="_blank" class="link">Markdown</a>.
+            Two-button cheatsheet: <code>**bold**</code>, <code>[text](url)</code>, <code>## heading</code>,
+            <code>- list item</code>.
+          </p>
+        </div>
+
+        <div class="form-field" data-only="news">
+          <label for="f-tags">Tags <span class="opt">optional</span></label>
+          <input id="f-tags" name="tags" type="text" placeholder="event-recap, milestone" />
+          <p class="help">Comma-separated. Kept simple and lowercase.</p>
+        </div>
+
+        <div class="form-field" data-only="news">
+          <label for="f-author">Author <span class="opt">optional</span></label>
+          <input id="f-author" name="author" type="text" placeholder="Coordinator's name" />
+        </div>
+
+        <details class="form-details">
+          <summary>Add an image <span class="opt">optional</span></summary>
+          <div class="space-y-4 mt-4">
+            <div class="form-field">
+              <label for="f-imgSrc">Image URL</label>
+              <input id="f-imgSrc" name="imgSrc" type="text" placeholder="/images/news/your-photo.jpg" />
+              <p class="help">
+                Where the file lives on the site. The publisher will upload the actual file to that
+                path. If left blank, the PATHFINDER logo is used automatically.
+              </p>
+            </div>
+            <div class="form-field">
+              <label for="f-imgAlt">Alt text</label>
+              <input id="f-imgAlt" name="imgAlt" type="text" placeholder="Short description of what the photo shows" />
+              <p class="help">A one-line description for screen readers and search engines.</p>
+            </div>
+            <div class="form-field">
+              <label for="f-imgCredit">Credit</label>
+              <input id="f-imgCredit" name="imgCredit" type="text" placeholder="Photographer Name on Source (License)" />
+              <p class="help">Required for Creative Commons images.</p>
+            </div>
+          </div>
+        </details>
+      </form>
+
+      <!-- ─── PREVIEW ─────────────────────────────────────────────── -->
+      <aside class="space-y-6 lg:sticky lg:top-32 lg:self-start">
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--color-ink-soft)] mb-3">
+            Card preview
+          </h2>
+          <!-- News card shape -->
+          <article id="pv-news-card" class="surface-card overflow-hidden flex flex-col max-w-md">
+            <img
+              id="pv-image"
+              src="/images/logo.png"
+              alt=""
+              class="w-full h-44 object-contain bg-[var(--color-surface-soft)] p-5"
+            />
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center gap-3 mb-3 text-xs text-[var(--color-ink-faint)]">
+                <time id="pv-date-label">—</time>
+                <span id="pv-tag-wrap" hidden>
+                  <span aria-hidden="true">·</span>
+                  <span class="uppercase tracking-wider ml-2" id="pv-tag"></span>
+                </span>
+              </div>
+              <h3 class="font-display text-xl leading-tight mb-3" id="pv-title">Your headline will appear here</h3>
+              <p class="text-sm text-[var(--color-ink-soft)] mb-4 flex-1" id="pv-summary">Your summary will appear here.</p>
+              <span class="text-sm font-medium text-[var(--color-brand)]">Read more →</span>
+            </div>
+          </article>
+
+          <!-- Event card shape (hidden until event mode) -->
+          <article id="pv-event-card" class="surface-card p-6 md:p-7 flex flex-col max-w-md hidden">
+            <div class="flex items-center gap-2 mb-4 text-xs">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[var(--color-teal)] text-white font-semibold" id="pv-format">In-person</span>
+            </div>
+            <p class="text-sm font-semibold text-[var(--color-accent)] mb-2" id="pv-event-date">—</p>
+            <h3 class="font-display text-xl leading-tight mb-2" id="pv-event-title">Your event title</h3>
+            <p class="text-sm text-[var(--color-ink-soft)] mb-3">
+              <span id="pv-event-location">City, Country</span>
+            </p>
+            <p class="text-sm text-[var(--color-ink-soft)] mb-4 flex-1" id="pv-event-summary">Your summary will appear here.</p>
+            <span class="text-sm font-medium text-[var(--color-brand)]">Event details →</span>
+          </article>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--color-ink-soft)] mb-3">
+            Article preview
+          </h2>
+          <div class="surface-card p-6 max-w-md">
+            <h1 class="font-display text-2xl mb-2" id="pv-article-title">Your headline</h1>
+            <p class="text-xs text-[var(--color-ink-faint)] mb-4" id="pv-article-meta">—</p>
+            <div class="prose-content text-sm" id="pv-article-body"><p>Body preview…</p></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-baseline justify-between mb-3">
+            <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--color-ink-soft)]">
+              Markdown to copy
+            </h2>
+            <span class="text-xs text-[var(--color-ink-faint)]" id="pv-word-count">0 words</span>
+          </div>
+          <div class="rounded-lg border border-[var(--color-border)] overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-2 bg-[var(--color-surface-soft)] border-b border-[var(--color-border)] text-xs gap-2 flex-wrap">
+              <code id="pv-filename" class="font-mono text-[var(--color-ink-soft)]">YYYY-MM-DD-title.md</code>
+              <div class="flex items-center gap-2">
+                <button
+                  id="download-btn"
+                  type="button"
+                  class="btn btn-primary text-xs py-1.5 px-3"
+                >
+                  ↓ Download .md
+                </button>
+                <button
+                  id="copy-btn"
+                  type="button"
+                  class="btn btn-secondary text-xs py-1.5 px-3"
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+            <pre class="p-4 text-xs font-mono text-[var(--color-ink)] whitespace-pre-wrap break-words max-h-64 overflow-auto"><code id="pv-markdown">…</code></pre>
+          </div>
+          <p id="copy-status" class="mt-2 text-sm text-[var(--color-teal-deep)] font-semibold" hidden>Copied to clipboard ✓</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <section class="mt-16 max-w-3xl border-t border-[var(--color-border)] pt-10">
+      <h2 class="text-2xl md:text-3xl mb-6">What to do with the copied text</h2>
+      <ol class="space-y-4 text-[var(--color-ink-soft)] leading-relaxed">
+        <li>
+          <span class="inline-block w-6 font-semibold text-[var(--color-brand)]">1.</span>
+          Click <strong class="text-[var(--color-ink)]">Copy Markdown</strong> above.
+        </li>
+        <li>
+          <span class="inline-block w-6 font-semibold text-[var(--color-brand)]">2.</span>
+          Send it — with the suggested filename and any image attachment — to
+          <a href={`mailto:${site.coordinator.email}?subject=${encodeURIComponent("New PATHFINDER post")}`} class="link">
+            {site.coordinator.email}
+          </a>.
+        </li>
+        <li>
+          <span class="inline-block w-6 font-semibold text-[var(--color-brand)]">3.</span>
+          The publisher pastes it into the site's <code>src/content/news/</code> (or
+          <code>src/content/events/</code>) folder on GitHub. The post appears on the live site
+          within about a minute.
+        </li>
+      </ol>
+      <p class="mt-6 text-sm text-[var(--color-ink-faint)]">
+        Nothing on this page connects to GitHub, sends emails on your behalf, or writes to the site.
+        You control what gets sent, and the publisher controls what gets published.
+      </p>
+    </section>
+  </div>
+
+  <style>
+    .type-toggle {
+      color: var(--color-ink-soft);
+    }
+    .type-toggle[aria-pressed="true"] {
+      background: var(--color-brand);
+      color: white;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 0.4rem;
+    }
+    .form-field .req {
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+    .form-field .opt {
+      color: var(--color-ink-faint);
+      font-weight: 400;
+      font-size: 0.75rem;
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      background: white;
+      border: 1px solid var(--color-border-strong);
+      border-radius: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--color-ink);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-field textarea {
+      resize: vertical;
+      min-height: 5rem;
+      line-height: 1.5;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      outline: none;
+      border-color: var(--color-brand);
+      box-shadow: 0 0 0 3px rgba(20, 59, 99, 0.15);
+    }
+    .form-field .help {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--color-ink-faint);
+      line-height: 1.5;
+    }
+    .form-field .help code {
+      background: var(--color-surface-soft);
+      padding: 0.05rem 0.35rem;
+      border-radius: 0.25rem;
+      font-size: 0.8em;
+    }
+    .form-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--color-ink);
+      padding: 0.5rem 0;
+      user-select: none;
+    }
+    .form-details summary:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .link {
+      color: var(--color-teal-deep);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .link:hover {
+      color: var(--color-brand);
+    }
+
+    #pv-article-body :is(h2, h3) {
+      font-family: var(--font-display);
+      margin-top: 1.2em;
+      margin-bottom: 0.4em;
+    }
+    #pv-article-body h2 { font-size: 1.15rem; }
+    #pv-article-body h3 { font-size: 1rem; }
+    #pv-article-body p { margin: 0.6em 0; }
+    #pv-article-body ul, #pv-article-body ol { padding-left: 1.4em; margin: 0.6em 0; }
+    #pv-article-body ul { list-style: disc; }
+    #pv-article-body ol { list-style: decimal; }
+    #pv-article-body a { color: var(--color-teal-deep); text-decoration: underline; }
+  </style>
+
+  <script>
+    import { marked } from "marked";
+
+    marked.setOptions({ gfm: true, breaks: false });
+
+    type PostType = "news" | "event";
+    let currentType: PostType = "news";
+
+    const form = document.getElementById("composer-form") as HTMLFormElement;
+    const dateInput = document.getElementById("f-date") as HTMLInputElement;
+    const startDateInput = document.getElementById("f-startDate") as HTMLInputElement;
+
+    // Default the date to today.
+    const todayISO = new Date().toISOString().slice(0, 10);
+    dateInput.value = todayISO;
+    startDateInput.value = todayISO;
+
+    // ── Helpers ────────────────────────────────────────────────
+    function slugify(text: string): string {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9\s-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .slice(0, 60);
+    }
+
+    function fmtDate(iso: string): string {
+      if (!iso) return "—";
+      const d = new Date(iso + "T00:00");
+      if (Number.isNaN(d.getTime())) return "—";
+      return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    }
+
+    function fmtShortDate(iso: string): string {
+      if (!iso) return "";
+      const d = new Date(iso + "T00:00");
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    }
+
+    function escapeYaml(v: string): string {
+      const str = String(v);
+      if (str === "") return '""';
+      if (/[:#&*!|>'%@`\[\]{}]|^\s|\s$/.test(str) || str.includes("\n")) {
+        return `"${str.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+      }
+      return str;
+    }
+
+    function parseTags(raw: string): string[] {
+      return raw
+        .split(",")
+        .map((t) => t.trim().toLowerCase())
+        .filter(Boolean);
+    }
+
+    function getFormValue(name: string): string {
+      const el = form.elements.namedItem(name) as HTMLInputElement | null;
+      return el?.value?.trim() ?? "";
+    }
+
+    // ── Type toggle ────────────────────────────────────────────
+    document.querySelectorAll<HTMLButtonElement>(".type-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const type = btn.dataset.type as PostType;
+        if (type === currentType) return;
+        currentType = type;
+        document.querySelectorAll<HTMLButtonElement>(".type-toggle").forEach((b) => {
+          b.setAttribute("aria-pressed", String(b.dataset.type === type));
+        });
+        document.querySelectorAll<HTMLElement>("[data-only]").forEach((el) => {
+          el.classList.toggle("hidden", el.dataset.only !== type);
+        });
+        document.getElementById("pv-news-card")?.classList.toggle("hidden", type !== "news");
+        document.getElementById("pv-event-card")?.classList.toggle("hidden", type !== "event");
+        updatePreview();
+      });
+    });
+
+    // ── Preview + output ───────────────────────────────────────
+    function buildFilename(): string {
+      const title = getFormValue("title") || "untitled";
+      const date =
+        currentType === "news"
+          ? getFormValue("date") || todayISO
+          : getFormValue("startDate") || todayISO;
+      return `${date}-${slugify(title) || "untitled"}.md`;
+    }
+
+    function buildFrontmatterAndBody(): string {
+      const title = getFormValue("title");
+      const summary = getFormValue("summary");
+      const body = (form.elements.namedItem("body") as HTMLTextAreaElement)?.value ?? "";
+      const imgSrc = getFormValue("imgSrc");
+      const imgAlt = getFormValue("imgAlt");
+      const imgCredit = getFormValue("imgCredit");
+
+      const lines: string[] = ["---"];
+
+      if (currentType === "news") {
+        lines.push(`title: ${escapeYaml(title)}`);
+        lines.push(`date: ${getFormValue("date") || todayISO}`);
+        lines.push(`summary: ${escapeYaml(summary)}`);
+        const author = getFormValue("author");
+        if (author) lines.push(`author: ${escapeYaml(author)}`);
+        const tags = parseTags(getFormValue("tags"));
+        if (tags.length > 0) {
+          lines.push("tags:");
+          for (const t of tags) lines.push(`  - ${escapeYaml(t)}`);
+        }
+      } else {
+        lines.push(`title: ${escapeYaml(title)}`);
+        lines.push(`startDate: ${getFormValue("startDate") || todayISO}`);
+        const endDate = getFormValue("endDate");
+        if (endDate) lines.push(`endDate: ${endDate}`);
+        lines.push(`location: ${escapeYaml(getFormValue("location"))}`);
+        lines.push(`country: ${escapeYaml(getFormValue("country"))}`);
+        lines.push(`format: ${escapeYaml(getFormValue("format"))}`);
+        lines.push(`summary: ${escapeYaml(summary)}`);
+        const reg = getFormValue("registrationUrl");
+        if (reg) lines.push(`registrationUrl: ${escapeYaml(reg)}`);
+      }
+
+      if (imgSrc) {
+        lines.push("image:");
+        lines.push(`  src: ${escapeYaml(imgSrc)}`);
+        lines.push(`  alt: ${escapeYaml(imgAlt)}`);
+        if (imgCredit) lines.push(`  credit: ${escapeYaml(imgCredit)}`);
+      }
+
+      lines.push("---");
+      lines.push("");
+      lines.push(body);
+
+      return lines.join("\n").trimEnd() + "\n";
+    }
+
+    function updatePreview(): void {
+      const title = getFormValue("title") || "Your headline will appear here";
+      const summary = getFormValue("summary") || "Your summary will appear here.";
+      const body = (form.elements.namedItem("body") as HTMLTextAreaElement)?.value ?? "";
+      const imgSrc = getFormValue("imgSrc");
+      const imgAlt = getFormValue("imgAlt");
+
+      // Shared: card title/summary + image
+      const image = document.getElementById("pv-image") as HTMLImageElement;
+      image.src = imgSrc || "/images/logo.png";
+      image.alt = imgAlt || "";
+
+      if (currentType === "news") {
+        (document.getElementById("pv-title") as HTMLElement).textContent = title;
+        (document.getElementById("pv-summary") as HTMLElement).textContent = summary;
+        const isoDate = getFormValue("date") || todayISO;
+        (document.getElementById("pv-date-label") as HTMLTimeElement).textContent = fmtDate(isoDate);
+        (document.getElementById("pv-date-label") as HTMLTimeElement).dateTime = isoDate;
+        const tags = parseTags(getFormValue("tags"));
+        const tagWrap = document.getElementById("pv-tag-wrap") as HTMLElement;
+        if (tags.length > 0) {
+          (document.getElementById("pv-tag") as HTMLElement).textContent = tags[0];
+          tagWrap.hidden = false;
+        } else {
+          tagWrap.hidden = true;
+        }
+      } else {
+        (document.getElementById("pv-event-title") as HTMLElement).textContent = title;
+        (document.getElementById("pv-event-summary") as HTMLElement).textContent = summary;
+        (document.getElementById("pv-event-location") as HTMLElement).textContent =
+          getFormValue("location") || "City, Country";
+        (document.getElementById("pv-format") as HTMLElement).textContent =
+          getFormValue("format") || "In-person";
+        const start = getFormValue("startDate");
+        const end = getFormValue("endDate");
+        const dateLabel =
+          end && start ? `${fmtShortDate(start)} – ${fmtShortDate(end)}` : fmtShortDate(start) || "—";
+        (document.getElementById("pv-event-date") as HTMLElement).textContent = dateLabel;
+      }
+
+      // Article preview
+      (document.getElementById("pv-article-title") as HTMLElement).textContent = title;
+      const meta =
+        currentType === "news"
+          ? `Published · ${fmtDate(getFormValue("date") || todayISO)}`
+          : (() => {
+              const s = getFormValue("startDate");
+              const e = getFormValue("endDate");
+              const dates = e && s ? `${fmtShortDate(s)} – ${fmtShortDate(e)}` : fmtShortDate(s);
+              const loc = getFormValue("location");
+              return [dates, loc].filter(Boolean).join(" · ") || "—";
+            })();
+      (document.getElementById("pv-article-meta") as HTMLElement).textContent = meta;
+      (document.getElementById("pv-article-body") as HTMLElement).innerHTML =
+        body.trim() ? marked.parse(body) as string : "<p><em>Body preview…</em></p>";
+
+      // Markdown output + filename
+      const md = buildFrontmatterAndBody();
+      (document.getElementById("pv-markdown") as HTMLElement).textContent = md;
+      (document.getElementById("pv-filename") as HTMLElement).textContent = buildFilename();
+      const wordCount = body.trim() ? body.trim().split(/\s+/).length : 0;
+      (document.getElementById("pv-word-count") as HTMLElement).textContent =
+        `${wordCount} ${wordCount === 1 ? "word" : "words"}`;
+    }
+
+    form.addEventListener("input", updatePreview);
+
+    // ── Copy to clipboard + Download .md ───────────────────────
+    const copyBtn = document.getElementById("copy-btn") as HTMLButtonElement;
+    const downloadBtn = document.getElementById("download-btn") as HTMLButtonElement;
+    const copyStatus = document.getElementById("copy-status") as HTMLElement;
+
+    function flashStatus(msg: string): void {
+      copyStatus.hidden = false;
+      copyStatus.textContent = msg;
+      setTimeout(() => (copyStatus.hidden = true), 3000);
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(buildFrontmatterAndBody());
+        flashStatus("Copied to clipboard ✓");
+      } catch {
+        flashStatus("Couldn't copy — select the text below and copy manually.");
+      }
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const md = buildFrontmatterAndBody();
+      const filename = buildFilename();
+      const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      flashStatus(`Downloaded ${filename} ✓`);
+    });
+
+    // First render
+    updatePreview();
+  </script>
+</BaseLayout>
