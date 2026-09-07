@@ -121,6 +121,26 @@ const logoUrl = url("/images/logo.png");
 
         <div class="form-field">
           <label for="f-body">Body</label>
+          <div class="md-toolbar" role="toolbar" aria-label="Formatting">
+            <button type="button" data-md="bold" class="md-btn" title="Bold — wraps selection in **">
+              <strong>B</strong>
+            </button>
+            <button type="button" data-md="link" class="md-btn" title="Insert a link">
+              🔗 Link
+            </button>
+            <button type="button" data-md="h2" class="md-btn" title="Section heading">
+              H2
+            </button>
+            <button type="button" data-md="h3" class="md-btn" title="Sub-heading">
+              H3
+            </button>
+            <button type="button" data-md="list" class="md-btn" title="Bulleted list">
+              • List
+            </button>
+            <button type="button" data-md="quote" class="md-btn" title="Quote block">
+              ❝ Quote
+            </button>
+          </div>
           <textarea
             id="f-body"
             name="body"
@@ -128,15 +148,15 @@ const logoUrl = url("/images/logo.png");
             placeholder="The full article text in Markdown.
 
 ## Use headings like this
-**Bold** and *italic*. [Links](https://example.org) work too.
+**Bold** and [links](https://example.org) work too.
 
 - Bullet lists
 - Are supported"
           ></textarea>
           <p class="help">
-            Uses <a href="https://commonmark.org/help/" rel="noopener" target="_blank" class="link">Markdown</a>.
-            Two-button cheatsheet: <code>**bold**</code>, <code>[text](url)</code>, <code>## heading</code>,
-            <code>- list item</code>.
+            Select some text and click a toolbar button, or type
+            <a href="https://commonmark.org/help/" rel="noopener" target="_blank" class="link">Markdown</a>
+            directly.
           </p>
         </div>
 
@@ -389,6 +409,47 @@ const logoUrl = url("/images/logo.png");
     #pv-article-body ul { list-style: disc; }
     #pv-article-body ol { list-style: decimal; }
     #pv-article-body a { color: var(--color-teal-deep); text-decoration: underline; }
+
+    /* Markdown toolbar above the body textarea */
+    .md-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0.35rem;
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-border);
+      border-bottom: none;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+    .md-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-ink-soft);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 0.375rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .md-btn:hover {
+      background: var(--color-brand);
+      color: white;
+      border-color: var(--color-brand);
+    }
+    .md-btn:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+    /* Blend the toolbar with the textarea beneath it */
+    .md-toolbar + textarea {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   </style>
 
   <script>
@@ -598,6 +659,71 @@ const logoUrl = url("/images/logo.png");
     }
 
     form.addEventListener("input", updatePreview);
+
+    // ── Markdown toolbar (Bold / Link / H2 / H3 / List / Quote) ─
+    const bodyEl = document.getElementById("f-body") as HTMLTextAreaElement;
+
+    function wrapSelection(before: string, after: string, placeholder: string): void {
+      const start = bodyEl.selectionStart;
+      const end = bodyEl.selectionEnd;
+      const selected = bodyEl.value.slice(start, end) || placeholder;
+      const newValue =
+        bodyEl.value.slice(0, start) + before + selected + after + bodyEl.value.slice(end);
+      bodyEl.value = newValue;
+      bodyEl.focus();
+      // Select the newly-inserted text so the user can immediately overtype it
+      bodyEl.setSelectionRange(start + before.length, start + before.length + selected.length);
+      bodyEl.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    function prefixLines(prefix: string, placeholder: string): void {
+      const start = bodyEl.selectionStart;
+      const end = bodyEl.selectionEnd;
+      const value = bodyEl.value;
+      const lineStart = value.lastIndexOf("\n", start - 1) + 1;
+      const lineEndIdx = value.indexOf("\n", end);
+      const lineEnd = lineEndIdx === -1 ? value.length : lineEndIdx;
+      const block = value.slice(lineStart, lineEnd) || placeholder;
+      const prefixed = block
+        .split("\n")
+        .map((line) => (line ? prefix + line : prefix + placeholder))
+        .join("\n");
+      bodyEl.value = value.slice(0, lineStart) + prefixed + value.slice(lineEnd);
+      bodyEl.focus();
+      bodyEl.setSelectionRange(lineStart, lineStart + prefixed.length);
+      bodyEl.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".md-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const action = btn.dataset.md;
+        switch (action) {
+          case "bold":
+            wrapSelection("**", "**", "bold text");
+            break;
+          case "link": {
+            const linkUrl = window.prompt("Link URL:", "https://");
+            if (!linkUrl) return;
+            const selected =
+              bodyEl.value.slice(bodyEl.selectionStart, bodyEl.selectionEnd) || "link text";
+            wrapSelection("[", `](${linkUrl})`, selected);
+            break;
+          }
+          case "h2":
+            prefixLines("## ", "Section heading");
+            break;
+          case "h3":
+            prefixLines("### ", "Sub-heading");
+            break;
+          case "list":
+            prefixLines("- ", "List item");
+            break;
+          case "quote":
+            prefixLines("> ", "Quoted text");
+            break;
+        }
+      });
+    });
 
     // ── Copy to clipboard + Download .md ───────────────────────
     const copyBtn = document.getElementById("copy-btn") as HTMLButtonElement;

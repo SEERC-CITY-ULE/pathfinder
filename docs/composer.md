@@ -46,9 +46,26 @@ Same flow as news, but click the **Event** toggle at the top first. The form cha
 
 Everything else works the same. Download, send to publisher.
 
-## Markdown formatting cheat sheet
+## Formatting the body
 
-The **Body** field supports Markdown. That's plain text with a few simple rules:
+There are two ways to format text in the **Body** field:
+
+### 1. Toolbar buttons (easiest)
+
+Right above the body textarea there's a small toolbar:
+
+- **B** — bold. Select some text and click B, or click B and start typing.
+- **🔗 Link** — insert a link. Select the text you want linked, click Link, then type or paste the URL in the popup.
+- **H2** — turn the current line into a section heading.
+- **H3** — turn the current line into a sub-heading.
+- **• List** — turn the current line (or selected lines) into a bulleted list.
+- **❝ Quote** — turn the current line into a quote block.
+
+The preview on the right updates immediately so you see exactly what will render.
+
+### 2. Type Markdown directly
+
+The toolbar is just a shortcut — you can type the same syntax by hand. That's plain text with a few simple rules:
 
 ```
 ## A section heading
