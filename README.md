@@ -1,6 +1,6 @@
 # PATHFINDER project website
 
-The public website for the [PATHFINDER](https://pathfinder-project.github.io) project — an EU-funded CERV initiative (grant `101253819`, 2026–2028) on AI, youth, and the future of work.
+The public website for the [PATHFINDER](https://pathfinder-project.github.io) project — an EU-funded CERV initiative on AI, youth, and the future of work.
 
 Built with [Astro](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/). Content lives in plain Markdown files so non-engineer coordinators can maintain the site directly on GitHub.
 
@@ -90,16 +90,6 @@ The site is deployed to **GitHub Pages** by [`.github/workflows/deploy.yml`](./.
 4. **Settings → Code security → require 2FA for all collaborators / the org.**
 5. Update [`astro.config.mjs`](./astro.config.mjs) — set `SITE` and `BASE` to the final URL (GitHub Pages subdomain or custom domain).
 6. If using a custom domain (e.g. `pathfinder-project.eu`), add a `public/CNAME` file containing the domain, and configure DNS per [GitHub's instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
-
-### Is GitHub safe to host an EU-funded project on?
-
-Yes, with the standard hardening above. Concretely:
-
-- **Visitors can't change anything.** The site is built into static HTML/CSS/JS and served read-only. There's no admin panel, database, comment form, or login.
-- **Only repository collaborators can push.** With branch protection on `main`, even those collaborators must go through a pull request and review.
-- **Every deploy is in the audit log.** GitHub Actions records who triggered each deploy, with what code, at what time.
-- **No third-party CDN dependencies at runtime.** Fonts are bundled via npm and served from your own domain — no external JS, no analytics, no trackers.
-- **The repo can be private** if extra restriction is desired (GitHub Pages supports private repos on Pro/Team/Enterprise plans).
 
 ## Accessibility
 

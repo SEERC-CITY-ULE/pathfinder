@@ -106,7 +106,7 @@ To send:
 
 The publisher will upload the file to GitHub, at which point the site will update within about a minute.
 
-## Common questions
+## FAQs
 
 **"Can I edit an already-published post?"** — The composer only creates new files. To edit an existing news item or event, ask the publisher (they can do it directly on GitHub) or see [editing-directly.md](./editing-directly.md) if you're comfortable with the web editor.
 
