@@ -1,4 +1,6 @@
 ---
+import { url } from "~/lib/url";
+
 type Props = {
   href: string;
   title: string;
@@ -19,7 +21,7 @@ const isoDate = date.toISOString().slice(0, 10);
 
 <a href={href} class="surface-card overflow-hidden group flex flex-col h-full">
   <img
-    src={image?.src ?? "/images/logo.png"}
+    src={image?.src ?? url("/images/logo.png")}
     alt={image?.alt ?? ""}
     aria-hidden={!image ? "true" : undefined}
     class="w-full h-44 object-contain bg-[var(--color-surface-soft)] p-5"

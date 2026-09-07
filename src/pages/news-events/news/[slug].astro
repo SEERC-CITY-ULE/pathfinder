@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
+import { url } from "~/lib/url";
 
 export async function getStaticPaths() {
   const items = await getCollection("news", ({ data }) => !data.draft);
@@ -38,7 +39,7 @@ const meta = [
   <Content />
 
   <p class="mt-12 pt-8 border-t border-[var(--color-border)]">
-    <a href="/news-events" class="text-[var(--color-brand)] hover:underline underline-offset-4">
+    <a href={url("/news-events")} class="text-[var(--color-brand)] hover:underline underline-offset-4">
       ← Back to news &amp; events
     </a>
   </p>

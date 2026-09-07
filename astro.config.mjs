@@ -8,8 +8,8 @@ import tailwindcss from "@tailwindcss/vite";
 //   user/org site:  "https://pathfinder-project.github.io"   (no base)
 //   project page:   "https://<org>.github.io"  with base: "/pathfinder"
 //   custom domain:  "https://pathfinder-project.eu"          (no base)
-const SITE = "https://pathfinder-project.github.io";
-const BASE = "/";
+const SITE = "https://seerc-city-ule.github.io";
+const BASE = "/pathfinder";
 
 export default defineConfig({
   site: SITE,

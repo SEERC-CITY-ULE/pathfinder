@@ -1,18 +1,19 @@
 ---
 import { nav, site } from "~/data/site";
+import { url, unbase } from "~/lib/url";
 
-const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const raw = unbase(Astro.url.pathname).replace(/\/$/, "") || "/";
 const isActive = (href: string) => {
-  if (href === "/") return pathname === "/";
-  return pathname === href || pathname.startsWith(`${href}/`);
+  if (href === "/") return raw === "/";
+  return raw === href || raw.startsWith(`${href}/`);
 };
 ---
 
 <header class="sticky top-0 z-40 bg-[var(--color-surface)]/90 backdrop-blur border-b border-[var(--color-border)]">
   <div class="container-wide flex items-center justify-between h-24 md:h-28">
-    <a href="/" class="flex items-center group" aria-label={`${site.name} home`}>
+    <a href={url("/")} class="flex items-center group" aria-label={`${site.name} home`}>
       <img
-        src="/images/logo.png"
+        src={url("/images/logo.png")}
         alt=""
         aria-hidden="true"
         width="80"
@@ -26,7 +27,7 @@ const isActive = (href: string) => {
       {
         nav.map((item) => (
           <a
-            href={item.href}
+            href={url(item.href)}
             aria-current={isActive(item.href) ? "page" : undefined}
             class:list={[
               "px-3 py-2 text-sm font-medium rounded-md transition-colors",
@@ -64,7 +65,7 @@ const isActive = (href: string) => {
       {
         nav.map((item) => (
           <a
-            href={item.href}
+            href={url(item.href)}
             aria-current={isActive(item.href) ? "page" : undefined}
             class:list={[
               "px-3 py-3 text-base font-medium rounded-md",

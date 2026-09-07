@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { url } from "~/lib/url";
 ---
 
 <BaseLayout title="Page not found" noindex>
@@ -9,6 +10,6 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
     <p class="text-lg text-[var(--color-ink-soft)] max-w-md mx-auto mb-10">
       The page you're looking for has moved or doesn't exist. Try the navigation, or jump back to the homepage.
     </p>
-    <a href="/" class="btn btn-primary">Go to homepage</a>
+    <a href={url("/")} class="btn btn-primary">Go to homepage</a>
   </section>
 </BaseLayout>

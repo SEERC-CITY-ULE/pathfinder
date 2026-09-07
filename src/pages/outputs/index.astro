@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import OutputCard from "~/components/OutputCard.astro";
 import Pattern from "~/components/Pattern.astro";
+import { url } from "~/lib/url";
 
 const featured = (await getCollection("outputs", ({ data }) => data.featured)).sort(
   (a, b) => a.data.order - b.data.order,
@@ -30,7 +31,7 @@ const featured = (await getCollection("outputs", ({ data }) => data.featured)).s
       {
         featured.map((o) => (
           <OutputCard
-            href={`/outputs/${o.id.toLowerCase().replace(".", "-")}`}
+            href={url(`/outputs/${o.id.toLowerCase().replace(".", "-")}`)}
             title={o.data.title}
             summary={o.data.summary}
           />

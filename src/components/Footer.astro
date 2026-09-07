@@ -1,6 +1,7 @@
 ---
 import EuFundingBanner from "~/components/EuFundingBanner.astro";
 import { nav, site } from "~/data/site";
+import { url } from "~/lib/url";
 
 const year = new Date().getFullYear();
 ---
@@ -10,8 +11,8 @@ const year = new Date().getFullYear();
 
   <div class="container-wide py-12 md:py-16 grid gap-10 md:grid-cols-3">
     <div>
-      <a href="/" class="inline-flex items-center" aria-label={`${site.name} home`}>
-        <img src="/images/logo.png" alt="" aria-hidden="true" width="160" height="160" class="h-40 w-auto" />
+      <a href={url("/")} class="inline-flex items-center" aria-label={`${site.name} home`}>
+        <img src={url("/images/logo.png")} alt="" aria-hidden="true" width="160" height="160" class="h-40 w-auto" />
         <span class="sr-only">{site.name}</span>
       </a>
       <p class="mt-4 text-sm text-[var(--color-ink-soft)] max-w-sm">{site.tagline}</p>
@@ -27,7 +28,7 @@ const year = new Date().getFullYear();
           nav.map((item) => (
             <li>
               <a
-                href={item.href}
+                href={url(item.href)}
                 class="text-[var(--color-ink-soft)] hover:text-[var(--color-brand)] hover:underline underline-offset-4"
               >
                 {item.label}
@@ -70,7 +71,7 @@ const year = new Date().getFullYear();
       </a>.
     </p>
     <p>
-      <a href="/news-events/rss.xml" class="hover:underline underline-offset-2 hover:text-[var(--color-brand)]">
+      <a href={url("/news-events/rss.xml")} class="hover:underline underline-offset-2 hover:text-[var(--color-brand)]">
         RSS
       </a>
     </p>
