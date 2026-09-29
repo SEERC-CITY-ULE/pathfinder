@@ -1,6 +1,6 @@
 ---
 name: University of York Europe Campus (with SEERC)
-shortName: CITY ULE
+shortName: SEERC-CITY-ULE
 country: Greece
 role: Beneficiary
 summary: Non-state, not-for-profit University Legal Entity and the licensed European branch campus of the University of York, headquartered in Thessaloniki.
