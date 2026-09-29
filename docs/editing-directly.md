@@ -371,46 +371,157 @@ Commit → **"Commit directly to the `main` branch"** → **Commit changes**.
 
 ---
 
-## Walkthrough 7 — Editing page copy (Home, About, Consortium intro)
+## Walkthrough 7 — Editing page copy (Home, About, Consortium intro, section intros)
 
-Some page text isn't in the `content/` folder — it's in the page files themselves. These are trickier to edit because there's HTML around the text.
+Some page text isn't in the `content/` folder — it's baked directly into the page files themselves. These are the **intro paragraphs**, **hero taglines**, **stat labels**, and **section descriptions** you see on the site. Examples:
 
-**Rule**: change only the **words** — never the `<tags>` or `{expressions}` around them.
+- The "Youth voices shaping an AI-ready Europe" tagline on the Home page.
+- The paragraph on the News & events page: *"Project announcements, event recaps, and the calendar of public PATHFINDER activities…"*
+- The intro on Consortium: *"Six partners across five countries — a multidisciplinary partnership…"*
+- The four objective titles on the Home page.
+- The "Challenge" stats on the About page (15%, 26%+, 11.2%, 10%).
 
-### The pages you can edit:
+Because these live inside HTML tags rather than in a simple Markdown file, you have to be a bit more careful. Follow the two rules below and you'll be fine.
 
-| Page on the site | File to edit on GitHub |
+### The two rules
+
+**Rule 1 — Change only the words.**
+The text between `>` and `<` is what appears on the website. That's what you edit.
+
+**Rule 2 — Never touch anything that isn't a plain word.**
+Specifically, do NOT change:
+- Anything starting with `<` and ending with `>` (that's an HTML tag, e.g. `<p>`, `</p>`, `<span class="...">`, `<h2>`).
+- Anything in `{curly braces}` (that's a dynamic expression pulled from data — e.g. `{site.name}`).
+- Anything with `class=` or `href=` inside a tag (those control styling and links).
+- The number of `<` and `>` characters — if the file has `<p>` before your text and `</p>` after, keep both.
+
+If you follow these two rules, the site cannot break from your edit.
+
+### The pages you can edit, with direct links
+
+Each link below opens GitHub straight in **edit mode** — no navigation, no clicking "pencil icon" needed. Just click, edit, commit.
+
+| Page on the site | Click to edit |
 |---|---|
-| Home page (hero + sections) | [`src/pages/index.astro`](../src/pages/index.astro) |
-| About page | [`src/pages/about.astro`](../src/pages/about.astro) |
-| Consortium page (intro paragraph) | [`src/pages/consortium.astro`](../src/pages/consortium.astro) |
-| News & events page (intro) | [`src/pages/news-events/index.astro`](../src/pages/news-events/index.astro) |
-| Outputs page (intro) | [`src/pages/outputs/index.astro`](../src/pages/outputs/index.astro) |
+| Home page (hero, sections, objectives, home-page intros) | [Edit `index.astro`](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/index.astro) |
+| About page (challenge, methodology, objectives) | [Edit `about.astro`](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/about.astro) |
+| Consortium page (intro paragraph above the partner list) | [Edit `consortium.astro`](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/consortium.astro) |
+| News & events page (intro paragraph) | [Edit `news-events/index.astro`](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/news-events/index.astro) |
+| Outputs page (intro paragraph) | [Edit `outputs/index.astro`](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/outputs/index.astro) |
 
-### How to edit safely
+*Tip*: right-click these links and pick "Open in new tab" so you can keep this guide open on the side.
 
-1. Open the file on GitHub (link above).
-2. Click the pencil icon.
-3. **Find the exact text** you want to change (Ctrl+F / Cmd+F in your browser).
-4. Change only the **plain words** — leave everything that looks like `<span class="…">`, `{something}`, or `class=`, or `href=` alone.
+### Detailed walkthrough — with a real example
 
-**Example — changing the About page challenge stats:**
+Let's say you want to change the News & events intro paragraph:
 
-You'll see something like:
+> *Project announcements, event recaps, and the calendar of public PATHFINDER activities — debates, career days, transnational forums, skills labs, and the closing EU policy roundtable.*
+
+**Step 1**. Click [Edit `news-events/index.astro`](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/news-events/index.astro) above.
+
+**Step 2**. Press **Cmd+F** (Mac) or **Ctrl+F** (Windows) inside the text editor to search. Type a distinctive word or two from the sentence — e.g. `Project announcements`. Your cursor jumps to that line.
+
+**Step 3**. You'll see something like this:
+
 ```html
-<div class="border-l-2 border-[var(--color-accent)] pl-4">
-  <p class="…">15%</p>
-  <p class="…">EU youth unemployment (late 2024)</p>
-</div>
+      <p class="text-lg md:text-xl text-[var(--color-ink-soft)] leading-relaxed">
+        Project announcements, event recaps, and the calendar of public PATHFINDER activities — debates, career days, transnational forums, skills labs, and the closing EU policy roundtable.
+      </p>
 ```
 
-You can safely change the **`15%`** and **`EU youth unemployment (late 2024)`** to different words. Do NOT touch the `<div class="…">`, `<p class="…">`, or `</p>` bits.
+Identify the three parts:
+- 🟢 **Safe to change**: `Project announcements, event recaps, and the calendar…` — the plain sentence.
+- 🔴 **Don't touch**: `<p class="text-lg md:text-xl text-[var(--color-ink-soft)] leading-relaxed">` — this is the opening tag.
+- 🔴 **Don't touch**: `</p>` — this is the closing tag.
 
-### If in doubt
+**Step 4**. Replace only the green part with your new text. For example:
 
-Copy the file's contents into a plain text note before editing. If your commit breaks the site (red X on GitHub Actions), just paste the original text back and commit again.
+```html
+      <p class="text-lg md:text-xl text-[var(--color-ink-soft)] leading-relaxed">
+        Everything happening at PATHFINDER — news updates, event announcements, and the full calendar of our public activities across all five countries.
+      </p>
+```
 
-Or: ask the technical maintainer to do the change — they'll be able to look at your commit and undo it in seconds.
+**Step 5**. Scroll down to the "Commit changes" box.
+- Commit message: something short like `Update News & events intro copy`.
+- Choose **"Commit directly to the `main` branch"**.
+- Click **Commit changes**.
+
+**Step 6**. Wait about a minute, then refresh the News & events page on the live site. Your new sentence appears.
+
+### More examples — what you might want to change on each page
+
+**Home page** ([edit](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/index.astro)):
+- **Hero tagline** — search for `Youth voices shaping`.
+- **The four "Project objectives" cards** — search for `Open dialogue, online and offline` (or any of the other three headings). Each has a title and a description you can rewrite.
+- **The section headings** like `Upcoming events`, `Latest news`, `Implementation countries`.
+- **The paragraph under "Implementation countries"** starting `PATHFINDER activities take place across five countries…`.
+
+**About page** ([edit](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/about.astro)):
+- The four **challenge statistics** — search for `15%` or `EU youth unemployment`. You can change both the number and its description.
+- The **methodology phase descriptions** — search for a phase name like `Participatory research`.
+- The **section headings** like `The challenge`, `Methodology`, `Objectives`.
+
+**Consortium page** ([edit](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/consortium.astro)):
+- The **intro paragraph** above the partner list — search for `Six partners across five countries`.
+- The **Advisory Board section intro** — search for `Four experts drawn from four countries`.
+- Note: the partner details themselves (name, contribution, team members) are in [`src/content/partners/`](https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/src/content/partners), not in this file. See Walkthrough 4.
+
+**Outputs page** ([edit](https://github.com/SEERC-CITY-ULE/pathfinder/edit/main/src/pages/outputs/index.astro)):
+- The **page heading** `Project outputs`.
+- The **intro paragraph** — search for `The three flagship outputs`.
+
+### Common mistakes and what happens
+
+**Mistake 1 — Deleted an angle bracket by accident.**
+- Example: you delete the `<` in `</p>`, leaving `/p>` instead.
+- Symptom: the build fails (red X on GitHub Actions). The site keeps showing the old (working) version — visitors see no change.
+- Fix: click the red X → find the file → put the `<` back → commit again.
+
+**Mistake 2 — Changed a class name by accident.**
+- Example: you rewrite `class="text-lg"` to `class="text-huge"` because "huge" sounds better.
+- Symptom: the build succeeds, but the paragraph looks weird on the live site (wrong size, wrong colour).
+- Fix: open the file again, put the original class name back, commit again.
+
+**Mistake 3 — Changed a `{curly-brace expression}`.**
+- Example: you change `{site.name}` in the hero to `PATHFINDER`. Locally works, but on some pages you'll see empty text.
+- Symptom: usually the build succeeds, but text disappears in some places.
+- Fix: put the original `{curly braces expression}` back.
+
+**Mistake 4 — Removed the closing `</p>` (or `</div>`, `</section>`, etc.).**
+- Symptom: the layout gets scrambled — text on the page below overlaps or disappears.
+- Fix: re-add the closing tag. If unsure where it goes, ask the maintainer.
+
+### Safety net — preview before publishing
+
+If you're nervous about a change, you can commit to a **new branch** instead of `main` and open a Pull Request. GitHub Actions will build a preview so you can see what the change looks like before it goes live.
+
+At the "Commit changes" box:
+1. Choose **"Create a new branch for this commit and start a pull request"** (instead of "Commit directly to `main`").
+2. Give the branch a name like `try-new-intro`.
+3. Click **Propose changes**.
+4. On the next screen, click **Create pull request**.
+5. The Actions tab will show the build. If green, you can click the "Deploy Preview" URL if configured. When happy, click **Merge pull request** on the PR page to go live.
+
+### Escape hatch — undo any change
+
+Every edit is in the commit history and reversible:
+
+1. Go to `https://github.com/SEERC-CITY-ULE/pathfinder/commits/main`.
+2. Find your bad commit.
+3. Click the **"..."** menu on that commit → **Revert**.
+4. Confirm the revert. The site rebuilds within a minute with the old text back.
+
+### When to ask the maintainer instead
+
+If any of the following applies, it's faster to send your desired change to the technical maintainer than to attempt the edit yourself:
+
+- You want to change the **layout** or **colour** of something (not just the words).
+- You want to **add** a whole new section or paragraph (not just replace existing text).
+- The text you want to change contains a `{curly-brace expression}` — those are computed and need to be updated in the data file, not the page file.
+- You've tried an edit twice and it keeps failing the build.
+
+Just email the maintainer with a screenshot of what you want changed and the new text.
 
 ---
 
