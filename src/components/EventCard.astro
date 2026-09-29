@@ -10,9 +10,10 @@ type Props = {
   country: string;
   format: "In-person" | "Online" | "Hybrid";
   summary: string;
+  status: "upcoming" | "past";
 };
 
-const { href, title, startDate, endDate, location, country, format, summary } = Astro.props;
+const { href, title, startDate, endDate, location, country, format, summary, status } = Astro.props;
 const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
 
 const fmt = (d: Date) =>
@@ -21,7 +22,18 @@ const dateLabel = endDate ? `${fmt(startDate)} – ${fmt(endDate)}` : fmt(startD
 ---
 
 <a href={href} class="surface-card p-6 md:p-7 group flex flex-col h-full">
-  <div class="flex items-center gap-2 mb-4 text-xs">
+  <div class="flex items-center gap-2 mb-4 text-xs flex-wrap">
+    {
+      status === "upcoming" ? (
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[var(--color-accent)] text-white font-semibold uppercase tracking-wide">
+          Upcoming
+        </span>
+      ) : (
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[var(--color-surface-soft)] text-[var(--color-ink-faint)] border border-[var(--color-border)] font-semibold uppercase tracking-wide">
+          Past
+        </span>
+      )
+    }
     <span
       class="inline-flex items-center px-2.5 py-1 rounded-full bg-[var(--color-teal)] text-white font-semibold"
     >

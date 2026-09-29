@@ -124,6 +124,7 @@ const events = (await getCollection("events", ({ data }) => !data.draft))
                 country={e.data.country}
                 format={e.data.format}
                 summary={e.data.summary}
+                status="upcoming"
               />
             ))}
           </div>
