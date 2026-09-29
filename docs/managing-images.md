@@ -26,10 +26,13 @@ Different types of photos go in different folders. You'll pick the right one bef
 |---|---|---|
 | A photo for a news item | `public/images/news/` | `/images/news/your-file.jpg` |
 | A photo for an event | `public/images/events/` | `/images/events/your-file.jpg` |
+| A cover image for an output/deliverable | `public/images/outputs/` | `/images/outputs/your-file.jpg` |
 | A team-member portrait (partner) | `public/images/team/` | `/images/team/your-file.jpg` |
 | An Advisory Board portrait | `public/images/team/` | `/images/team/your-file.jpg` |
 | A partner organisation logo | `public/images/partners/` | `/images/partners/your-file.png` |
 | A new hero photo for the home page | `public/images/hero/` | `/images/hero/your-file.jpg` |
+
+All six folders already exist in the repo — you don't need to create them. Just upload files into whichever one matches your case.
 
 You don't need to memorise this — the walkthroughs below tell you exactly where to click.
 
