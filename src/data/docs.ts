@@ -47,11 +47,9 @@ export const docs: DocEntry[] = [
       "Symptom-first fixes for common issues — failed commits, missing photos, stale pages.",
     audience: "For anyone hitting a problem",
   },
-  {
-    slug: "deployment",
-    title: "Deployment & operations",
-    description:
-      "One-time GitHub setup, custom domain, branch protection, and ongoing operations.",
-    audience: "For the technical maintainer",
-  },
 ];
+
+// Note: `deployment.md` deliberately isn't listed here. It's a maintainer-facing
+// guide (GitHub setup, DNS, branch protection). It stays in the repo's docs/
+// folder and can be read on github.com; there's no reason to serve it on the
+// live site.
