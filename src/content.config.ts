@@ -100,7 +100,12 @@ const outputs = defineCollection({
     dueMonth: z.number().int().min(1).max(24),
     summary: z.string().min(20),
     featured: z.boolean().default(false),
-    fileUrl: z.string().url().optional(),
+    fileUrl: z
+      .string()
+      .refine((v) => v.startsWith("/") || /^https?:\/\//i.test(v), {
+        message: "Must be a full URL (https://...) or a site path (/files/...)",
+      })
+      .optional(),
     order: z.number().int().default(99),
   }),
 });

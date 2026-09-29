@@ -46,6 +46,19 @@ Same flow as news, but click the **Event** toggle at the top first. The form cha
 
 Everything else works the same. Download, send to publisher.
 
+## Writing an output (with optional PDF)
+
+Click the **Output** toggle at the top of `/admin/compose`:
+
+- **Title** — the deliverable/output name (e.g. "Transnational Research Synthesis Report").
+- **Deliverable ID** — the DoA code in `D#.#` format (e.g. `D6.1`, `D19.1`).
+- **Work package**, **Lead partner**, and **Due month (1–24)** — project metadata.
+- **Display order** & **Show on Outputs page** — controls where the card appears on `/outputs`.
+- **Summary** — one or two sentences shown on the Output card and at the top of the detail page.
+- **Body** — click **+ Insert standard Output sections** above the toolbar to pre-fill the standard overview + bullet-point takeaways structure, or write Markdown directly.
+- **Deliverable PDF** *(optional)* — choose a `.pdf` file from your computer (or paste an external URL). Choosing a PDF automatically sets `fileUrl: /files/<slug>.pdf`, shows a live PDF preview on the right, and enables the **↓ Save PDF** button so the PDF file is named to match `public/files/`.
+
+
 ## Formatting the body
 
 There are two ways to format text in the **Body** field:

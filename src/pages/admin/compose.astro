@@ -15,12 +15,21 @@ const countries = [
   "Online",
 ];
 
+const partners = [
+  "European Dialogue",
+  "CREDI",
+  "CITY ULE",
+  "Fotódentra",
+  "PCO",
+  "YRS",
+];
+
 const logoUrl = url("/images/logo.png");
 ---
 
 <BaseLayout
   title="Compose"
-  description="Internal helper for creating news and event posts. Nothing is published from this page."
+  description="Internal helper for creating news, event, and output posts. Nothing is published from this page."
   noindex
 >
   <div class="container-wide py-10 md:py-14">
@@ -28,8 +37,8 @@ const logoUrl = url("/images/logo.png");
       <p class="eyebrow mb-3">Internal tool</p>
       <h1 class="text-3xl md:text-5xl mb-4">Compose a post</h1>
       <p class="text-[var(--color-ink-soft)] leading-relaxed">
-        Fill in the form and the correctly-formatted Markdown appears on the right. Copy it, then
-        send it to the publisher. <strong class="text-[var(--color-ink)]">This page publishes
+        Fill in the form and the correctly-formatted Markdown appears on the right. Copy or download it, then
+        send it to the publisher (or upload it to GitHub). <strong class="text-[var(--color-ink)]">This page publishes
         nothing on its own</strong> — it's just a formatter to save you from writing YAML by hand.
       </p>
     </header>
@@ -52,6 +61,14 @@ const logoUrl = url("/images/logo.png");
       >
         Event
       </button>
+      <button
+        type="button"
+        data-type="output"
+        class="type-toggle px-5 py-2 rounded-full text-sm font-semibold transition-colors"
+        aria-pressed="false"
+      >
+        Output
+      </button>
     </div>
 
     <div class="grid gap-10 lg:grid-cols-2">
@@ -60,6 +77,44 @@ const logoUrl = url("/images/logo.png");
         <div class="form-field">
           <label for="f-title">Title <span class="req">·</span></label>
           <input id="f-title" name="title" type="text" required maxlength="120" placeholder="A short, punchy headline" />
+        </div>
+
+        <!-- OUTPUT-ONLY METADATA FIELDS -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 hidden" data-only="output">
+          <div class="form-field">
+            <label for="f-outputId">Deliverable ID <span class="req">·</span></label>
+            <input id="f-outputId" name="outputId" type="text" value="D6.1" placeholder="e.g. D6.1" />
+            <p class="help">Format: <code>D#.#</code> (e.g. D6.1, D19.1)</p>
+          </div>
+          <div class="form-field">
+            <label for="f-workPackage">Work package <span class="req">·</span></label>
+            <input id="f-workPackage" name="workPackage" type="text" value="WP6" placeholder="e.g. WP6" />
+          </div>
+          <div class="form-field">
+            <label for="f-leadPartner">Lead partner <span class="req">·</span></label>
+            <select id="f-leadPartner" name="leadPartner">
+              {partners.map((p) => <option value={p}>{p}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 hidden" data-only="output">
+          <div class="form-field">
+            <label for="f-dueMonth">Due month (1–24) <span class="req">·</span></label>
+            <input id="f-dueMonth" name="dueMonth" type="number" min="1" max="24" value="12" />
+          </div>
+          <div class="form-field">
+            <label for="f-order">Display order <span class="opt">optional</span></label>
+            <input id="f-order" name="order" type="number" min="1" value="4" />
+            <p class="help">Lower numbers appear first.</p>
+          </div>
+          <div class="form-field flex flex-col justify-center pt-5">
+            <label class="inline-flex items-center gap-2.5 cursor-pointer">
+              <input id="f-featured" name="featured" type="checkbox" checked class="!w-4 !h-4 accent-[var(--color-brand)]" />
+              <span class="text-sm font-semibold text-[var(--color-ink)]">Show on Outputs page</span>
+            </label>
+            <p class="help">Sets <code>featured: true</code></p>
+          </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
@@ -116,11 +171,21 @@ const logoUrl = url("/images/logo.png");
             minlength="20"
             placeholder="One or two sentences shown on the card preview. At least 20 characters."
           ></textarea>
-          <p class="help">Shown on the card and social-media share previews.</p>
+          <p class="help">Shown on the card, the top of the detail page, and social-media share previews.</p>
         </div>
 
         <div class="form-field">
-          <label for="f-body">Body</label>
+          <div class="flex items-center justify-between mb-1">
+            <label for="f-body" class="!mb-0">Body</label>
+            <button
+              type="button"
+              id="insert-output-template-btn"
+              data-only="output"
+              class="hidden text-xs font-semibold text-[var(--color-teal-deep)] hover:text-[var(--color-brand)] underline underline-offset-2 cursor-pointer"
+            >
+              + Insert standard Output sections
+            </button>
+          </div>
           <div class="md-toolbar" role="toolbar" aria-label="Formatting">
             <button type="button" data-md="bold" class="md-btn" title="Bold — wraps selection in **">
               <strong>B</strong>
@@ -160,6 +225,51 @@ const logoUrl = url("/images/logo.png");
           </p>
         </div>
 
+        <!-- OUTPUT-ONLY PDF SECTION -->
+        <div class="rounded-lg border border-[var(--color-border-strong)] bg-[var(--color-surface-soft)] p-5 space-y-4 hidden" data-only="output">
+          <div>
+            <h3 class="font-display text-lg text-[var(--color-ink)] mb-1">Deliverable PDF <span class="text-xs font-normal text-[var(--color-ink-faint)]">optional</span></h3>
+            <p class="text-xs text-[var(--color-ink-soft)] leading-relaxed">
+              Attach a PDF from your computer (or paste an external link) to show a <strong>"Download deliverable (PDF) ↗"</strong> button and embedded PDF viewer on the output page.
+            </p>
+          </div>
+
+          <div class="form-field">
+            <label for="f-pdfFile">1. Choose a PDF file from your computer</label>
+            <input
+              id="f-pdfFile"
+              type="file"
+              accept=".pdf,application/pdf"
+              class="!bg-white cursor-pointer"
+            />
+            <p class="help">
+              Selecting a PDF automatically fills the path below (<code>/files/…pdf</code>) and previews the PDF on the right.
+            </p>
+          </div>
+
+          <div class="form-field">
+            <label for="f-fileUrl">2. PDF path on the site or external URL</label>
+            <div class="flex gap-2">
+              <input
+                id="f-fileUrl"
+                name="fileUrl"
+                type="text"
+                placeholder="/files/d6-1-report.pdf or https://..."
+              />
+              <button
+                type="button"
+                id="clear-pdf-btn"
+                class="btn btn-secondary text-xs px-3 py-1.5 shrink-0 hidden"
+              >
+                Clear
+              </button>
+            </div>
+            <p class="help">
+              For uploaded PDFs, place the PDF file in <code>public/files/</code> in the repository so it matches this path.
+            </p>
+          </div>
+        </div>
+
         <div class="form-field" data-only="news">
           <label for="f-tags">Tags <span class="opt">optional</span></label>
           <input id="f-tags" name="tags" type="text" placeholder="event-recap, milestone" />
@@ -171,7 +281,7 @@ const logoUrl = url("/images/logo.png");
           <input id="f-author" name="author" type="text" placeholder="Coordinator's name" />
         </div>
 
-        <details class="form-details">
+        <details class="form-details" id="image-details-section">
           <summary>Add an image <span class="opt">optional</span></summary>
           <div class="space-y-4 mt-4">
             <div class="form-field">
@@ -238,6 +348,13 @@ const logoUrl = url("/images/logo.png");
             <p class="text-sm text-[var(--color-ink-soft)] mb-4 flex-1" id="pv-event-summary">Your summary will appear here.</p>
             <span class="text-sm font-medium text-[var(--color-brand)]">Event details →</span>
           </article>
+
+          <!-- Output card shape (hidden until output mode) -->
+          <article id="pv-output-card" class="surface-card p-6 md:p-8 flex flex-col max-w-md hidden">
+            <h3 class="font-display text-xl leading-tight mb-3" id="pv-output-title">Your output title</h3>
+            <p class="text-sm text-[var(--color-ink-soft)] flex-1" id="pv-output-summary">Your summary will appear here.</p>
+            <p class="mt-5 text-sm font-semibold text-[var(--color-brand)]">Read more →</p>
+          </article>
         </div>
 
         <div>
@@ -247,7 +364,26 @@ const logoUrl = url("/images/logo.png");
           <div class="surface-card p-6 max-w-md">
             <h1 class="font-display text-2xl mb-2" id="pv-article-title">Your headline</h1>
             <p class="text-xs text-[var(--color-ink-faint)] mb-4" id="pv-article-meta">—</p>
+            <p class="text-sm text-[var(--color-ink-soft)] leading-relaxed mb-4 hidden" id="pv-output-lead-summary"></p>
             <div class="prose-content text-sm" id="pv-article-body"><p>Body preview…</p></div>
+            <div id="pv-output-download-wrap" class="mt-5 space-y-3 hidden">
+              <a
+                id="pv-output-download-link"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary text-xs py-2 px-4 inline-flex"
+              >
+                Download deliverable (PDF) ↗
+              </a>
+              <div id="pv-output-pdf-wrap" class="rounded border border-[var(--color-border)] overflow-hidden bg-[var(--color-surface-soft)] hidden">
+                <iframe
+                  id="pv-output-pdf-frame"
+                  title="Selected PDF preview"
+                  class="w-full h-64"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -261,7 +397,15 @@ const logoUrl = url("/images/logo.png");
           <div class="rounded-lg border border-[var(--color-border)] overflow-hidden">
             <div class="flex items-center justify-between px-4 py-2 bg-[var(--color-surface-soft)] border-b border-[var(--color-border)] text-xs gap-2 flex-wrap">
               <code id="pv-filename" class="font-mono text-[var(--color-ink-soft)]">YYYY-MM-DD-title.md</code>
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <button
+                  id="download-pdf-btn"
+                  type="button"
+                  class="btn btn-secondary text-xs py-1.5 px-3 hidden"
+                  title="Save the selected PDF with the exact filename expected in public/files/"
+                >
+                  ↓ Save renamed PDF
+                </button>
                 <button
                   id="download-btn"
                   type="button"
@@ -287,23 +431,23 @@ const logoUrl = url("/images/logo.png");
 
     <!-- INSTRUCTIONS -->
     <section class="mt-16 max-w-3xl border-t border-[var(--color-border)] pt-10">
-      <h2 class="text-2xl md:text-3xl mb-6">What to do with the copied text</h2>
+      <h2 class="text-2xl md:text-3xl mb-6">What to do with the downloaded file</h2>
       <ol class="space-y-4 text-[var(--color-ink-soft)] leading-relaxed">
         <li>
           <span class="inline-block w-6 font-semibold text-[var(--color-brand)]">1.</span>
-          Click <strong class="text-[var(--color-ink)]">Copy Markdown</strong> above.
+          Click <strong class="text-[var(--color-ink)]">↓ Download .md</strong> (or <strong class="text-[var(--color-ink)]">Copy</strong>) above. If you attached a PDF for an Output, also click <strong class="text-[var(--color-ink)]">↓ Save renamed PDF</strong>.
         </li>
         <li>
           <span class="inline-block w-6 font-semibold text-[var(--color-brand)]">2.</span>
-          Send it — with the suggested filename and any image attachment — to
+          Send the file(s) — along with any image or PDF attachment — to
           <a href={`mailto:${site.coordinator.email}?subject=${encodeURIComponent("New PATHFINDER post")}`} class="link">
             {site.coordinator.email}
-          </a>.
+          </a>, or upload directly to GitHub if you have write access.
         </li>
         <li>
           <span class="inline-block w-6 font-semibold text-[var(--color-brand)]">3.</span>
-          The publisher pastes it into the site's <code>src/content/news/</code> (or
-          <code>src/content/events/</code>) folder on GitHub. The post appears on the live site
+          The publisher uploads the <code>.md</code> file into <code>src/content/news/</code>,
+          <code>src/content/events/</code>, or <code>src/content/outputs/</code> on GitHub (and any deliverable PDF into <code>public/files/</code>). The post appears on the live site
           within about a minute.
         </li>
       </ol>
@@ -457,12 +601,22 @@ const logoUrl = url("/images/logo.png");
 
     marked.setOptions({ gfm: true, breaks: false });
 
-    type PostType = "news" | "event";
+    type PostType = "news" | "event" | "output";
     let currentType: PostType = "news";
 
     const form = document.getElementById("composer-form") as HTMLFormElement;
     const dateInput = document.getElementById("f-date") as HTMLInputElement;
     const startDateInput = document.getElementById("f-startDate") as HTMLInputElement;
+    const pdfFileInput = document.getElementById("f-pdfFile") as HTMLInputElement;
+    const fileUrlInput = document.getElementById("f-fileUrl") as HTMLInputElement;
+    const clearPdfBtn = document.getElementById("clear-pdf-btn") as HTMLButtonElement;
+    const downloadPdfBtn = document.getElementById("download-pdf-btn") as HTMLButtonElement;
+    const insertOutputTemplateBtn = document.getElementById(
+      "insert-output-template-btn",
+    ) as HTMLButtonElement;
+
+    let selectedPdfFile: File | null = null;
+    let selectedPdfObjectUrl: string | null = null;
 
     // Default the date to today.
     const todayISO = new Date().toISOString().slice(0, 10);
@@ -480,6 +634,14 @@ const logoUrl = url("/images/logo.png");
         .replace(/\s+/g, "-")
         .replace(/-+/g, "-")
         .slice(0, 60);
+    }
+
+    function slugifyOutputId(id: string): string {
+      return (id || "D1.1")
+        .trim()
+        .toLowerCase()
+        .replace(/\./g, "-")
+        .replace(/[^a-z0-9-]/g, "");
     }
 
     function fmtDate(iso: string): string {
@@ -517,6 +679,49 @@ const logoUrl = url("/images/logo.png");
       return el?.value?.trim() ?? "";
     }
 
+    function getSuggestedPdfFilename(): string {
+      const idSlug = slugifyOutputId(getFormValue("outputId") || "D6.1");
+      const titleSlug = slugify(getFormValue("title"));
+      if (titleSlug) {
+        return `${idSlug}-${titleSlug}.pdf`;
+      }
+      if (selectedPdfFile) {
+        const baseName = selectedPdfFile.name.replace(/\.pdf$/i, "");
+        const fileSlug = slugify(baseName) || "deliverable";
+        return fileSlug.startsWith(idSlug) ? `${fileSlug}.pdf` : `${idSlug}-${fileSlug}.pdf`;
+      }
+      return `${idSlug}-deliverable.pdf`;
+    }
+
+    // ── PDF file selection & clear ─────────────────────────────
+    pdfFileInput.addEventListener("change", () => {
+      const file = pdfFileInput.files?.[0] ?? null;
+      if (selectedPdfObjectUrl) {
+        URL.revokeObjectURL(selectedPdfObjectUrl);
+        selectedPdfObjectUrl = null;
+      }
+      selectedPdfFile = file;
+      if (file) {
+        selectedPdfObjectUrl = URL.createObjectURL(file);
+        const suggested = getSuggestedPdfFilename();
+        if (!fileUrlInput.value.trim() || fileUrlInput.value.trim().startsWith("/files/")) {
+          fileUrlInput.value = `/files/${suggested}`;
+        }
+      }
+      updatePreview();
+    });
+
+    clearPdfBtn.addEventListener("click", () => {
+      pdfFileInput.value = "";
+      fileUrlInput.value = "";
+      if (selectedPdfObjectUrl) {
+        URL.revokeObjectURL(selectedPdfObjectUrl);
+        selectedPdfObjectUrl = null;
+      }
+      selectedPdfFile = null;
+      updatePreview();
+    });
+
     // ── Type toggle ────────────────────────────────────────────
     document.querySelectorAll<HTMLButtonElement>(".type-toggle").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -529,15 +734,45 @@ const logoUrl = url("/images/logo.png");
         document.querySelectorAll<HTMLElement>("[data-only]").forEach((el) => {
           el.classList.toggle("hidden", el.dataset.only !== type);
         });
+        document.getElementById("image-details-section")?.classList.toggle("hidden", type === "output");
         document.getElementById("pv-news-card")?.classList.toggle("hidden", type !== "news");
         document.getElementById("pv-event-card")?.classList.toggle("hidden", type !== "event");
+        document.getElementById("pv-output-card")?.classList.toggle("hidden", type !== "output");
         updatePreview();
       });
+    });
+
+    // ── Output template helper ─────────────────────────────────
+    insertOutputTemplateBtn.addEventListener("click", () => {
+      const title = getFormValue("title") || "Deliverable Title";
+      const template = [
+        `Following the project activities across the partner countries, the **${title}** brings the findings together into a single, comparable picture.`,
+        "",
+        "It captures:",
+        "",
+        "- **Key finding or pillar 1** — brief explanation of what this section covers.",
+        "- **Key finding or pillar 2** — brief explanation of the methodology or insights.",
+        "- **Key finding or pillar 3** — best practices and inclusive approaches for engaging youth.",
+        "- **Recommendations** — actionable next steps for young people, employers, and policymakers.",
+        "",
+        "The report is published openly as part of PATHFINDER's public deliverables.",
+      ].join("\n");
+
+      const bodyField = document.getElementById("f-body") as HTMLTextAreaElement;
+      if (bodyField.value.trim() && !window.confirm("Replace current body text with the standard Output template?")) {
+        return;
+      }
+      bodyField.value = template;
+      bodyField.dispatchEvent(new Event("input", { bubbles: true }));
     });
 
     // ── Preview + output ───────────────────────────────────────
     function buildFilename(): string {
       const title = getFormValue("title") || "untitled";
+      if (currentType === "output") {
+        const idSlug = slugifyOutputId(getFormValue("outputId") || "D6.1");
+        return `${idSlug}-${slugify(title) || "output"}.md`;
+      }
       const date =
         currentType === "news"
           ? getFormValue("date") || todayISO
@@ -566,7 +801,7 @@ const logoUrl = url("/images/logo.png");
           lines.push("tags:");
           for (const t of tags) lines.push(`  - ${escapeYaml(t)}`);
         }
-      } else {
+      } else if (currentType === "event") {
         lines.push(`title: ${escapeYaml(title)}`);
         lines.push(`startDate: ${getFormValue("startDate") || todayISO}`);
         const endDate = getFormValue("endDate");
@@ -577,9 +812,30 @@ const logoUrl = url("/images/logo.png");
         lines.push(`summary: ${escapeYaml(summary)}`);
         const reg = getFormValue("registrationUrl");
         if (reg) lines.push(`registrationUrl: ${escapeYaml(reg)}`);
+      } else {
+        const outputId = (getFormValue("outputId") || "D6.1").toUpperCase();
+        const workPackage = getFormValue("workPackage") || "WP6";
+        const leadPartner = getFormValue("leadPartner") || "European Dialogue";
+        const dueMonth = Math.min(24, Math.max(1, Number.parseInt(getFormValue("dueMonth") || "12", 10) || 12));
+        const order = Number.parseInt(getFormValue("order") || "4", 10) || 4;
+        const featuredEl = document.getElementById("f-featured") as HTMLInputElement;
+        const featured = featuredEl ? featuredEl.checked : true;
+        const fileUrl = getFormValue("fileUrl");
+
+        lines.push(`id: ${escapeYaml(outputId)}`);
+        lines.push(`title: ${escapeYaml(title)}`);
+        lines.push(`workPackage: ${escapeYaml(workPackage)}`);
+        lines.push(`leadPartner: ${escapeYaml(leadPartner)}`);
+        lines.push(`dueMonth: ${dueMonth}`);
+        lines.push(`summary: ${escapeYaml(summary)}`);
+        lines.push(`featured: ${featured}`);
+        if (fileUrl) {
+          lines.push(`fileUrl: ${escapeYaml(fileUrl)}`);
+        }
+        lines.push(`order: ${order}`);
       }
 
-      if (imgSrc) {
+      if (currentType !== "output" && imgSrc) {
         lines.push("image:");
         lines.push(`  src: ${escapeYaml(imgSrc)}`);
         lines.push(`  alt: ${escapeYaml(imgAlt)}`);
@@ -605,6 +861,12 @@ const logoUrl = url("/images/logo.png");
       image.src = imgSrc || image.dataset.fallback || "/images/logo.png";
       image.alt = imgAlt || "";
 
+      const leadSummaryEl = document.getElementById("pv-output-lead-summary") as HTMLElement;
+      const outputDownloadWrap = document.getElementById("pv-output-download-wrap") as HTMLElement;
+      const outputDownloadLink = document.getElementById("pv-output-download-link") as HTMLAnchorElement;
+      const outputPdfWrap = document.getElementById("pv-output-pdf-wrap") as HTMLElement;
+      const outputPdfFrame = document.getElementById("pv-output-pdf-frame") as HTMLIFrameElement;
+
       if (currentType === "news") {
         (document.getElementById("pv-title") as HTMLElement).textContent = title;
         (document.getElementById("pv-summary") as HTMLElement).textContent = summary;
@@ -619,7 +881,10 @@ const logoUrl = url("/images/logo.png");
         } else {
           tagWrap.hidden = true;
         }
-      } else {
+        leadSummaryEl.classList.add("hidden");
+        outputDownloadWrap.classList.add("hidden");
+        downloadPdfBtn.classList.add("hidden");
+      } else if (currentType === "event") {
         (document.getElementById("pv-event-title") as HTMLElement).textContent = title;
         (document.getElementById("pv-event-summary") as HTMLElement).textContent = summary;
         (document.getElementById("pv-event-location") as HTMLElement).textContent =
@@ -631,6 +896,50 @@ const logoUrl = url("/images/logo.png");
         const dateLabel =
           end && start ? `${fmtShortDate(start)} – ${fmtShortDate(end)}` : fmtShortDate(start) || "—";
         (document.getElementById("pv-event-date") as HTMLElement).textContent = dateLabel;
+        leadSummaryEl.classList.add("hidden");
+        outputDownloadWrap.classList.add("hidden");
+        downloadPdfBtn.classList.add("hidden");
+      } else {
+        (document.getElementById("pv-output-title") as HTMLElement).textContent = title;
+        (document.getElementById("pv-output-summary") as HTMLElement).textContent = summary;
+
+        leadSummaryEl.textContent = summary;
+        leadSummaryEl.classList.remove("hidden");
+
+        const fileUrl = getFormValue("fileUrl");
+        const hasPdfOrUrl = Boolean(fileUrl || selectedPdfObjectUrl);
+        clearPdfBtn.classList.toggle("hidden", !hasPdfOrUrl);
+        downloadPdfBtn.classList.toggle("hidden", !selectedPdfFile);
+
+        if (selectedPdfFile) {
+          const targetPdfName = fileUrl.startsWith("/files/")
+            ? fileUrl.replace(/^\/files\//, "")
+            : getSuggestedPdfFilename();
+          downloadPdfBtn.textContent = `↓ Save PDF (${targetPdfName})`;
+        }
+
+        if (hasPdfOrUrl) {
+          outputDownloadWrap.classList.remove("hidden");
+          outputDownloadLink.href = selectedPdfObjectUrl || fileUrl || "#";
+          const isPdf = Boolean(selectedPdfObjectUrl || /\.pdf($|\?)/i.test(fileUrl));
+          outputDownloadLink.textContent = isPdf
+            ? "Download deliverable (PDF) ↗"
+            : "Download deliverable ↗";
+
+          if (selectedPdfObjectUrl) {
+            outputPdfWrap.classList.remove("hidden");
+            if (outputPdfFrame.src !== selectedPdfObjectUrl) {
+              outputPdfFrame.src = selectedPdfObjectUrl;
+            }
+          } else {
+            outputPdfWrap.classList.add("hidden");
+            outputPdfFrame.removeAttribute("src");
+          }
+        } else {
+          outputDownloadWrap.classList.add("hidden");
+          outputPdfWrap.classList.add("hidden");
+          outputPdfFrame.removeAttribute("src");
+        }
       }
 
       // Article preview
@@ -638,16 +947,24 @@ const logoUrl = url("/images/logo.png");
       const meta =
         currentType === "news"
           ? `Published · ${fmtDate(getFormValue("date") || todayISO)}`
-          : (() => {
-              const s = getFormValue("startDate");
-              const e = getFormValue("endDate");
-              const dates = e && s ? `${fmtShortDate(s)} – ${fmtShortDate(e)}` : fmtShortDate(s);
-              const loc = getFormValue("location");
-              return [dates, loc].filter(Boolean).join(" · ") || "—";
-            })();
+          : currentType === "event"
+            ? (() => {
+                const s = getFormValue("startDate");
+                const e = getFormValue("endDate");
+                const dates = e && s ? `${fmtShortDate(s)} – ${fmtShortDate(e)}` : fmtShortDate(s);
+                const loc = getFormValue("location");
+                return [dates, loc].filter(Boolean).join(" · ") || "—";
+              })()
+            : (() => {
+                const outId = (getFormValue("outputId") || "D6.1").toUpperCase();
+                const wp = getFormValue("workPackage") || "WP6";
+                const lp = getFormValue("leadPartner") || "European Dialogue";
+                const dm = getFormValue("dueMonth") || "12";
+                return `Output · ${outId} · ${wp} · Lead: ${lp} · Due: Month ${dm}`;
+              })();
       (document.getElementById("pv-article-meta") as HTMLElement).textContent = meta;
       (document.getElementById("pv-article-body") as HTMLElement).innerHTML =
-        body.trim() ? marked.parse(body) as string : "<p><em>Body preview…</em></p>";
+        body.trim() ? (marked.parse(body) as string) : "<p><em>Body preview…</em></p>";
 
       // Markdown output + filename
       const md = buildFrontmatterAndBody();
@@ -659,6 +976,7 @@ const logoUrl = url("/images/logo.png");
     }
 
     form.addEventListener("input", updatePreview);
+    form.addEventListener("change", updatePreview);
 
     // ── Markdown toolbar (Bold / Link / H2 / H3 / List / Quote) ─
     const bodyEl = document.getElementById("f-body") as HTMLTextAreaElement;
@@ -725,7 +1043,7 @@ const logoUrl = url("/images/logo.png");
       });
     });
 
-    // ── Copy to clipboard + Download .md ───────────────────────
+    // ── Copy to clipboard + Download .md / PDF ─────────────────
     const copyBtn = document.getElementById("copy-btn") as HTMLButtonElement;
     const downloadBtn = document.getElementById("download-btn") as HTMLButtonElement;
     const copyStatus = document.getElementById("copy-status") as HTMLElement;
@@ -758,6 +1076,21 @@ const logoUrl = url("/images/logo.png");
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
       flashStatus(`Downloaded ${filename} ✓`);
+    });
+
+    downloadPdfBtn.addEventListener("click", () => {
+      if (!selectedPdfFile || !selectedPdfObjectUrl) return;
+      const fileUrl = getFormValue("fileUrl");
+      const targetPdfName = fileUrl.startsWith("/files/")
+        ? fileUrl.replace(/^\/files\//, "")
+        : getSuggestedPdfFilename();
+      const a = document.createElement("a");
+      a.href = selectedPdfObjectUrl;
+      a.download = targetPdfName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      flashStatus(`Saved PDF as ${targetPdfName} ✓`);
     });
 
     // First render

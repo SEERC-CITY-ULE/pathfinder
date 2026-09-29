@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { url } from "~/lib/url";
 
 type Props = {
   title: string;
@@ -10,6 +11,11 @@ type Props = {
 };
 
 const { title, eyebrow, description, meta = [], image } = Astro.props;
+const imgSrc = image?.src
+  ? image.src.startsWith("/")
+    ? url(image.src)
+    : image.src
+  : url("/images/logo.png");
 ---
 
 <BaseLayout title={title} description={description}>
@@ -37,7 +43,7 @@ const { title, eyebrow, description, meta = [], image } = Astro.props;
 
     <figure class="container-wide py-8">
       <img
-        src={image?.src ?? "/images/logo.png"}
+        src={imgSrc}
         alt={image?.alt ?? ""}
         aria-hidden={!image ? "true" : undefined}
         class="w-full h-72 object-contain rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-soft)] p-8"

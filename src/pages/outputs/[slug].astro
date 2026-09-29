@@ -13,6 +13,13 @@ export async function getStaticPaths() {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
+
+const resolvedFileUrl = item.data.fileUrl
+  ? item.data.fileUrl.startsWith("/")
+    ? url(item.data.fileUrl)
+    : item.data.fileUrl
+  : undefined;
+const isPdf = resolvedFileUrl ? /\.pdf($|\?)/i.test(resolvedFileUrl) : false;
 ---
 
 <ArticleLayout
@@ -24,12 +31,30 @@ const { Content } = await render(item);
   <Content />
 
   {
-    item.data.fileUrl && (
-      <p class="mt-10">
-        <a href={item.data.fileUrl} class="btn btn-primary" rel="noopener">
-          Download deliverable ↗
-        </a>
-      </p>
+    resolvedFileUrl && (
+      <div class="mt-10 space-y-6">
+        <p>
+          <a
+            href={resolvedFileUrl}
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener"
+            download={item.data.fileUrl?.startsWith("/") ? "" : undefined}
+          >
+            {isPdf ? "Download deliverable (PDF) ↗" : "Download deliverable ↗"}
+          </a>
+        </p>
+        {isPdf && (
+          <div class="rounded-lg border border-[var(--color-border)] overflow-hidden bg-[var(--color-surface-soft)]">
+            <iframe
+              src={resolvedFileUrl}
+              title={`${item.data.title} PDF preview`}
+              class="w-full h-[600px]"
+              loading="lazy"
+            />
+          </div>
+        )}
+      </div>
     )
   }
 
