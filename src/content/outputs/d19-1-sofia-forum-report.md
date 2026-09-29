@@ -1,12 +1,8 @@
 ---
 id: D19.1
 title: Sofia Forum Report & Youth Skills Lab Curriculum
-workPackage: WP19
-leadPartner: PCO
-dueMonth: 20
 summary: Outputs from the PATHFINDER Sofia Forum on AI, Youth and the Future of Work — including the training scheme for the five national Youth Skills Labs, covering AI literacy, 4th-generation skills, adaptability, and career readiness.
 featured: true
-order: 2
 ---
 
 The PATHFINDER Sofia Forum is the flagship event where youth, employers, EU policymakers, and Advisory Board members co-create a shared response to AI-driven labour-market change.

@@ -1,12 +1,8 @@
 ---
 id: D25.1
 title: PATHFINDER Policy Recommendation Report
-workPackage: WP25
-leadPartner: European Dialogue
-dueMonth: 24
 summary: Youth-driven policy recommendations on inclusive AI and employment, developed through national debates, the Sofia Forum, and transnational dialogue. Formally presented at the EU Policy Roundtable.
 featured: true
-order: 3
 ---
 
 The closing output of the PATHFINDER project — and the one with the longest reach.

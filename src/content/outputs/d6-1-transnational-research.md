@@ -1,12 +1,8 @@
 ---
 id: D6.1
 title: Transnational Research Synthesis Report
-workPackage: WP6
-leadPartner: CREDI
-dueMonth: 7
 summary: Consolidated findings from the five national Youth–Employer Dialogue events held in each partner country, mapping youth perceptions of AI and employment and identifying priority skills gaps.
 featured: true
-order: 1
 ---
 
 Following the country-level participatory research events held in Bosnia & Herzegovina, Greece, Bulgaria, Slovakia, and Serbia, the **Transnational Research Synthesis Report** brings the five strands together into a single, comparable picture.

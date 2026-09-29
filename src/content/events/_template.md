@@ -9,7 +9,6 @@ endDate: 2027-03-16              # optional, omit for single-day events
 location: City, Country          # human-readable location
 country: Greece                  # one of: Slovakia | Greece | Bosnia & Herzegovina | Bulgaria | Serbia | Italy | United Kingdom | European Union | Online
 format: In-person                # one of: In-person | Online | Hybrid
-workPackage: WP15                # optional, e.g. WP15
 summary: One or two sentences (at least 20 characters) describing what the event is and who it's for.
 # image:                         # optional hero image
 #   src: /images/news/your-photo.jpg
