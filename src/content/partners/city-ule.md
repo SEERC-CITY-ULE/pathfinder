@@ -12,6 +12,9 @@ team:
   - name: Nikos Zaharis
     role: SEERC representative
     photo: /images/team/nikos-zaharis.webp
+  - name: Stefania Gourzoulidou
+    role: CITY ULE lead
+    photo: /images/team/faye-ververidou.webp
 order: 3
 ---
 
