@@ -1,7 +1,7 @@
 ---
 title: Transnational Dialogue on AI and Youth Employability
 startDate: 2026-10-20
-endDate: 
+ 
 location: Sarajevo
 country: Bosnia & Herzegovina
 format: In-person
