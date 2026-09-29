@@ -1,19 +1,21 @@
 ---
 title: Transnational Dialogue on AI and Youth Employability
-startDate: 2026-10-15
-endDate: 2026-10-16
-location: Sarajevo, Bosnia & Herzegovina
+startDate: 2026-10-20
+endDate: 
+location: Sarajevo
 country: Bosnia & Herzegovina
 format: In-person
-summary: A transnational event uniting national research on AI and youth employability, shaping a shared research agenda and guiding project outputs. Hosted by CREDI in Sarajevo, with participation from project staff, youth representatives, employers, and the PATHFINDER Advisory Board.
+summary: Our first transnational youth workshop unites national research findings into a shared understanding of the challenges young people encounter in an AI-driven labour market on AI and youth employability.
 agenda: |
-  **Day 1** — Knowledge-sharing participatory event: dialogue on AI and youth employability across the five project countries.
+  **Introduction** — What the evidence tells us: findings from Central and Eastern Europe.
 
-  **Day 2** — Advisory Board strategic guidance: in-situ meeting and post-event reflection with AB members.
+  **Round 1** — Exploring how AI is changing pathways from education to first meaningful work.
 
-  Dates above are indicative; the final agenda will be published closer to the event.
+  **Round 2** — Beyond AI Skills: Defining what preparedness for an AI-driven labour market should mean in practice.
+
+  **Round 3** — Who gets left behind: Exclusion mechanisms, vulnerability and mitigation measures.
+
+  The final agenda is subject to minor changes.
 ---
 
-The Sarajevo Dialogue is PATHFINDER's first major transnational gathering. Building on the five national research strands (Slovakia, Greece, Bosnia & Herzegovina, Bulgaria, Serbia), participants will co-design practical solutions for AI-driven labour-market challenges.
-
-Two to three young people aged 18–30 from each partner country will be invited, with priority given to marginalised groups, youth with mismatched skills, and precarious workers. The Advisory Board will provide strategic guidance on the participatory research agenda.
+The Sarajevo Dialogue builds on the national discussions held in the five partner countries and brings young people, employers and project partners together to map the pressure points in young people's transition from education to employment, and to agree on priority areas for the project's upcoming interventions.
