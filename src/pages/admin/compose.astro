@@ -24,8 +24,18 @@ const logoUrl = url("/images/logo.png");
   noindex
 >
   <div class="container-wide py-10 md:py-14">
+    <p class="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] mb-3">
+      <a href={url("/admin/")} class="hover:underline underline-offset-4">Admin</a>
+      <span class="text-[var(--color-ink-faint)] mx-2">/</span>
+      <span>Compose</span>
+      <a
+        href={url("/admin/docs/composer/")}
+        class="ml-4 inline-flex items-center gap-1 text-[var(--color-teal-deep)] normal-case tracking-normal text-sm font-normal hover:underline underline-offset-4"
+      >
+        📖 Help &amp; guides
+      </a>
+    </p>
     <header class="mb-8 max-w-3xl">
-      <p class="eyebrow mb-3">Internal tool</p>
       <h1 class="text-3xl md:text-5xl mb-4">Compose a post</h1>
       <p class="text-[var(--color-ink-soft)] leading-relaxed">
         Fill in the form and the correctly-formatted Markdown appears on the right. Copy or download it, then

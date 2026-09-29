@@ -1,0 +1,156 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { docs } from "~/data/docs";
+import { url } from "~/lib/url";
+
+type Props = {
+  activeSlug: string;
+  title: string;
+  description?: string;
+};
+
+const { activeSlug, title, description } = Astro.props;
+---
+
+<BaseLayout title={`Help — ${title}`} description={description} noindex>
+  <div class="container-wide py-8 md:py-12">
+    <p class="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] mb-3">
+      <a href={url("/admin/")} class="hover:underline underline-offset-4">Admin</a>
+      <span class="text-[var(--color-ink-faint)] mx-2">/</span>
+      <a href={url("/admin/docs/")} class="hover:underline underline-offset-4">Help &amp; guides</a>
+    </p>
+
+    <div class="grid gap-10 md:grid-cols-[16rem_1fr] md:gap-14">
+      <!-- Sidebar nav -->
+      <aside class="md:sticky md:top-32 md:self-start md:max-h-[calc(100vh-10rem)] md:overflow-y-auto">
+        <nav aria-label="Documentation">
+          <p class="text-xs font-semibold uppercase tracking-widest text-[var(--color-ink-soft)] mb-3">
+            All guides
+          </p>
+          <ul class="space-y-1">
+            {
+              docs.map((d) => (
+                <li>
+                  <a
+                    href={url(`/admin/docs/${d.slug}/`)}
+                    aria-current={d.slug === activeSlug ? "page" : undefined}
+                    class:list={[
+                      "block px-3 py-2 rounded-md text-sm transition-colors",
+                      d.slug === activeSlug
+                        ? "bg-[var(--color-brand)] text-white font-semibold"
+                        : "text-[var(--color-ink-soft)] hover:bg-[var(--color-surface-soft)] hover:text-[var(--color-brand)]",
+                    ]}
+                  >
+                    {d.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main article -->
+      <article class="min-w-0">
+        <header class="mb-8">
+          <h1 class="font-display text-3xl md:text-4xl mb-3">{title}</h1>
+          {description && (
+            <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed">{description}</p>
+          )}
+        </header>
+        <div class="docs-body">
+          <slot />
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <style is:global>
+    /* Rendered-markdown styles scoped to the docs article body */
+    .docs-body {
+      color: var(--color-ink);
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+    .docs-body :is(h1, h2, h3, h4) {
+      font-family: var(--font-display);
+      color: var(--color-brand);
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      line-height: 1.2;
+      scroll-margin-top: 6rem;
+    }
+    .docs-body h1 { font-size: 1.85rem; margin: 2em 0 0.6em; }
+    .docs-body h2 {
+      font-size: 1.45rem;
+      margin: 2em 0 0.6em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .docs-body h3 { font-size: 1.15rem; margin: 1.6em 0 0.4em; color: var(--color-teal-deep); }
+    .docs-body h4 { font-size: 1rem; margin: 1.3em 0 0.3em; }
+
+    .docs-body p { margin: 0.7em 0; }
+    .docs-body ul, .docs-body ol { padding-left: 1.5em; margin: 0.7em 0; }
+    .docs-body ul { list-style: disc; }
+    .docs-body ol { list-style: decimal; }
+    .docs-body li { margin: 0.35em 0; }
+    .docs-body li > p { margin: 0.3em 0; }
+
+    .docs-body a {
+      color: var(--color-teal-deep);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: break-word;
+    }
+    .docs-body a:hover { color: var(--color-brand); }
+
+    .docs-body strong { color: var(--color-ink); font-weight: 700; }
+    .docs-body em, .docs-body i, .docs-body cite { font-style: normal; font-weight: 600; }
+
+    .docs-body code {
+      background: var(--color-surface-soft);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.88em;
+      font-family: "Menlo", "Consolas", monospace;
+      color: var(--color-brand);
+    }
+    .docs-body pre {
+      background: var(--color-surface-soft);
+      padding: 1em 1.15em;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.85em;
+      line-height: 1.55;
+      border: 1px solid var(--color-border);
+      margin: 1em 0;
+    }
+    .docs-body pre code { background: none; padding: 0; color: var(--color-ink); }
+
+    .docs-body blockquote {
+      border-left: 3px solid var(--color-teal);
+      padding: 0.1em 0 0.1em 1em;
+      margin: 1em 0;
+      color: var(--color-ink-soft);
+    }
+
+    .docs-body table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+      font-size: 0.95em;
+      display: block;
+      overflow-x: auto;
+    }
+    .docs-body th, .docs-body td {
+      border: 1px solid var(--color-border);
+      padding: 0.55em 0.75em;
+      text-align: left;
+      vertical-align: top;
+    }
+    .docs-body th { background: var(--color-surface-soft); font-weight: 700; color: var(--color-brand); }
+
+    .docs-body hr { border: 0; border-top: 1px solid var(--color-border); margin: 1.5em 0; }
+  </style>
+</BaseLayout>

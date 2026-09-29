@@ -1,0 +1,58 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { docs } from "~/data/docs";
+import { url } from "~/lib/url";
+---
+
+<BaseLayout
+  title="Help & guides"
+  description="Documentation for coordinators, publishers, and maintainers of the PATHFINDER website."
+  noindex
+>
+  <div class="container-wide py-10 md:py-14">
+    <header class="mb-10 max-w-3xl">
+      <p class="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] mb-3">
+        <a href={url("/admin/")} class="hover:underline underline-offset-4">Admin</a>
+        <span class="text-[var(--color-ink-faint)] mx-2">/</span>
+        <span>Help &amp; guides</span>
+      </p>
+      <h1 class="text-3xl md:text-5xl mb-4">Help &amp; guides</h1>
+      <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed">
+        Everything you need to update the PATHFINDER website — click-by-click, browser-only, no
+        terminal required. Pick the guide that matches what you're trying to do.
+      </p>
+    </header>
+
+    <ul class="grid gap-5 md:grid-cols-2 max-w-4xl">
+      {
+        docs.map((d) => (
+          <li>
+            <a
+              href={url(`/admin/docs/${d.slug}/`)}
+              class="surface-card p-6 md:p-7 h-full flex flex-col group"
+            >
+              <p class="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] mb-3">
+                {d.audience}
+              </p>
+              <h2 class="font-display text-xl leading-tight mb-3 group-hover:text-[var(--color-brand)] transition-colors">
+                {d.title}
+              </h2>
+              <p class="text-sm text-[var(--color-ink-soft)] leading-relaxed flex-1">
+                {d.description}
+              </p>
+              <p class="mt-4 text-sm font-semibold text-[var(--color-brand)] group-hover:underline underline-offset-4">
+                Open guide →
+              </p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-12 text-sm text-[var(--color-ink-faint)] max-w-3xl">
+      These guides are always in sync with the site — they're generated from the Markdown files at
+      <code>docs/</code> in the repository. If something is missing or wrong, ask the technical
+      maintainer to update the source files.
+    </p>
+  </div>
+</BaseLayout>
