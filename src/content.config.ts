@@ -45,6 +45,7 @@ const events = defineCollection({
     format: z.enum(["In-person", "Online", "Hybrid"]),
     workPackage: z.string().optional(),
     summary: z.string().min(20),
+    agenda: z.string().optional(),
     image,
     registrationUrl: z.string().url().optional(),
     draft: z.boolean().default(false),
@@ -95,10 +96,11 @@ const outputs = defineCollection({
   schema: z.object({
     id: z.string().regex(/^D\d{1,2}\.\d$/, { message: "e.g. D6.1" }),
     title: z.string().min(1),
-    workPackage: z.string().min(2),
-    leadPartner: z.string().min(2),
-    dueMonth: z.number().int().min(1).max(24),
+    workPackage: z.string().optional(),
+    leadPartner: z.string().optional(),
+    dueMonth: z.number().int().min(1).max(24).optional(),
     summary: z.string().min(20),
+    image,
     featured: z.boolean().default(false),
     fileUrl: z
       .string()

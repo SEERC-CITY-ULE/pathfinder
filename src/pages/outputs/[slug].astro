@@ -24,8 +24,9 @@ const isPdf = resolvedFileUrl ? /\.pdf($|\?)/i.test(resolvedFileUrl) : false;
 
 <ArticleLayout
   title={item.data.title}
-  eyebrow="Output"
+  eyebrow={`Output · ${item.data.id}`}
   description={item.data.summary}
+  image={item.data.image}
 >
   <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed mb-8">{item.data.summary}</p>
   <Content />

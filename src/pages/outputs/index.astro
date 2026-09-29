@@ -31,9 +31,12 @@ const featured = (await getCollection("outputs", ({ data }) => data.featured)).s
       {
         featured.map((o) => (
           <OutputCard
-            href={url(`/outputs/${o.id.toLowerCase().replace(".", "-")}`)}
+            href={url(`/outputs/${o.data.id.toLowerCase().replace(".", "-")}`)}
+            id={o.data.id}
             title={o.data.title}
             summary={o.data.summary}
+            image={o.data.image}
+            hasFile={Boolean(o.data.fileUrl)}
           />
         ))
       }

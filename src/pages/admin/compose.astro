@@ -15,15 +15,6 @@ const countries = [
   "Online",
 ];
 
-const partners = [
-  "European Dialogue",
-  "CREDI",
-  "CITY ULE",
-  "Fotódentra",
-  "PCO",
-  "YRS",
-];
-
 const logoUrl = url("/images/logo.png");
 ---
 
@@ -80,33 +71,11 @@ const logoUrl = url("/images/logo.png");
         </div>
 
         <!-- OUTPUT-ONLY METADATA FIELDS -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 hidden" data-only="output">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden" data-only="output">
           <div class="form-field">
             <label for="f-outputId">Deliverable ID <span class="req">·</span></label>
             <input id="f-outputId" name="outputId" type="text" value="D6.1" placeholder="e.g. D6.1" />
             <p class="help">Format: <code>D#.#</code> (e.g. D6.1, D19.1)</p>
-          </div>
-          <div class="form-field">
-            <label for="f-workPackage">Work package <span class="req">·</span></label>
-            <input id="f-workPackage" name="workPackage" type="text" value="WP6" placeholder="e.g. WP6" />
-          </div>
-          <div class="form-field">
-            <label for="f-leadPartner">Lead partner <span class="req">·</span></label>
-            <select id="f-leadPartner" name="leadPartner">
-              {partners.map((p) => <option value={p}>{p}</option>)}
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 hidden" data-only="output">
-          <div class="form-field">
-            <label for="f-dueMonth">Due month (1–24) <span class="req">·</span></label>
-            <input id="f-dueMonth" name="dueMonth" type="number" min="1" max="24" value="12" />
-          </div>
-          <div class="form-field">
-            <label for="f-order">Display order <span class="opt">optional</span></label>
-            <input id="f-order" name="order" type="number" min="1" value="4" />
-            <p class="help">Lower numbers appear first.</p>
           </div>
           <div class="form-field flex flex-col justify-center pt-5">
             <label class="inline-flex items-center gap-2.5 cursor-pointer">
@@ -158,6 +127,23 @@ const logoUrl = url("/images/logo.png");
         <div class="form-field hidden" data-only="event">
           <label for="f-registrationUrl">Registration URL <span class="opt">optional</span></label>
           <input id="f-registrationUrl" name="registrationUrl" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="form-field hidden" data-only="event">
+          <label for="f-agenda">Agenda <span class="opt">optional</span></label>
+          <textarea
+            id="f-agenda"
+            name="agenda"
+            rows="6"
+            placeholder={`One item per line. Markdown works.
+
+09:00 — Registration & coffee
+09:30 — Opening remarks
+10:00 — Panel: AI and youth employability
+11:30 — Break
+`}
+          ></textarea>
+          <p class="help">Rendered as its own "Agenda" section on the event page.</p>
         </div>
 
         <!-- SHARED FIELDS -->
@@ -812,30 +798,28 @@ const logoUrl = url("/images/logo.png");
         lines.push(`summary: ${escapeYaml(summary)}`);
         const reg = getFormValue("registrationUrl");
         if (reg) lines.push(`registrationUrl: ${escapeYaml(reg)}`);
+        const agenda = (form.elements.namedItem("agenda") as HTMLTextAreaElement)?.value ?? "";
+        if (agenda.trim()) {
+          // Emit as YAML block scalar so newlines survive intact
+          const indented = agenda.replace(/\n/g, "\n  ");
+          lines.push(`agenda: |\n  ${indented}`);
+        }
       } else {
         const outputId = (getFormValue("outputId") || "D6.1").toUpperCase();
-        const workPackage = getFormValue("workPackage") || "WP6";
-        const leadPartner = getFormValue("leadPartner") || "European Dialogue";
-        const dueMonth = Math.min(24, Math.max(1, Number.parseInt(getFormValue("dueMonth") || "12", 10) || 12));
-        const order = Number.parseInt(getFormValue("order") || "4", 10) || 4;
         const featuredEl = document.getElementById("f-featured") as HTMLInputElement;
         const featured = featuredEl ? featuredEl.checked : true;
         const fileUrl = getFormValue("fileUrl");
 
         lines.push(`id: ${escapeYaml(outputId)}`);
         lines.push(`title: ${escapeYaml(title)}`);
-        lines.push(`workPackage: ${escapeYaml(workPackage)}`);
-        lines.push(`leadPartner: ${escapeYaml(leadPartner)}`);
-        lines.push(`dueMonth: ${dueMonth}`);
         lines.push(`summary: ${escapeYaml(summary)}`);
         lines.push(`featured: ${featured}`);
         if (fileUrl) {
           lines.push(`fileUrl: ${escapeYaml(fileUrl)}`);
         }
-        lines.push(`order: ${order}`);
       }
 
-      if (currentType !== "output" && imgSrc) {
+      if (imgSrc) {
         lines.push("image:");
         lines.push(`  src: ${escapeYaml(imgSrc)}`);
         lines.push(`  alt: ${escapeYaml(imgAlt)}`);
@@ -957,10 +941,7 @@ const logoUrl = url("/images/logo.png");
               })()
             : (() => {
                 const outId = (getFormValue("outputId") || "D6.1").toUpperCase();
-                const wp = getFormValue("workPackage") || "WP6";
-                const lp = getFormValue("leadPartner") || "European Dialogue";
-                const dm = getFormValue("dueMonth") || "12";
-                return `Output · ${outId} · ${wp} · Lead: ${lp} · Due: Month ${dm}`;
+                return `Output · ${outId}`;
               })();
       (document.getElementById("pv-article-meta") as HTMLElement).textContent = meta;
       (document.getElementById("pv-article-body") as HTMLElement).innerHTML =

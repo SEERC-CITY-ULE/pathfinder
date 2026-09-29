@@ -1,30 +1,55 @@
 ---
+import { url } from "~/lib/url";
+
 type Props = {
   href?: string;
+  id: string;
   title: string;
   summary: string;
+  image?: { src: string; alt: string };
+  hasFile?: boolean;
 };
 
-const { href, title, summary } = Astro.props;
+const { href, id, title, summary, image, hasFile = false } = Astro.props;
 const Tag = href ? "a" : "div";
+const imgSrc = image?.src
+  ? image.src.startsWith("/")
+    ? url(image.src)
+    : image.src
+  : url("/images/logo.png");
 ---
 
 <Tag
   href={href}
   class:list={[
-    "surface-card p-6 md:p-8 flex flex-col h-full",
+    "surface-card overflow-hidden flex flex-col h-full",
     href && "group",
   ]}
 >
-  <h3 class:list={["font-display text-xl leading-tight mb-3", href && "group-hover:text-[var(--color-brand)] transition-colors"]}>
-    {title}
-  </h3>
-  <p class="text-sm text-[var(--color-ink-soft)] flex-1">{summary}</p>
-  {
-    href && (
-      <p class="mt-5 text-sm font-semibold text-[var(--color-brand)] group-hover:underline underline-offset-4">
-        Read more →
-      </p>
-    )
-  }
+  <img
+    src={imgSrc}
+    alt={image?.alt ?? ""}
+    aria-hidden={!image ? "true" : undefined}
+    class="w-full h-44 object-contain bg-[var(--color-surface-soft)] p-5"
+    loading="lazy"
+  />
+  <div class="p-6 flex flex-col flex-1">
+    <p class="eyebrow mb-3">{id}</p>
+    <h3
+      class:list={[
+        "font-display text-xl leading-tight mb-3",
+        href && "group-hover:text-[var(--color-brand)] transition-colors",
+      ]}
+    >
+      {title}
+    </h3>
+    <p class="text-sm text-[var(--color-ink-soft)] mb-4 flex-1">{summary}</p>
+    {
+      href && (
+        <p class="text-sm font-semibold text-[var(--color-brand)] group-hover:underline underline-offset-4">
+          {hasFile ? "Download deliverable ↗" : "Read more →"}
+        </p>
+      )
+    }
+  </div>
 </Tag>
