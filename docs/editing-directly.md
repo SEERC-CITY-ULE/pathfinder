@@ -29,6 +29,12 @@ Every edit on GitHub follows the same 5 clicks:
 
 Wait one minute. The live site updates automatically. That's it.
 
+### Need to create a new folder?
+
+GitHub has **no explicit "Add folder" button** — you create folders by naming them in a filename. For example, typing `new-folder/.gitkeep` into a "Create new file" filename box creates `new-folder/` with an invisible placeholder inside.
+
+Full walkthrough (with the direct-upload alternative and nested-folder examples) lives in [managing-images.md → Creating a new subfolder](./managing-images.md#creating-a-new-subfolder-when-the-default-ones-arent-enough).
+
 Below are the specific files and fields for each type of content.
 
 ---

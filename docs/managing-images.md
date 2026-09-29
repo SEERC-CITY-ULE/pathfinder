@@ -35,6 +35,57 @@ You don't need to memorise this — the walkthroughs below tell you exactly wher
 
 ---
 
+## Creating a new subfolder (when the default ones aren't enough)
+
+Sometimes you'll want to organise photos into a new subfolder — for example, all photos from one event grouped together in `public/images/events/sarajevo-2027/`. GitHub's web UI has **no explicit "Add folder" button**. Here's how you actually do it.
+
+### Why it works differently
+
+Git doesn't track empty folders — only files. So on GitHub, you create a folder by creating a **file inside it** with a path that names the folder. The folder appears automatically because the file is in it.
+
+### The one-file trick (an empty placeholder)
+
+Use this when you want to create the folder now and put files in it later.
+
+1. On github.com, navigate to the parent folder — e.g. go to `public/images/events/` at `https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/public/images/events`.
+2. Click **Add file → Create new file**.
+3. In the filename box at the top, type both the folder and a placeholder file separated by a `/`:
+   ```
+   sarajevo-2027/.gitkeep
+   ```
+4. Leave the file **content empty**.
+5. Scroll down → commit message like `Create sarajevo-2027 folder for event photos` → **Commit changes**.
+
+The folder `public/images/events/sarajevo-2027/` now exists with an invisible `.gitkeep` file inside. The `.gitkeep` file is a common convention — its only job is to keep the otherwise-empty folder alive in git.
+
+**Tip**: as you type in the filename box, look at the small breadcrumbs above it. They update in real time to show the nesting — `public / images / events / sarajevo-2027 / .gitkeep`. That's a good sanity check that you typed the slash correctly.
+
+### The direct-upload trick (create folder + add files in one go)
+
+If you're creating the folder because you have files to put in it right now, skip `.gitkeep` and just create the first real file at its full path.
+
+**Option A — Create a first file directly:**
+1. In the parent folder, click **Add file → Create new file**.
+2. Filename: `sarajevo-2027/report.md` (or whatever).
+3. Type the content.
+4. Commit.
+
+**Option B — Upload the folder from your desktop:**
+1. On your computer, put your files inside a folder named exactly what you want (e.g. `sarajevo-2027`).
+2. In the parent folder on GitHub, click **Add file → Upload files**.
+3. Drag the folder itself (not the files inside it) into the drop zone. Chrome and Firefox both preserve the folder structure when you drag a folder.
+4. Commit.
+
+### Nested folders (folders inside folders)
+
+Same trick, more slashes. Filename `outer/inner/deepest/.gitkeep` creates all three folders at once.
+
+### Removing a folder
+
+To delete an empty folder, delete the file inside it (usually the `.gitkeep`). The folder disappears with the file — git has no concept of empty folders. To delete a folder that has real content, delete each file one at a time (or ask the maintainer to do it with a single command).
+
+---
+
 ## Walkthrough 1 — Adding a photo to a news item or event
 
 The **easiest** way is to use the **Composer** (`/admin/compose` on the live site) — it uploads nothing, but it generates the correct Markdown for you. See [composer.md](./composer.md) for how the composer works.
