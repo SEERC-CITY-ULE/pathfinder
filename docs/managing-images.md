@@ -1,92 +1,226 @@
-# Managing images
+# Adding photos to the website
 
-The PATHFINDER site uses images in several places: hero photos, news article headers, event photos, partner logos, and team member portraits. This guide covers where they live, how to add them, and where to find Creative Commons ones.
+This guide is for **coordinators and team members** who want to add photos to news items, events, or team-member profiles. Everything happens in **your browser** on github.com — **no terminal, no command line, no code editor.**
 
-## Where images live
+If you've never used GitHub before, follow the walkthrough sections below. Each one is written to be done click-by-click.
 
-Images go in `public/images/`, in one of these subfolders:
+---
 
-| Subfolder | Used for | Referenced in Markdown as |
+## Before you start (one-time setup)
+
+You need three things:
+
+1. **A GitHub account.** Free — sign up at [github.com](https://github.com) if you don't have one.
+2. **Write access to the PATHFINDER repository.** Ask your technical maintainer to invite you as a collaborator. You'll get an email invitation with an "Accept invitation" button.
+3. **Your photo ready on your computer** (see the "Preparing your photo" section below for size / format guidance).
+
+That's it. From now on you can add photos any time by going to github.com and following the steps below.
+
+---
+
+## Where photos live
+
+Different types of photos go in different folders. You'll pick the right one before uploading:
+
+| I want to add… | Folder to upload to | Referenced in the page as |
 |---|---|---|
-| `public/images/hero/` | Home page hero photo | `/images/hero/filename.jpg` |
-| `public/images/news/` | News article images | `/images/news/filename.jpg` |
-| `public/images/events/` | Event photos | `/images/events/filename.jpg` |
-| `public/images/team/` | Partner + Advisory Board portraits | `/images/team/filename.jpg` |
-| `public/images/partners/` | Partner organisation logos | `/images/partners/filename.png` |
+| A photo for a news item | `public/images/news/` | `/images/news/your-file.jpg` |
+| A photo for an event | `public/images/events/` | `/images/events/your-file.jpg` |
+| A team-member portrait (partner) | `public/images/team/` | `/images/team/your-file.jpg` |
+| An Advisory Board portrait | `public/images/team/` | `/images/team/your-file.jpg` |
+| A partner organisation logo | `public/images/partners/` | `/images/partners/your-file.png` |
+| A new hero photo for the home page | `public/images/hero/` | `/images/hero/your-file.jpg` |
 
-Note that the path in Markdown starts with `/images/…`, NOT `/public/images/…`. The `public/` folder is dropped at build time.
+You don't need to memorise this — the walkthroughs below tell you exactly where to click.
 
-## Adding an image on GitHub
+---
 
-1. Navigate to the right subfolder in the repo, e.g. `github.com/<org>/pathfinder/tree/main/public/images/news`.
-2. Click **Add file → Upload files**.
-3. Drag your image into the drop zone.
-4. Commit.
+## Walkthrough 1 — Adding a photo to a news item or event
 
-The image is now at `https://<your-site>/images/news/yourfile.jpg` and can be referenced in any content file.
+The **easiest** way is to use the **Composer** (`/admin/compose` on the live site) — it uploads nothing, but it generates the correct Markdown for you. See [composer.md](./composer.md) for how the composer works.
 
-## Referencing an image in content
+If you're editing directly on GitHub, here's the click-by-click:
 
-In news or event frontmatter:
+### Step 1 — Upload the photo file
 
-```yaml
-image:
-  src: /images/news/your-file.jpg
-  alt: A short description of what the photo shows
-  credit: Photographer Name on Unsplash
-```
+1. Open a browser tab and go to:
+   `https://github.com/SEERC-CITY-ULE/pathfinder`
+2. On the repository page, click the folder called **`public`**.
+3. Then click **`images`**.
+4. Then click **`news`** (or **`events`** if it's for an event).
+5. Just above the file list, click the button **`Add file`** (top-right, next to the green "Code" button).
+6. From the dropdown, choose **`Upload files`**.
+7. A drop zone appears. Either drag your photo file into it, or click **"choose your files"** and pick your photo.
+8. Wait for the little green tick that says the upload finished.
+9. **Scroll down** on that page. You'll see a "Commit changes" box.
+10. In the first field, type a short message like `Add photo for Sarajevo recap`.
+11. Leave the second field empty.
+12. Make sure **"Commit directly to the `main` branch"** is selected.
+13. Click the green **`Commit changes`** button.
 
-For team member portraits (in partner or Advisory Board files):
+Your photo is now on the site at `https://the-pathfinder-project.eu/images/news/your-file.jpg`.
 
-```yaml
-photo: /images/team/denisa-karabova.jpg
-```
+### Step 2 — Tell the news item to use the photo
 
-## Image requirements
+Now you need to point the news article at the file you just uploaded.
 
-- **License**: Creative Commons (or public domain, or your own photo). See sources below.
-- **Format**: JPEG (`.jpg`) for photos, PNG for logos, WEBP for smaller file sizes.
-- **Size**:
-  - Hero and article images: aim for **1600×900** or similar landscape ratio. Max 500 KB.
-  - Team portraits: **400×400** square. Max 100 KB.
-  - Partner logos: transparent PNG, roughly square, max 200 KB.
-- **Naming**: lowercase, hyphens-not-spaces, descriptive: `sarajevo-workshop-2027.jpg`.
+**If the news item doesn't exist yet**: use the [Composer](./composer.md) — in the "Add an image" section, type the path (`/images/news/your-file.jpg`) and the alt text. Then send the resulting file to the publisher.
 
-Use a compression tool if your images are too big:
-- [Squoosh](https://squoosh.app/) — drag-and-drop, in your browser.
-- Or any image editor's "Export for web".
+**If the news item already exists on the site**, follow these steps to edit it:
+
+1. In your browser go to:
+   `https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/src/content/news`
+2. Click the news file you want to edit (a `.md` file with a date in its name).
+3. Click the **pencil icon** in the top-right of the file view (it says "Edit this file" when you hover).
+4. You'll see the text of the article. Near the top, between two lines of three dashes (`---`), find or add the image block. It should look like this:
+   ```yaml
+   image:
+     src: /images/news/your-file.jpg
+     alt: A short description of what the photo shows
+     credit: Photographer name on Source
+   ```
+   - `src`: **must** start with `/images/news/` and match the filename you uploaded exactly.
+   - `alt`: a one-sentence description of what's in the photo (for screen readers).
+   - `credit`: optional but recommended — where the photo came from.
+   - Indentation matters: the three sub-lines each start with **two spaces**.
+5. Scroll down to the "Commit changes" box.
+6. Short commit message like `Add photo to Sarajevo recap`.
+7. Choose **"Commit directly to the `main` branch"**.
+8. Click **`Commit changes`**.
+
+**Wait about one minute**, then refresh the news article page — the photo should appear.
+
+### Step 3 (only for events) — same but different folder
+
+For events, everything is identical to news except:
+- Upload to `public/images/events/` (not `news/`).
+- Edit the event file at `src/content/events/` (not `news/`).
+- The `src:` path is `/images/events/your-file.jpg`.
+
+---
+
+## Walkthrough 2 — Adding a photo for a team member
+
+Team-member photos apply to both **partner team members** (e.g. Faye Ververidou, Nikos Zaharis) and **Advisory Board members** (e.g. Antigoni Founta).
+
+### Step 1 — Upload the portrait
+
+1. Open a browser tab and go to:
+   `https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/public/images/team`
+2. Click **`Add file`** → **`Upload files`**.
+3. Drag your portrait into the drop zone (or click "choose your files").
+4. Give the file a name that matches the person, using lowercase and hyphens:
+   - ✅ `denisa-karabova.jpg`
+   - ✅ `oreste-pollicino.jpg`
+   - ❌ `Denisa Karabova.jpg` (spaces and capital letters cause problems)
+5. Scroll down, add a commit message like `Add portrait for Denisa Karabová`.
+6. Choose **"Commit directly to the `main` branch"**.
+7. Click **`Commit changes`**.
+
+### Step 2 — Tell the person's profile to use the photo
+
+**For a partner team member** (e.g. someone at European Dialogue):
+
+1. Go to:
+   `https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/src/content/partners`
+2. Click the partner file (e.g. `european-dialogue.md`).
+3. Click the **pencil icon** to edit.
+4. Find the person in the `team:` list. Add a `photo:` line under their `role:` line, matching the filename you uploaded:
+   ```yaml
+   team:
+     - name: Denisa Karabová
+       role: Project Coordinator
+       bio: Works in non-formal education…
+       photo: /images/team/denisa-karabova.jpg
+   ```
+   - The `photo:` line starts with **six spaces** (aligned under `name:` and `role:`).
+5. Scroll down → commit message → **Commit changes**.
+
+**For an Advisory Board member**:
+
+1. Go to:
+   `https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/src/content/advisory-board`
+2. Click the person's file (e.g. `antigoni-founta.md`).
+3. Click the pencil icon.
+4. Add or change the `photo:` line at the top of the file (inside the `---` block):
+   ```yaml
+   photo: /images/team/antigoni-founta.jpg
+   ```
+5. Commit as before.
+
+Refresh `/consortium` on the live site after ~1 minute — the portrait should replace the coloured initials avatar.
+
+---
+
+## Preparing your photo (before you upload it)
+
+Photos work best if you prepare them a bit first. Two minutes' work makes the site feel more polished and load faster.
+
+### Format
+- **Photos** (workshops, portraits, events): use JPEG (`.jpg`) or WEBP (`.webp`).
+- **Logos** (partner logos, icons): use PNG (`.png`) with a transparent background.
+
+### Size (dimensions and file weight)
+
+| For… | Ideal dimensions | Maximum file size |
+|---|---|---|
+| News / event hero photos | 1600 × 900 px (landscape) | 500 KB |
+| Team-member portraits | 400 × 400 px (square) | 100 KB |
+| Partner logos | roughly square, 400×400 px | 200 KB |
+| Home page hero photo | 2000 × 1200 px (landscape) | 500 KB |
+
+If your photo is too large:
+1. Go to [squoosh.app](https://squoosh.app/) in your browser (Google's free tool).
+2. Drag your image in.
+3. On the right panel, choose "MozJPEG" or "WebP" and drag the Quality slider down until the file size drops below the limit.
+4. Click "Download" (bottom-right).
+
+### Filename
+Use lowercase letters, numbers, and hyphens only. No spaces, no accents, no special characters.
+
+- ✅ `sarajevo-workshop-2027.jpg`
+- ✅ `foteini-ververidou.jpg`
+- ❌ `Sarajevo Workshop 2027.jpg` (spaces break URLs)
+- ❌ `Φώτω.jpg` (accents cause problems)
+
+---
 
 ## Alt text (accessibility)
 
-Every image on the site needs `alt` text. Not decorative alt like "photo" — a real description of what's in the image:
+Every photo needs an `alt:` description in the file that references it. This is what screen readers announce for blind users, and what search engines use to understand the image.
+
+Write what's **in the photo**, in one sentence.
 
 - ❌ Bad: `alt: photo`
-- ❌ Bad: `alt: PATHFINDER event`
-- ✅ Good: `alt: Twelve young researchers seated in a circle discussing AI ethics at the Sarajevo workshop`
+- ❌ Bad: `alt: PATHFINDER Sarajevo`
+- ✅ Good: `alt: Twelve young researchers seated around a wooden table discussing AI ethics`
+- ✅ Good (portrait): `alt: Portrait of Denisa Karabová smiling at the camera`
 
-If the image is purely decorative (e.g. a background pattern), leave alt empty (`alt: ""`) or omit the field entirely.
+---
 
-## Where to find Creative Commons images
+## Where to find good photos
 
-**For general photos** (workshops, people, conference-style scenes):
+**For general photos (workshops, people at events, city scenes):**
 
-- **[Unsplash](https://unsplash.com/)** — Free for any use, attribution appreciated but not required. Enormous library. Great for hero images and article photos.
-- **[Pexels](https://pexels.com/)** — Similar to Unsplash. Free for any use.
-- **[Wikimedia Commons](https://commons.wikimedia.org/)** — Filter by license (CC BY or CC BY-SA). Wide variety, includes historical and location photos. Attribution required — always record the credit.
+- **[Unsplash](https://unsplash.com/)** — Free for any use. Attribution appreciated but not required. Best for hero and article photos.
+- **[Pexels](https://www.pexels.com/)** — Similar to Unsplash. Free for any use.
+- **[Wikimedia Commons](https://commons.wikimedia.org/)** — Filter by CC BY or CC BY-SA license. Attribution required — always record the photographer.
 
-**For EU-specific imagery**:
+**For EU-branded imagery:**
 
-- **[EU Audiovisual Service](https://audiovisual.ec.europa.eu/)** — Official EU photos and videos. Attribution required, formatted as "© European Union, [year]".
+- **[EU Audiovisual Service](https://audiovisual.ec.europa.eu/)** — Official EU photos. Attribution required as `© European Union, [year] / Photographer name`.
 
-**For portraits** of team members and AB members:
+**For team-member portraits:**
 
-- Ideally use photos the person supplies themselves. Ask them.
-- If they have a professional profile page (university, LinkedIn), often you can request permission to use their photo from there.
-- Don't scrape social media portraits without permission.
+- **Ask the person for a photo they're happy with.** That's always best.
+- If they have a professional profile page (university, LinkedIn), you can usually ask permission to use that photo.
+- Please don't take portraits from social media without asking.
+
+---
 
 ## Recording the credit
 
-For images with attribution requirements, always fill in the `credit:` field:
+When you use a photo that requires attribution, always fill in the `credit:` field alongside the `image:`:
 
 ```yaml
 image:
@@ -95,32 +229,46 @@ image:
   credit: Fauxels on Pexels
 ```
 
-For EU images:
-
+For EU photos:
 ```yaml
 credit: © European Union, 2027 / Photographer Name
 ```
 
-Team portraits don't currently render a visible credit (it's assumed you got permission). Keep a record of where each photo came from in a private log.
-
-## The default logo fallback
-
-If a news item or event has no `image:` in its frontmatter, the site automatically shows the **PATHFINDER logo** as the hero image, on a warm surface background. This looks intentional — you don't need to add an image for every post.
-
-Skip the image field when:
-- You don't have a photo yet.
-- The post is short-form (an announcement, a link).
-- The photo would be generic filler (a stock keyboard, a generic office).
-
-## Replacing the hero photo on the Home page
-
-The Home page hero currently uses `/images/hero/youth-collaboration.jpg` (a placeholder from Unsplash). To swap it:
-
-1. Upload the new photo to `public/images/hero/`.
-2. Open [`src/pages/index.astro`](../src/pages/index.astro).
-3. Find the line `src="/images/hero/youth-collaboration.jpg"` and change the filename.
-4. Also update the small `Photo via Unsplash` credit at the bottom-right of the hero if the credit changes.
+For team-member portraits, credit isn't shown publicly — but keep a note somewhere private of where each photo came from, in case you're ever asked.
 
 ---
 
-Broken image on the site? See [troubleshooting.md](./troubleshooting.md).
+## No photo? That's fine
+
+If a news item or event has no `image:` field, the **PATHFINDER logo** appears automatically as the hero image. This looks intentional — you don't need to add a photo for every post.
+
+For team-member portraits without a `photo:` field, a coloured circle with the person's initials appears (e.g. **DK** for Denisa Karabová). Also intentional — swap in a real photo when you have one.
+
+---
+
+## Troubleshooting
+
+**"I uploaded the photo but it's not showing on the site"**
+1. Wait a full minute — the site rebuilds in the background after every commit.
+2. Hard-refresh your browser (Cmd+Shift+R on Mac, Ctrl+F5 on Windows).
+3. Check that the filename in the content file **exactly matches** the uploaded filename, including capital letters and file extension. `Denisa.JPG` ≠ `denisa.jpg`.
+4. Check the path starts with `/images/…`, not `/public/images/…`. The `public/` part is dropped when the site is built.
+
+**"I see a broken-image icon on the live site"**
+- The file wasn't uploaded, or the path is wrong. Go to `https://github.com/SEERC-CITY-ULE/pathfinder/tree/main/public/images/news` (or whichever folder) and confirm your file is there with the exact name you referenced.
+
+**"The commit failed with a red X"**
+- Usually YAML indentation. Open the failed commit on GitHub, click the red X, look at the error. The most common cause is an extra or missing space at the start of a line inside the `---` block.
+- Fix the file (click the pencil icon, correct the indentation), commit again.
+
+**"I can't find the Add file button"**
+- You need to be **inside a folder** on GitHub, not on a specific file. If you're looking at a file, click the folder name in the breadcrumbs at the top of the page (e.g. click "news" to go back to the folder).
+- If the button still isn't there, you probably don't have write access — ask the maintainer to invite you as a repository collaborator.
+
+**"The photo appears but it looks stretched or cropped weirdly"**
+- Team portraits should be square (roughly 400×400). Portraits with a different aspect ratio will be cropped to a circle by the site.
+- News and event photos should be landscape (roughly 1600×900).
+
+---
+
+*For a form-based way to add news, events, or outputs without editing files, see [composer.md](./composer.md). For the publisher's workflow, see [publishing.md](./publishing.md).*

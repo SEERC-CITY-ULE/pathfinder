@@ -2,14 +2,28 @@
 
 Everything you need to run and update the PATHFINDER project website.
 
-## Find your role
+## Find your task
 
-- **I'm a partner submitting news or an event** → [composer.md](./composer.md)
-- **I'm the publisher committing content to the site** → [publishing.md](./publishing.md)
-- **I want to edit partner descriptions, team bios, or the About page** → [editing-directly.md](./editing-directly.md)
-- **I need to add or swap an image** → [managing-images.md](./managing-images.md)
-- **Something broke** → [troubleshooting.md](./troubleshooting.md)
-- **I'm the technical maintainer deploying or configuring the site** → [deployment.md](./deployment.md)
+**I want to add a new post…**
+- News item, event, or output → use the [Composer](./composer.md) at `/admin/compose` on the live site.
+
+**I want to edit something that's already on the website…**
+- Existing news item → [editing-directly.md → Walkthrough 1](./editing-directly.md#walkthrough-1--editing-an-existing-news-item)
+- Existing event → [editing-directly.md → Walkthrough 2](./editing-directly.md#walkthrough-2--editing-an-existing-event)
+- Existing output / deliverable → [editing-directly.md → Walkthrough 3](./editing-directly.md#walkthrough-3--editing-an-existing-output-deliverable)
+- Partner organisation description or team members → [editing-directly.md → Walkthrough 4](./editing-directly.md#walkthrough-4--editing-a-partner-organisation-info--team)
+- Advisory Board member → [editing-directly.md → Walkthrough 5](./editing-directly.md#walkthrough-5--editing-an-advisory-board-member)
+- Basic site info (project name, tagline, contact email, coordinator) → [editing-directly.md → Walkthrough 6](./editing-directly.md#walkthrough-6--editing-basic-site-information)
+- Home / About / Consortium page copy → [editing-directly.md → Walkthrough 7](./editing-directly.md#walkthrough-7--editing-page-copy-home-about-consortium-intro)
+
+**I want to add or swap a photo…**
+- News, event, team, Advisory Board, hero, or partner logo → [managing-images.md](./managing-images.md) (fully step-by-step for GitHub newcomers)
+
+**I'm the publisher committing content sent by others** → [publishing.md](./publishing.md)
+
+**Something broke** → [troubleshooting.md](./troubleshooting.md)
+
+**I'm the technical maintainer deploying or configuring the site** → [deployment.md](./deployment.md)
 
 ## About this site in one paragraph
 
