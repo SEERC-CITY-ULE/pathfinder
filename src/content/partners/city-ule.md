@@ -1,5 +1,5 @@
 ---
-name: University of York Europe Campus (with SEERC)
+name: University of York Europe Campus, CITY ULE
 shortName: SEERC-CITY-ULE
 country: Greece
 role: Beneficiary
