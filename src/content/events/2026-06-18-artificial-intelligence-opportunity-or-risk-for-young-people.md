@@ -26,7 +26,7 @@ agenda: |
   17:35–18:00 | Conclusions and validation — Validation of the results and closing remarks.
 ---
 
-📍 **Venue:** <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8392ac55ad9c1:0x82bc16c6e0e18389?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">OK!Thess, Kydonion 2, Thessaloniki (View on Google Maps ↗)</a>
+📍 **Venue:** <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8392ac55ad9c1:0x82bc16c6e0e18389?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">OK!Thess, Thessaloniki </a>
 
 PATHFINDER’s Greek national participatory dialogue, **“Artificial Intelligence: Opportunity or Risk for Young People in the Modern Labour Market?”,** will bring young people together with employers, HR professionals and AI specialists to explore what artificial intelligence means for the future of employment.
 
