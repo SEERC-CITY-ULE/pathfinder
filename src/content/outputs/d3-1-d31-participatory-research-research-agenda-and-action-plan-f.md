@@ -3,7 +3,7 @@ id: D3.1
 title: D3.1 – Participatory Research, Research Agenda and Action Plan for Bulgaria
 summary: Explore Bulgarian perspectives on AI, youth employment, future skills and digital inequalities, alongside priorities for more inclusive labour market transitions.
 featured: true
-fileUrl: /files/d3-1-d31-participatory-research-research-agenda-and-action-plan-f.pdf
+fileUrl: /files/D3.1-Bulgaria.pdf
 ---
 
 On **10 June 2026**, the **Policy and Citizens’ Observatory (PCO)**, with the support of Sofia Municipality and within the PATHFINDER project, delivered the Bulgarian National Participatory Event **“Youth, Artificial Intelligence and the Labour Market: All Inclusive”** in Sofia, bringing together 48 young people, employers, educators, local authorities, civil society representatives, media representatives and other stakeholders.
