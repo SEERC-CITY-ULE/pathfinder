@@ -2,7 +2,7 @@
 title: Where Is My Place in the AI Era?
 startDate: 2026-07-03
 time: "09:00–13:00"
-location: Garden Reading Room, Juraj Fándly Library, Trnava
+location: Juraj Fándly Library, Trnava
 locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x476ca07f94e0d3cd:0x421e541926e4d9f8?sa=X&ved=1t:8290&ictx=111"
 country: Slovakia
 format: In-person
