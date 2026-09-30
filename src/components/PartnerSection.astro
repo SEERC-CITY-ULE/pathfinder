@@ -1,30 +1,26 @@
 ---
 import TeamMemberCard from "./TeamMemberCard.astro";
 import { site } from "~/data/site";
-
 type TeamMember = {
   name: string;
   role: string;
   bio?: string;
   photo?: string;
 };
-
 type Props = {
   name: string;
   shortName: string;
   country: string;
   role: "Coordinator" | "Beneficiary";
   summary: string;
-  contribution: string;
+  contribution?: string;
   website?: string;
   logo?: string;
   team: TeamMember[];
 };
-
-const { name, shortName, country, role, summary, contribution, website, logo, team } = Astro.props;
+const { name, shortName, country, role, summary, website, logo, team } = Astro.props;
 const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
 ---
-
 <section class="border-t border-[var(--color-border)]">
   <div class="container-wide py-16 md:py-20">
     <div class="grid gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
@@ -64,14 +60,9 @@ const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
           )
         }
       </header>
-
       <!-- Main: description + team -->
       <div>
-        <p class="text-[1.05rem] text-[var(--color-ink)] leading-relaxed mb-4">{summary}</p>
-        <p class="text-[var(--color-ink-soft)] leading-relaxed mb-10">
-          <span class="font-semibold text-[var(--color-ink)]">In PATHFINDER:</span> {contribution}
-        </p>
-
+        <p class="text-[1.05rem] text-[var(--color-ink)] leading-relaxed mb-10">{summary}</p>
         {
           team.length > 0 && (
             <div>
