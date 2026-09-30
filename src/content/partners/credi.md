@@ -14,8 +14,7 @@ team:
   - name: Amela Kurta
     role: Team Member
     bio: Research assistant at the Centre for Development and Social Science Research (CDESS) where she is engaged as an associate researcher on several projects. She holds a master degree in management from School of Economics and Business, Sarajevo University, where she has also served as a teaching assistant. Her research interests include social policy, labour market analysis and migration.
-
+order: 2
 ---
 
-order: 2
 CREDI investigates how AI is reshaping employment, helping young people develop future-ready skills and creating participatory learning spaces that build resilience, adaptability, and informed career decision-making. 
