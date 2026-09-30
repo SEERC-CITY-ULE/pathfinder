@@ -6,7 +6,8 @@ tags:
   - participatory dialogue
   - bosnia and herzegovina
 image:
-src: public/images/news/Pathfinder event (Instagram Post (45)) (2).jpg
+  src: /images/news/Pathfinder event (Instagram Post (45)) (2).jpg
+  alt: Participants at the PATHFINDER national dialogue in Sarajevo
 ---
 
 On 25 June, CREDI welcomed young people, employers, educators, public institutions and civil society organisations to Sarajevo for PATHFINDER's national dialogue in Bosnia and Herzegovina.
