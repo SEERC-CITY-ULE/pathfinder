@@ -6,6 +6,9 @@ location: "SOHO, Sofia"
 locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x40aa856f78e26949:0x8b5a832b4645e77d?sa=X&ved=1t:8290&ictx=111"
 country: Bulgaria
 format: In-person
+image:
+  src: /images/events/Bulgaria-4.1-poster.png
+  alt: Poster for the PATHFINDER national dialogue in Bulgaria
 summary: Young people and labour market stakeholders gathered in Sofia to explore how AI is affecting young people’s entry into employment, skills needs and digital inequalities, and to identify priorities for future action.
 agenda: |
   09:30–10:00 | Registration and coffee
