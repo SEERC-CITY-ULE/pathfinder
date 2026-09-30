@@ -11,6 +11,7 @@ team:
   - name: Anna Krasteva
     role: President / Management Committee Member
     bio: Professor of Political Science and President of PCO, with extensive expertise in migration, citizenship, democratisation, digital citizenship and civic participation. Her research also explores new forms of civic mobilisation and the relationship between digital transformation, democracy and youth participation.
+    photo: /images/team/Krasteva_Photo.jpg
   - name: Tsvetelina Garelova
     role: Researcher
     bio: Sustainability graduate and European Climate Pact Ambassador. A former UN Youth Delegate, she has experience leading youth initiatives on climate awareness, organising educational activities and working on regulations connected with the EU Green Deal.
