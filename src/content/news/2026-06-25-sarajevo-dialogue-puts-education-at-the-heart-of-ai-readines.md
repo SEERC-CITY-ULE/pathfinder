@@ -6,7 +6,7 @@ tags:
   - participatory dialogue
   - bosnia and herzegovina
 image:
-  src: public/images/news/Sarajevo-merged.jpg
+  src: /images/news/Sarajevo-merged.jpg
   alt: Participants at the PATHFINDER national dialogue in Sarajevo
 ---
 
