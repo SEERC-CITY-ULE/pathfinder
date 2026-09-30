@@ -1,6 +1,5 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
-
 const country = z.enum([
   "Slovakia",
   "Greece",
@@ -12,7 +11,6 @@ const country = z.enum([
   "European Union",
   "Online",
 ]);
-
 const image = z
   .object({
     src: z.string(),
@@ -20,7 +18,6 @@ const image = z
     credit: z.string().optional(),
   })
   .optional();
-
 const news = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/news" }),
   schema: z.object({
@@ -33,14 +30,15 @@ const news = defineCollection({
     draft: z.boolean().default(false),
   }),
 });
-
 const events = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/events" }),
   schema: z.object({
     title: z.string().min(1),
     startDate: z.coerce.date(),
     endDate: z.coerce.date().optional(),
+    time: z.string().optional(),
     location: z.string().min(1),
+    locationUrl: z.string().url().optional(),
     country,
     format: z.enum(["In-person", "Online", "Hybrid"]),
     workPackage: z.string().optional(),
@@ -51,14 +49,12 @@ const events = defineCollection({
     draft: z.boolean().default(false),
   }),
 });
-
 const teamMember = z.object({
   name: z.string().min(1),
   role: z.string().min(1),
   bio: z.string().optional(),
   photo: z.string().optional(),
 });
-
 const partners = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/partners" }),
   schema: z.object({
@@ -74,7 +70,6 @@ const partners = defineCollection({
     order: z.number().int().default(99),
   }),
 });
-
 const advisoryBoard = defineCollection({
   loader: glob({
     pattern: "**/[^_]*.md",
@@ -90,7 +85,6 @@ const advisoryBoard = defineCollection({
     order: z.number().int().default(99),
   }),
 });
-
 const outputs = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/outputs" }),
   schema: z.object({
@@ -111,5 +105,4 @@ const outputs = defineCollection({
     order: z.number().int().default(99),
   }),
 });
-
 export const collections = { news, events, partners, advisoryBoard, outputs };
