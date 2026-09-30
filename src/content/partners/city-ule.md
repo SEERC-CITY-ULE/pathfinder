@@ -3,6 +3,8 @@ name: University of York Europe Campus (with SEERC)
 shortName: SEERC-CITY-ULE
 country: Greece
 role: Beneficiary
+logo: /images/partners/CITY_ULE_logo.png
+website: https://city.yorkeuropecampus.eu/research/seerc-south-east-european-research-centre/
 summary: Non-state, not-for-profit University Legal Entity and the licensed European branch campus of the University of York, headquartered in Thessaloniki.
 contribution: Through its research arm SEERC, CITY ULE contributes academic expertise on participatory research and youth employability, leads PATHFINDER's participation in flagship EU youth events, runs participatory workshops and Skills Labs, and supports Advisory Board engagement.
 team:
