@@ -5,6 +5,9 @@ summary: Young people, employers and professionals came together in Trnava to ex
 tags:
   - participatory dialogue
   - slovakia
+image:
+  src: /images/news/Slovakia-dialogue.jpeg
+  alt: Participants at the PATHFINDER national dialogue in Trnava, Slovakia
 ---
 
 On **3 July 2026**, PATHFINDER held its Slovak national participatory dialogue, **“AI and the Future of Work – A Youth Dialogue on Artificial Intelligence and Employment in Slovakia”**, in Trnava. Organised by Európsky dialóg (ED), the event brought together 33 young people, employers and working professionals.  
