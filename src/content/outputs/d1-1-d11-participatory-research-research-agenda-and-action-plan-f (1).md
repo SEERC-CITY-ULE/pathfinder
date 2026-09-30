@@ -3,7 +3,7 @@ id: D1.1
 title: D1.1 – Participatory Research, Research Agenda and Action Plan for Bosnia and Herzegovina
 summary: Explore key findings and priorities from Bosnia and Herzegovina on AI, youth employment and the skills needed for an inclusive future of work.
 featured: true
-fileUrl: /files/d1-1-d11-participatory-research-research-agenda-and-action-plan-f.pdf
+fileUrl: /files/Deliverable-1.1-Bosnia-and-Herzegovina.pdf
 ---
 
 On **25 June 2026**, the PATHFINDER project delivered the national participatory event **“AI and the Future of Work – A Dialogue Between Young People and Employers in Bosnia and Herzegovina”** in Sarajevo, bringing together 27 young people, employers, public institutions, civil society organisations, education providers and other labour market stakeholders.     
