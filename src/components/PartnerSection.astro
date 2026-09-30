@@ -18,17 +18,6 @@ type Props = {
   team: TeamMember[];
 };
 const { name, shortName, country, role, summary, contribution, website, logo, team } = Astro.props;
-const flagIso: Record<string, string> = {
-  "Slovakia": "sk",
-  "Greece": "gr",
-  "Bosnia & Herzegovina": "ba",
-  "Bulgaria": "bg",
-  "Serbia": "rs",
-  "Italy": "it",
-  "United Kingdom": "gb",
-  "European Union": "eu",
-};
-const iso = flagIso[country];
 ---
 <section class="border-t border-[var(--color-border)]">
   <div class="container-wide py-16 md:py-20">
@@ -39,17 +28,7 @@ const iso = flagIso[country];
           {role === "Coordinator" ? "Coordinator" : "Partner"} · {shortName}
         </p>
         <h2 class="font-display text-2xl md:text-3xl leading-tight mb-3">{name}</h2>
-        <p class="flex items-center gap-2.5 text-base md:text-lg font-bold text-[var(--color-ink)] mb-4">
-          {iso && (
-            <img
-              src={`https://flagcdn.com/${iso}.svg`}
-              alt={`${country} flag`}
-              class="w-6 h-4 object-cover rounded-xs shadow-xs border border-[var(--color-border)]"
-              loading="lazy"
-            />
-          )}
-          <span>{country}</span>
-        </p>
+        <p class="text-sm text-[var(--color-ink-soft)] mb-4">{country}</p>
         {
           logo ? (
             website ? (
