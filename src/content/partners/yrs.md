@@ -3,6 +3,8 @@ name: Young Researchers of Serbia
 shortName: YRS
 country: Serbia
 role: Beneficiary
+logo: /images/partners/YRS-logo.png
+website: https://mis.org.rs/en/
 summary: Non-profit founded in 1976, driving environmental protection and sustainable community development through education, action, and volunteering.
 contribution: YRS leads the national activities in Serbia, including the public debate and Youth Skills Lab. Its experience with Erasmus+, Horizon 2020, and CERV youth programmes underpins PATHFINDER's participatory, skills-based learning environments.
 team:
