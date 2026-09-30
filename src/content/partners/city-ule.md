@@ -18,6 +18,7 @@ team:
   - name: Stefania Gourzoulidou
     role: Research Associate
     bio: Holds a BSc in Business Studies and an MSc in Logistics and Supply Chain Management. Her work focuses on community-led decision-making, including indicators related to people at risk of poverty or social exclusion and unemployment.
+    photo: /images/team/Stefi.jpg
 order: 3
 ---
 
