@@ -5,8 +5,8 @@ country: Slovakia
 role: Coordinator
 logo: /images/partners/ED_Logo_Basic_Blue_SK.png
 website: https://europskydialog.eu/en/
-summary: Civic and youth media association promoting active citizenship, professional media and arts, quality youth work, and media literacy.
-contribution: As Coordinator, European Dialogue leads strategic coordination and consortium management, ensures methodological consistency across partners, and leads national activities in Slovakia. Founded in 2013, ED holds a seven-year Erasmus+ Accreditation and brings proven experience from EU initiatives including Pulse Z (DG-CONNECT), Agora NextGen, and the DiGi YOUTH partnerships.
+summary: ED is a civic and youth media association that promotes active citizenship, professional media and arts, quality youth work and media literacy in Slovakia and beyond. Its activities combine youth work, media and arts and engage young people, young journalists and other media makers, artists and youth workers, with particular attention to young people facing fewer opportunities. ED organises local and international training activities, workshops, conferences and debates and places particular emphasis on media and information literacy, critical thinking, digital youth work, creativity and youth participation.
+contribution: As Coordinator, European Dialogue leads strategic coordination and consortium management; ED also leads national activities in Slovakia as well as the final online Policy Roundtable event integrating youth perspectives into policy recommendations.
 team:
   - name: Denisa Karabová
     role: Project Coordinator
