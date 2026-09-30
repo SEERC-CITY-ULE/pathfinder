@@ -6,6 +6,9 @@ author: participatory dialogue, serbia
 tags:
   - participatory dialogue
   - serbia
+image:
+  src: /images/news/Belgrade-dialogue.jpg
+  alt: Participants at the PATHFINDER national dialogue in Belgrade,Serbia.
 ---
 
 Across **8, 17 and 20 July 2026**, PATHFINDER held its Serbian participatory activities under the title **“AI START: Youth, Artificial Intelligence and the Pathways to Employment”** in Niš and Belgrade. Organised by **Young Researchers of Serbia (YRS)**, the activities brought together young people, employers, job information centres, civil society organisations, AI experts and other stakeholders.   
