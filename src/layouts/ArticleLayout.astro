@@ -1,15 +1,13 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { url } from "~/lib/url";
-
 type Props = {
   title: string;
   eyebrow?: string;
   description?: string;
-  meta?: { label: string; value: string }[];
+  meta?: { label: string; value: string; href?: string }[];
   image?: { src: string; alt: string; credit?: string };
 };
-
 const { title, eyebrow, description, meta = [], image } = Astro.props;
 const imgSrc = image?.src
   ? image.src.startsWith("/")
@@ -17,7 +15,6 @@ const imgSrc = image?.src
     : image.src
   : url("/images/logo.png");
 ---
-
 <BaseLayout title={title} description={description}>
   <article>
     <header class="container-wide py-12 md:py-20 border-b border-[var(--color-border)]">
@@ -31,7 +28,19 @@ const imgSrc = image?.src
                 <div>
                   <dt class="sr-only">{m.label}</dt>
                   <dd>
-                    <span class="font-medium text-[var(--color-ink)]">{m.label}:</span> {m.value}
+                    <span class="font-medium text-[var(--color-ink)]">{m.label}:</span>{" "}
+                    {m.href ? (
+                      <a
+                        href={m.href}
+                        target="_blank"
+                        rel="noopener"
+                        class="text-[var(--color-brand)] hover:underline underline-offset-4"
+                      >
+                        {m.value} ↗
+                      </a>
+                    ) : (
+                      m.value
+                    )}
                   </dd>
                 </div>
               ))}
@@ -40,7 +49,6 @@ const imgSrc = image?.src
         }
       </div>
     </header>
-
     <figure class="container-wide py-8">
       <img
         src={imgSrc}
@@ -56,7 +64,6 @@ const imgSrc = image?.src
         )
       }
     </figure>
-
     <div class="container-wide py-12 md:py-16">
       <div class="prose-content mx-auto">
         <slot />
