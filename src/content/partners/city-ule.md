@@ -5,8 +5,7 @@ country: Greece
 role: Beneficiary
 logo: /images/partners/CITY_ULE_logo.png
 website: https://city.yorkeuropecampus.eu/research/seerc-south-east-european-research-centre/
-summary: Non-state, not-for-profit University Legal Entity and the licensed European branch campus of the University of York, headquartered in Thessaloniki.
-contribution: Through its research arm SEERC, CITY ULE contributes academic expertise on participatory research and youth employability, leads PATHFINDER's participation in flagship EU youth events, runs participatory workshops and Skills Labs, and supports Advisory Board engagement.
+summary: The University of York Europe Campus, CITY U.L.E. is a non-state, non-profit higher education institution and the European branch campus of the University of York, based in Thessaloniki, with additional premises in Athens. Its South-East European Research Centre (SEERC), established in 2003, conducts multidisciplinary research in Enterprise, Innovation & Development, Information & Communication Technologies, and Society & Human Development. With a particular focus on South-East Europe, SEERC connects academic research with regional and societal challenges, having implemented more than 100 international research projects funded by the European Union and other international bodies.
 team:
   - name: Nikolaos Zaharis
     role: Team Lead
