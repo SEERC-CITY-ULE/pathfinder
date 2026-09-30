@@ -6,6 +6,9 @@ location: Hotel Holiday, Sarajevo
 locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x4758c920b10d4169:0xa1538fbd6a8d4e68?sa=X&ved=1t:8290&ictx=111"
 country: "Bosnia & Herzegovina"
 format: In-person
+image:
+  src: /images/events/Sarajevo-1.1.-poster.png
+  alt: Poster for the PATHFINDER national dialogue in Sarajevo
 summary: Young people and employers will come together in Sarajevo to explore how AI is reshaping the future of work, identify the challenges facing young people and jointly define priorities for future action.
 agenda: |
   10:30–11:00 | Registration
