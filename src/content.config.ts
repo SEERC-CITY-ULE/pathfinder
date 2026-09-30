@@ -65,7 +65,7 @@ const partners = defineCollection({
     website: z.string().url().optional(),
     logo: z.string().optional(),
     summary: z.string().min(20),
-    contribution: z.string().min(20),
+    contribution: z.string().optional(),
     team: z.array(teamMember).default([]),
     order: z.number().int().default(99),
   }),
