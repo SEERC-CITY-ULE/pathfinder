@@ -9,7 +9,7 @@ export const site = {
     "Unlocking the PotentiAl of YouTH on AI Learning For actIve transItion to employmeNt through DEmocratic paRticipation",
   tagline: "Youth voices shaping an AI-ready Europe",
   description:
-    "PATHFINDER is an EU-funded CERV project (2026–2028) bringing young people, employers, and policymakers from five countries into honest dialogue about how AI is reshaping the future of work.",
+    "PATHFINDER is an EU-funded CERV project (2026 to 2028) helping young people in five countries build the AI skills, connections and voice they need to enter a changing labour market, with a particular focus on those facing the greatest barriers.",
 
   grant: {
     id: "101253819",
