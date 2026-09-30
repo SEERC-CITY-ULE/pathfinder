@@ -17,4 +17,5 @@ team:
 
 ---
 
+order: 2
 CREDI investigates how AI is reshaping employment, helping young people develop future-ready skills and creating participatory learning spaces that build resilience, adaptability, and informed career decision-making. 
