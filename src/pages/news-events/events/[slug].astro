@@ -3,7 +3,6 @@ import { getCollection, render } from "astro:content";
 import { marked } from "marked";
 import ArticleLayout from "~/layouts/ArticleLayout.astro";
 import { url } from "~/lib/url";
-
 export async function getStaticPaths() {
   const items = await getCollection("events", ({ data }) => !data.draft);
   return items.map((item) => ({
@@ -11,24 +10,20 @@ export async function getStaticPaths() {
     props: { item },
   }));
 }
-
 const { item } = Astro.props;
 const { Content } = await render(item);
 const agendaHtml = item.data.agenda ? marked.parse(item.data.agenda) : null;
-
 const fmt = (d: Date) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 const dateLabel = item.data.endDate
   ? `${fmt(item.data.startDate)} – ${fmt(item.data.endDate)}`
   : fmt(item.data.startDate);
-
 const meta = [
-  { label: "When", value: dateLabel },
-  { label: "Where", value: item.data.location },
+  { label: "When", value: item.data.time ? `${dateLabel}, ${item.data.time}` : dateLabel },
+  { label: "Where", value: item.data.location, href: item.data.locationUrl },
   { label: "Format", value: item.data.format },
 ];
 ---
-
 <ArticleLayout
   title={item.data.title}
   eyebrow="Event"
@@ -38,7 +33,6 @@ const meta = [
 >
   <p class="text-lg text-[var(--color-ink-soft)] leading-relaxed mb-8">{item.data.summary}</p>
   <Content />
-
   {
     agendaHtml && (
       <section class="mt-12 pt-8 border-t border-[var(--color-border)]">
@@ -47,7 +41,6 @@ const meta = [
       </section>
     )
   }
-
   {
     item.data.registrationUrl && (
       <p class="mt-10">
@@ -57,7 +50,6 @@ const meta = [
       </p>
     )
   }
-
   <p class="mt-12 pt-8 border-t border-[var(--color-border)]">
     <a href={url("/news-events")} class="text-[var(--color-brand)] hover:underline underline-offset-4">
       ← Back to news &amp; events
