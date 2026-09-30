@@ -5,6 +5,9 @@ summary: Young people, employers, educators and other stakeholders gathered in S
 tags:
   - participatory dialogue
   - bulgaria
+image:
+  src: /images/news/Bulgaria-dialogue3.jpg
+  alt: Participants at the PATHFINDER national dialogue in Sarajevo, Bosnia and Herzegovina
 ---
 
 On **10 June 2026**, PATHFINDER held its Bulgarian national participatory dialogue, **“Youth, Artificial Intelligence and the Labour Market: All Inclusive”**, in Sofia. The event was organised by the **Policy and Citizens’ Observatory (PCO)** and brought together 48 young people, employers, educators, local authorities, civil society representatives, media and other stakeholders.    
