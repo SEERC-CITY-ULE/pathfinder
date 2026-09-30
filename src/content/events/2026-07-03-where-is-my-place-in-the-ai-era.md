@@ -7,8 +7,8 @@ locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x476ca07f94e0d
 country: Slovakia
 format: In-person
 image:
-  src: /images/events/Serbia-5.1-Poster.png
-  alt: Poster for the PATHFINDER national dialogue in Belgrade
+  src: /images/events/Slovakia-3.1-poster.png
+  alt: Poster for the PATHFINDER national dialogue in Trnava
 summary: Young people and professionals will meet in Trnava to explore how AI is reshaping workplaces, skills and education, and what young people need to navigate these changes.
 agenda: |
   09:00 | Arrival and welcome — Participant arrival, welcome and refreshments.
