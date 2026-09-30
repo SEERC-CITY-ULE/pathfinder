@@ -6,6 +6,9 @@ location: "OK!Thess, Thessaloniki"
 locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x14a8392ac55ad9c1:0x82bc16c6e0e18389?sa=X&ved=1t:8290&ictx=111"
 country: Greece
 format: In-person
+image:
+  src: /images/events/Greece.png
+  alt: Poster for the PATHFINDER national dialogue in Greece
 summary: Young people, employers and labour market stakeholders will meet in Thessaloniki to explore the Greek research findings on AI and work and help shape priorities for Greece’s Research Agenda and Action Plan.
 agenda: |
   14:00–14:15 | Welcome — Participant arrival and opening remarks.
