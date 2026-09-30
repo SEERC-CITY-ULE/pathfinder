@@ -5,8 +5,8 @@ country: Bulgaria
 role: Beneficiary
 logo: /images/partners/PolObs_Logo.png
 website: https://www.pol-obs.com/
-summary: Think tank addressing the major challenges of the 21st century — migration, digitalisation, climate — from the dual perspective of policies and citizens.
-contribution: PCO leads the PATHFINDER Sofia Forum and national activities in Bulgaria. Its track record spans EU projects including Erasmus+, CERV, and the JRC's ValuesML, with deep experience in digital citizenship and youth engagement.
+summary: Think tank addressing contemporary challenges, risks, crises and innovations from the perspectives of both policies and citizens. Its work focuses particularly on digitalisation, migration and climate and also covers areas including democracy, civic participation, citizenship, human rights, e-democracy and social inclusion.
+contribution: leads the  national activities in Bulgaria as well as the Sofia PATHFINDER Forum on AI, Youth and the Future of Work. 
 team:
   - name: Anna Krasteva
     role: President / Management Committee Member
