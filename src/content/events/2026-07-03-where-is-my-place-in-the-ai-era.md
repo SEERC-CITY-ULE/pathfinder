@@ -6,6 +6,9 @@ location: Juraj Fándly Library, Trnava
 locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x476ca07f94e0d3cd:0x421e541926e4d9f8?sa=X&ved=1t:8290&ictx=111"
 country: Slovakia
 format: In-person
+image:
+  src: /images/events/Serbia-5.1-Poster.png
+  alt: Poster for the PATHFINDER national dialogue in Belgrade
 summary: Young people and professionals will meet in Trnava to explore how AI is reshaping workplaces, skills and education, and what young people need to navigate these changes.
 agenda: |
   09:00 | Arrival and welcome — Participant arrival, welcome and refreshments.
