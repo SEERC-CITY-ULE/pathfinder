@@ -1,7 +1,9 @@
 ---
 title: "Youth, Artificial Intelligence and the Labour Market: All Inclusive"
 startDate: 2026-06-10
-location: Sofia
+time: "09:30–13:00"
+location: "SOHO, Sofia"
+locationUrl: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x40aa856f78e26949:0x8b5a832b4645e77d?sa=X&ved=1t:8290&ictx=111"
 country: Bulgaria
 format: In-person
 summary: Young people and labour market stakeholders gathered in Sofia to explore how AI is affecting young people’s entry into employment, skills needs and digital inequalities, and to identify priorities for future action.
@@ -27,11 +29,7 @@ agenda: |
   
   12:30–13:00 | Informal networking — Informal discussion, networking and refreshments.
 ---
-
 PATHFINDER’s Bulgarian national participatory dialogue, **“Youth, Artificial Intelligence and the Labour Market: All Inclusive”**, will bring young people and labour market stakeholders together in Sofia to explore how artificial intelligence is changing young people’s relationship with work.
-
 Organised by the **Policy and Citizens’ Observatory (PCO),** the event will build on PATHFINDER’s national research and focus on three interconnected areas: **young people’s entry into the labour market, skills, and digital inequalities.**
-
 Through World Café discussions, participants will map key challenges, barriers and opportunities before using problem-tree analysis to examine their underlying causes. The results will then be discussed collectively and prioritised, helping identify the issues that should receive particular attention in the next stages of PATHFINDER.
-
 The dialogue will contribute to the development of **Bulgaria’s Research Agenda and Action Plan**, ensuring that young people’s and stakeholders’ perspectives inform the project’s future work.
