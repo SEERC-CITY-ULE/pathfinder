@@ -15,9 +15,6 @@ team:
   - name: Kassandra Papastavrou
     role: Researcher
     bio: Specialises in social support for vulnerable groups and holds an MSc in Counselling Psychology. She has coordinated projects focusing on skills development, employability and protection.
-  - name: Giorgos Vellis
-    role: Researcher
-    bio: Works in Community Engagement at Light Trees following extensive fieldwork with IOM Greece. He holds a degree in Business Administration and is pursuing a Master's in Project Management, with interests in non-formal education and inclusion.
 order: 4
 ---
 
