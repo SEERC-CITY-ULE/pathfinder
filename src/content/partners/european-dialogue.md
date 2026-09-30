@@ -4,6 +4,7 @@ shortName: ED
 country: Slovakia
 role: Coordinator
 logo: /images/partners/ED_Logo_Basic_Blue_SK.png
+website: https://europskydialog.eu/en/
 summary: Civic and youth media association promoting active citizenship, professional media and arts, quality youth work, and media literacy.
 contribution: As Coordinator, European Dialogue leads strategic coordination and consortium management, ensures methodological consistency across partners, and leads national activities in Slovakia. Founded in 2013, ED holds a seven-year Erasmus+ Accreditation and brings proven experience from EU initiatives including Pulse Z (DG-CONNECT), Agora NextGen, and the DiGi YOUTH partnerships.
 team:
