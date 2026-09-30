@@ -1,13 +1,23 @@
 ---
-import { site } from "~/data/site";
+const countries = [
+  { iso: "sk", name: "Slovakia" },
+  { iso: "gr", name: "Greece" },
+  { iso: "ba", name: "Bosnia & Herzegovina" },
+  { iso: "bg", name: "Bulgaria" },
+  { iso: "rs", name: "Serbia" },
+];
 ---
-
-<ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-base">
+<ul class="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
   {
-    site.countries.map((c) => (
-      <li class="flex items-center gap-3 text-[var(--color-ink-soft)]">
-        <span class="text-3xl md:text-4xl leading-none" aria-hidden="true">{c.flag}</span>
-        <span>{c.name}</span>
+    countries.map((c) => (
+      <li class="flex items-center gap-3">
+        <img
+          src={`https://flagcdn.com/${c.iso}.svg`}
+          alt={`${c.name} flag`}
+          class="w-9 h-6 object-cover rounded-sm shadow-xs border border-[var(--color-border)]"
+          loading="lazy"
+        />
+        <span class="text-lg md:text-xl font-bold text-[var(--color-ink)]">{c.name}</span>
       </li>
     ))
   }
