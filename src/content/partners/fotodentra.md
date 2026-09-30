@@ -3,6 +3,8 @@ name: Light Trees (Fotódentra)
 shortName: Fotódentra
 country: Greece
 role: Beneficiary
+logo: /images/partners/Light Trees.png
+website: https://light-trees.org/
 summary: Athens-based non-profit dedicated to empowering vulnerable communities — families, refugees, and marginalised youth — through inclusive education, mental health support, and community engagement.
 contribution: Light Trees leads the transnational Instagram campaign and the national activities in Greece. Through arts-based workshops and seminars, the organisation enhances the employability of vulnerable youth and helps them navigate digital environments.
 team:
