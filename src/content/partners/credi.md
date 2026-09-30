@@ -5,8 +5,7 @@ country: Bosnia & Herzegovina
 role: Beneficiary
 logo: /images/partners/credi logo.png
 website: https://credi.ba/en/
-summary: Independent research institute, coordinator of the Western Balkan Migration Network and host of Bosnia and Herzegovina's first Data Archive for the Social Sciences.
-contribution: CREDI leads the transnational research synthesis and hosts the Sarajevo transnational dialogue event. Its expertise spans labour markets, youth employability, migration, and digital transformation, drawing on more than 30 national, regional and international projects.
+summary: The Centre for Development Evaluation and Social Science Research (CREDI) is an independent research institute in Bosnia and Herzegovina conducting applied social science research. Its work covers areas including labour markets, migration, education, social protection and socio-economic development. CREDI coordinates the Western Balkan Migration Network and has developed research infrastructure supporting access to social science data in Bosnia and Herzegovina. Its research experience includes national, regional and international work on labour-market developments, migration, youth employability and digital transformation.
 team:
   - name: Nermin Oruč
     role: Team Lead
@@ -17,4 +16,4 @@ team:
 order: 2
 ---
 
-CREDI investigates how AI is reshaping employment, helping young people develop future-ready skills and creating participatory learning spaces that build resilience, adaptability, and informed career decision-making. 
+ 
