@@ -5,7 +5,7 @@ country: Greece
 role: Beneficiary
 logo: /images/partners/CITY_ULE_logo.png
 website: https://city.yorkeuropecampus.eu/research/seerc-south-east-european-research-centre/
-summary: The University of York Europe Campus, CITY U.L.E. is a non-state, non-profit higher education institution and the European branch campus of the University of York, based in Thessaloniki, with additional premises in Athens. Its South-East European Research Centre (SEERC), established in 2003, conducts multidisciplinary research in Enterprise, Innovation & Development, Information & Communication Technologies, and Society & Human Development. With a particular focus on South-East Europe, SEERC connects academic research with regional and societal challenges, having implemented more than 100 international research projects funded by the European Union and other international bodies.
+summary: The University of York Europe Campus, CITY U.L.E. is a non-state, non-profit higher education institution and the European branch campus of the University of York, based in Thessaloniki, Greece. Its South-East European Research Centre (SEERC), established in 2003, conducts multidisciplinary research in Enterprise, Innovation & Development, Information & Communication Technologies, and Society & Human Development. With a particular focus on South-East Europe, SEERC connects academic research with regional and societal challenges, having implemented more than 100 international research projects funded by the European Union and other international bodies.
 team:
   - name: Nikolaos Zaharis
     role: Team Lead
