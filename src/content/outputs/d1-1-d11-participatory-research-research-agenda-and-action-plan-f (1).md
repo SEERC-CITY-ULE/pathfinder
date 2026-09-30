@@ -6,7 +6,7 @@ featured: true
 fileUrl: /files/Deliverable-1.1-Bosnia-and-Herzegovina.pdf
 ---
 
-On **25 June 2026**, the PATHFINDER project delivered the national participatory event **“AI and the Future of Work – A Dialogue Between Young People and Employers in Bosnia and Herzegovina”** in Sarajevo, bringing together 27 young people, employers, public institutions, civil society organisations, education providers and other labour market stakeholders.     
+On **25 June 2026**, the PATHFINDER project delivered the national participatory event **“AI and the Future of Work – A Dialogue Between Young People and Employers in Bosnia and Herzegovina”** in Sarajevo, bringing together young people, employers, public institutions, civil society organisations, education providers and other labour market stakeholders.     
 
 The event created a **participatory space** to explore the opportunities and challenges associated with AI-driven labour market transformation and to strengthen dialogue between young people and key actors involved in employment, education and policymaking.   
 
