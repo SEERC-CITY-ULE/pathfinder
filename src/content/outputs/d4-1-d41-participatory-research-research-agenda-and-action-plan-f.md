@@ -3,7 +3,7 @@ id: D4.1
 title: D4.1 – Participatory Research, Research Agenda and Action Plan for Slovakia
 summary: Discover key insights from Slovakia on AI, the future of work, emerging skills needs and the challenges young people face in an evolving labour market.
 featured: true
-fileUrl: /files/D4.1-Slovakia.pdf
+fileUrl: /files/d4-1-d31-participatory-research-research-agenda-and-action-plan-f.pdf
 ---
 
 On **3 July 2026**,** Európsky dialóg (ED)**, within the PATHFINDER project, delivered the Slovak National Participatory Event **“AI and the Future of Work – A Youth Dialogue on Artificial Intelligence and Employment in Slovakia”** in Trnava, bringing together 33 young people, employers and working professionals from five European countries.
