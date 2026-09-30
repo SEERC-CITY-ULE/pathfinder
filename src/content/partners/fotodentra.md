@@ -5,8 +5,8 @@ country: Greece
 role: Beneficiary
 logo: /images/partners/Light Trees.png
 website: https://light-trees.org/
-summary: Athens-based non-profit dedicated to empowering vulnerable communities — families, refugees, and marginalised youth — through inclusive education, mental health support, and community engagement.
-contribution: Light Trees leads the transnational Instagram campaign and the national activities in Greece. Through arts-based workshops and seminars, the organisation enhances the employability of vulnerable youth and helps them navigate digital environments.
+summary: non-profit organisation, established in Athens in 2011, dedicated to empowering vulnerable communities, including families, refugees, and marginalised youth, through inclusive education, mental health support, intercultural exchange and community engagement. 
+contribution: leads the national public debate on AI and the Future of Work in Greece and coordinate the transnational Instagram campaign and the participation in the flagship EU youth event, helping bring the project’s findings and young people’s perspectives to a wider European audience.
 team:
   - name: Lambrini Stamati
     role: Team Lead
