@@ -36,14 +36,23 @@ const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
         <h2 class="font-display text-2xl md:text-3xl leading-tight mb-3">{name}</h2>
         <p class="text-sm text-[var(--color-ink-soft)] mb-4">
           <span aria-hidden="true" class="mr-1">{flag}</span>{country}
-        </p>
         {
           logo ? (
-            <img
-              src={logo}
-              alt={`${name} logo`}
-              class="mt-2 mb-4 max-h-16 w-auto"
-            />
+            website ? (
+              <a href={website} target="_blank" rel="noopener" class="inline-block mt-2 mb-4 hover:opacity-80 transition-opacity">
+                <img
+                  src={logo}
+                  alt={`${name} logo`}
+                  class="max-h-16 w-auto"
+                />
+              </a>
+            ) : (
+              <img
+                src={logo}
+                alt={`${name} logo`}
+                class="mt-2 mb-4 max-h-16 w-auto"
+              />
+            )
           ) : (
             <div
               class="mt-2 mb-4 inline-flex items-center justify-center min-w-16 h-14 px-4 rounded-lg bg-[var(--color-brand)] text-white font-display text-sm font-semibold whitespace-nowrap tracking-wide"
@@ -58,6 +67,7 @@ const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
             <p>
               <a
                 href={website}
+                target="_blank"
                 rel="noopener"
                 class="text-sm font-semibold text-[var(--color-brand)] hover:underline underline-offset-4"
               >
