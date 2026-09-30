@@ -14,4 +14,4 @@ Building on the national baseline survey, participants **worked together** throu
 
 The findings informed the **Research Agenda and Action Plan for Bosnia and Herzegovina**, highlighting priorities around education and skills, young people’s transition from education to employment, and more coordinated, inclusive and responsible approaches to AI.    
 
-Read the full report [here!](/files/d1-1-d11-participatory-research-research-agenda-and-action-plan-f.pdf)
+
