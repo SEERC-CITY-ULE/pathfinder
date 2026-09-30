@@ -5,6 +5,8 @@ summary: Young people, employers and policy actors met in Sarajevo to talk openl
 tags:
   - participatory dialogue
   - bosnia and herzegovina
+image:
+src: public/images/news/Pathfinder event (Instagram Post (45)) (2).jpg
 ---
 
 On 25 June, CREDI welcomed young people, employers, educators, public institutions and civil society organisations to Sarajevo for PATHFINDER's national dialogue in Bosnia and Herzegovina.
