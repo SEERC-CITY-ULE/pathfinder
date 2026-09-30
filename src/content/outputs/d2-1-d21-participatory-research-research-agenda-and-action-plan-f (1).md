@@ -3,10 +3,10 @@ id: D2.1
 title: D2.1 – Participatory Research, Research Agenda and Action Plan for Greece
 summary: Discover how young people and labour market stakeholders in Greece view the opportunities, challenges and skills needs emerging from AI-driven changes in employment.
 featured: true
-fileUrl: /files/d2-1-d21-participatory-research-research-agenda-and-action-plan-f.pdf
+fileUrl: /files/D2.1-Greece.pdf
 ---
 
-On **18 June 2026**, The University of York Europe Campus, CITY U.L.E and Light Trees, within the PATHFINDER project, delivered the Greek National Participatory Event** “Artificial Intelligence: Opportunity or Risk for Young People in the Modern Labour Market?”** in Thessaloniki, bringing together 26 young people, employers, HR professionals, AI professionals and other labour market stakeholders.
+On **18 June 2026**, The University of York Europe Campus, CITY U.L.E and Light Trees, within the PATHFINDER project, delivered the Greek National Participatory Eventn **“Artificial Intelligence: Opportunity or Risk for Young People in the Modern Labour Market?”** in Thessaloniki, bringing together 26 young people, employers, HR professionals, AI professionals and other labour market stakeholders.
 
 The event created a **participatory space** to explore how AI is transforming employment, skills development and young people’s transition into the labour market. Building on the national baseline survey, participants contributed to interpreting the evidence, sharing experiences and identifying priorities for future action.
 
