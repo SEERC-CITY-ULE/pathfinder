@@ -18,7 +18,7 @@ type Props = {
   logo?: string;
   team: TeamMember[];
 };
-const { name, shortName, country, role, summary, website, logo, team } = Astro.props;
+const { name, shortName, country, role, summary, contribution, website, logo, team } = Astro.props;
 const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
 ---
 <section class="border-t border-[var(--color-border)]">
@@ -62,7 +62,16 @@ const flag = site.countries.find((c) => c.name === country)?.flag ?? "";
       </header>
       <!-- Main: description + team -->
       <div>
-        <p class="text-[1.05rem] text-[var(--color-ink)] leading-relaxed mb-10">{summary}</p>
+        <p class:list={["text-[1.05rem] text-[var(--color-ink)] leading-relaxed", contribution ? "mb-4" : "mb-10"]}>
+          {summary}
+        </p>
+        {
+          contribution && (
+            <p class="text-[var(--color-ink-soft)] leading-relaxed mb-10">
+              <span class="font-semibold text-[var(--color-ink)]">In PATHFINDER:</span> {contribution}
+            </p>
+          )
+        }
         {
           team.length > 0 && (
             <div>
