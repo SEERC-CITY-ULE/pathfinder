@@ -9,7 +9,7 @@ team:
   - name: Lambrini Stamati
     role: Team Lead
     bio: Certified group psychotherapist with extensive experience in the media and humanitarian sectors. She holds an MA from City University London and leads Growth and Innovation at Light Trees, with a focus on social inclusion and systems strategies.
-  - name: Panagiotis Mousidis
+  - name: Panagiotis Moysidis
     role: Education Expert
     bio: Certified adult educator specialising in interactive, learner-centred programmes for marginalised communities. With a background in Linguistics and New Technologies in Education, he develops curricula using gamification and participatory methods and leads EU-funded projects on skills development, social integration and intercultural learning.
   - name: Kassandra Papastavrou
