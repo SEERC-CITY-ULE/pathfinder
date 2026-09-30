@@ -15,3 +15,5 @@ On 25 June, CREDI welcomed young people, employers, educators, public institutio
 The conversation quickly moved past the question of whether AI will change work. Participants agreed it already has. What worried them more was whether young people, and the schools and institutions around them, are ready. Young participants spoke about fewer entry-level jobs and rising expectations, while employers pointed to a growing gap between what education teaches and what workplaces need.
 
 One message came through clearly: education is where change has to start, from AI literacy and practical learning to better trained teachers and closer links with employers.
+
+![](/images/news/114.jpg)
