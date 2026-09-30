@@ -5,6 +5,9 @@ endDate: 2026-09-20
 location: Niš and Belgrade
 country: Serbia
 format: In-person
+image:
+  src: /images/events/Serbia-5.1-Poster.png
+  alt: Poster for the PATHFINDER national dialogue in Belgrade and Niš
 summary: Young people, employers and other stakeholders will come together across Niš and Belgrade to explore how AI is changing pathways into employment and the skills young people need for the future.
 agenda: |
   8 July 2026 — Niš
