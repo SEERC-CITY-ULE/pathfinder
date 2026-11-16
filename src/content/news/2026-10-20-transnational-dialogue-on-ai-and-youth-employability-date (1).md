@@ -3,7 +3,7 @@ title: Transnational Dialogue on AI and Youth Employability
 date: 2026-10-20
 summary: On 20 October 2026, the PATHFINDER project held its first Transnational Dialogue on AI and Youth Employability in Sarajevo, Bosnia and Herzegovina, hosted by CREDI. The event brought together young people, employers, career advisors, researchers, project partners and Advisory Board members to exchange perspectives on the opportunities and challenges of an AI-driven labour market.
 image:
-  src: /images/news/Sarajevo-group-photo.jpeg
+  src: /images/news/Sarajevo-group-photo.jpg
   alt: ""
 ---
 
