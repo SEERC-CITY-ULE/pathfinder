@@ -6,6 +6,9 @@ country: Greece
 format: In-person
 summary: A dialogue event exploring how Artificial Intelligence (AI) is transforming the labour market, with particular emphasis on equal employment opportunities for young people with disabilities.
 registrationUrl: "https://forms.gle/n94gsH3rnhN9Nt7JA"
+image:
+  src: /images/events/event-athens-poster.png
+  alt: Poster for the PATHFINDER event in Athens on 18 December 2026
 ---
 
 The event will bring together young people, including young people with disabilities, employers, education and career advisors, researchers, human resources professionals and policymakers to **exchange experiences** and perspectives on the **future of employment**.
