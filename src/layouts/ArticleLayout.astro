@@ -54,7 +54,7 @@ const imgSrc = image?.src
         src={imgSrc}
         alt={image?.alt ?? ""}
         aria-hidden={!image ? "true" : undefined}
-        class="w-full h-72 object-contain rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-soft)] p-8"
+        class={image ? "block mx-auto max-w-full max-h-[36rem] rounded-lg border border-[var(--color-border)]" : "w-full h-72 object-contain rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-soft)] p-8"}
       />
       {
         image?.credit && (
